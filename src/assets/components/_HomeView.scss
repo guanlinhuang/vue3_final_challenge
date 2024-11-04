@@ -1,0 +1,22 @@
+.input-group{
+    width: 100%;
+    input {
+        border-radius: 0;
+        border: none;
+        border-bottom: solid 1.5px #D0D0D0;
+    }
+    input:focus{
+        box-shadow: none;
+        border-bottom: solid 1.5px #BF4342
+    }
+}
+
+.btnEmail{
+    --bs-btn-padding-x: 0;
+    --bs-btn-padding-y: 0;
+    --bs-btn-border-color:0;
+}
+
+.bi:active{
+    color: #BF4342;
+}
