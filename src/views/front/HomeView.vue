@@ -1,28 +1,45 @@
 <template>
   <SwiperBanner></SwiperBanner>
   <SwiperProducts></SwiperProducts>
-  <div class="container">
-    <div class="about py-5">
+  <div class="about py-5">
+    <div class="container">
       <div class="text-center">
         <h3>關於</h3>
-        <p>文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字</p>
-        <p>文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字</p>
-        <p>文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字</p>
-        <p>文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字</p>
+        <div class="d-flex justify-content-center">
+          <!-- <img src="" alt="" style="width: 100px; > -->
+          <div
+            style="width: 400px; height: 400px; background-color: bisque"
+          ></div>
+          <div class="ms-4 text-start">
+            <p>文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字</p>
+            <p>文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字</p>
+            <p>
+              文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字......
+            </p>
+          </div>
+        </div>
         <div class="d-flex justify-content-center py-5">
-          <a href="#" class="btn btn-outline-primary">探索更多</a>
+          <router-link to="/aboutGuanTony" class="btn btn-outline-primary"
+            >more</router-link
+          >
         </div>
       </div>
     </div>
-    <div class="line_news py-5">
+  </div>
+  <div class="line_news py-5">
+    <div class="container">
       <div class="row d-flex justify-content-around">
         <div class="addLine col-4">
-          <h4>加入XX生活百貨LINE</h4>
-          <img
+          <h4 class="text-center">加入XX生活百貨LINE</h4>
+          <!-- <img
             src="/images/products.jpg"
             alt=""
             style="width: 50px; height: 50px"
-          />
+          /> -->
+          <div
+            class="mx-auto"
+            style="width: 200px; height: 200px; background-color: rgba(15,45,60)"
+          ></div>
         </div>
         <div class="addNews col-4">
           <h4>訂閱電子報</h4>
@@ -39,7 +56,7 @@
                 type="submit"
                 id="button-addon2"
               >
-              <i class="bi bi-send-fill fs-4"></i>
+                <i class="bi bi-send-fill fs-4"></i>
               </button>
             </div>
           </form>
@@ -47,18 +64,40 @@
       </div>
     </div>
   </div>
+  <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar>
 </template>
 
 <script>
 // 引入 swiper vue元件
 import SwiperBanner from '@/components/SwiperBanner.vue'
 import SwiperProducts from '@/components/SwiperProducts.vue'
+import SmallSidebar from '@/components/SmallSidebar'
 
 export default {
   components: {
     // 註冊元件
     SwiperBanner,
-    SwiperProducts
+    SwiperProducts,
+    SmallSidebar
+  },
+  data () {
+    return {
+      carts: []
+    }
+  },
+  methods: {
+    // 取得購物車列表
+    getCart () {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      // this.isLoading = true
+      this.$http.get(url).then((response) => {
+        this.carts = response.data.data.carts
+        console.log('this.carts', this.carts)
+      })
+    }
+  },
+  created () {
+    this.getCart()
   }
 }
 </script>

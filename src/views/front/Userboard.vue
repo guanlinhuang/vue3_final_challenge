@@ -1,5 +1,6 @@
 <template>
   <NavbarFront></NavbarFront>
+  <SmallSidebar></SmallSidebar>
   <div class="HomeView">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
@@ -16,6 +17,7 @@ import emitter from '@/methods/emitter'
 import ToastMessages from '@/components/ToastMessages.vue'
 import NavbarFront from '@/components/Navbar_front.vue'
 import FooterFront from '@/components/Footer_front.vue'
+import SmallSidebar from '@/components/SmallSidebar'
 
 export default {
   name: 'HomeView',
@@ -23,7 +25,8 @@ export default {
     // HelloWorld,
     ToastMessages,
     NavbarFront,
-    FooterFront
+    FooterFront,
+    SmallSidebar
   },
   provide () { // 本外層元件加入provide // 可讓內層元件(加入inject)可以使用本外層元件的mitt套件功能
     return {
@@ -31,8 +34,8 @@ export default {
     }
   },
   created () {
-    console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)
-  } // 檢查是否有把環境變數加到專案中
+    console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)// 檢查是否有把環境變數加到專案中
+  }
 }
 
 </script>

@@ -6,6 +6,8 @@
     text-align: center;
     font-size: 18px;
     background: #fff;
+    cursor: pointer;
+    height:600px
 
     /* Center slide text vertically */
     // display: flex;
@@ -15,10 +17,13 @@
     // height: 900px;
 }
 
+// .swiper-button-prev{
+//     left:-10px;
+// }
 
 // Banner輪播
 .swiperBanner {
-    height: 900px;
+    height: 800px;
 }
 
 .slideBanner {
@@ -33,17 +38,38 @@
 
 
 // 產品輪播
-.swiperProducts {
-    width: 100%;
-    height: 400px;
-}
-
-.slideProducts {
-    background-image: url(/images/banner.jpg);
-}
-.slideProducts2 {
-    background-image: url(/images/banner2.jpg);
-}
-.slideProducts3 {
-    background-image: url(/images/banner3.jpg);
-}
+// .swiper 原生css帶有 position-relative 和 overflow-hidden
+// .swiper-button-next 或 .swiper-button-prev，原生帶css有 position-absolute 樣式
+.swiper-button-next { // 原生帶有 position-absolute 樣式
+    text-indent: 10% !important; 
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    width: 40px !important;
+    height: 60px !important;
+    top:42% !important;
+    //right:-20px; // 如果直接移動 navigation 位置，會發現超出 .swiper 的部分會被隱藏，所以直接調整swiper尺寸
+    right:0px !important; // 此為最後一步驟 //完成.swiper區塊設定後，再設定左右 navigaiton button 的位置就完成
+  }
+  
+  .swiper-button-prev {
+    text-indent: -10% !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    width: 40px !important;
+    height: 60px !important;
+    top:42% !important;
+    //left: -20px; // 如果直接移動 navigation 位置，會發現超出 .swiper 的部分會被隱藏，所以直接調整swiper尺寸
+    left:0px !important; // 此為最後一步驟 //完成.swiper區塊設定後，再設定左右 navigaiton button 的位置就完成
+    // background: #000
+  }
+  
+  .product-swiper {
+    margin: auto !important;
+    padding: 0 !important;
+  
+    @media (min-width: 768px) { // 768px以下不會顯示navigation
+      margin: 0 -20px !important;
+      padding: 0 20px !important;
+      // 同時使用margin跟padding可互相抵銷，可保持原本swiper尺寸，也可將navigation超出.swiper尺寸，且超出的部分不會被隱藏
+    }
+  }

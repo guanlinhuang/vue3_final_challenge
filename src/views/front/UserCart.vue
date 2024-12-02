@@ -88,7 +88,7 @@
             <tr>
               <td colspan="3" class="text-center"></td>
               <td class="text-end">運費</td>
-              <td class="text-end">{{ $data.shipping }}</td>
+              <td class="text-end">{{ $data.shipping}}</td>
             </tr>
             <tr>
               <td colspan="4" class="text-end">總金額</td>
@@ -130,20 +130,24 @@
       </router-link>
     </div>
   </div>
+  <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar>
 </template>
-
 <script>
-
+import SmallSidebar from '@/components/SmallSidebar.vue'
 export default {
   data () {
     return {
       cart: {},
+      // carts: [],
       coupon_code: '',
       shipping: 250,
       status: {
         loadingItem: '' // 對應品項 id
       }
     }
+  },
+  components: { // 區域註冊
+    SmallSidebar
   },
   methods: {
     // 取得購物車列表
@@ -153,7 +157,10 @@ export default {
       this.$http.get(url).then((response) => {
         console.log('getCart', response)
         this.cart = response.data.data
+        this.carts = response.data.data.carts
         // this.isLoading = false
+        // console.log('this.cart', this.cart)
+        console.log('this.carts', this.carts)
       })
       console.log(typeof this.shipping)
     },

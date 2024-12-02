@@ -69,8 +69,8 @@
             v-model="form.user.name"
             rules="required"
             :class="{ 'is-invalid': errors['姓名'] }"
-          ></Field>
-          <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
+          />
+          <ErrorMessage name="姓名" class="invalid-feedback"/>
         </div>
         <div class="mb-3">
           <label for="tel" class="form-label">收件人手機號碼</label>

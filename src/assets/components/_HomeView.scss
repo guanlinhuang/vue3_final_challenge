@@ -17,6 +17,72 @@
     --bs-btn-border-color:0;
 }
 
-.bi:active{
-    color: #BF4342;
+.HomeView{
+    margin-top: 86px;
+}
+
+// 主元件 HomeView.vue
+.line_news{
+    background-color: bisque
+}
+
+// 子元件 Navbar_front.vue
+.navbar{ 
+    background-color: rgba(15,45,60)}
+
+.nav-link{
+    position: relative;
+}
+
+.border-underline::before{
+    content: "";
+    position: absolute;
+    right: 50%;
+    left: 50%;
+    bottom: 0;
+    height: 3px;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+.border-underline:hover::before{
+    right: 0;
+    left: 0;
+}
+
+// 子元件 SmallSidebar.vue
+.follow_us{
+    background-color: rgba(15,45,60);
+    z-index:100;
+    position: fixed;
+	right: 0;
+	top: 100px;
+    border-radius: 20px 0 0 20px;
+}
+
+.followBtn{
+    transition: 0.2s ease-in-out; // 動態轉換時間，時間越快越好
+}
+
+.followBtn:hover{
+    transform: scale(1.3, 1.3); // 變形縮放效果
+    color:#BF4342;
+}
+
+
+// 子元件 SwiperProducts.vue
+.onSale{
+    top:10px;
+    left:10px;
+    border-radius: 5px;
+}
+
+
+// 子元件 Footer.vue
+.footer{
+    background-color:rgba(78, 70, 63)
+}
+
+.footer a:hover{
+    color: #000 !important;
 }

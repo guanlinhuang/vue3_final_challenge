@@ -23,6 +23,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css' // npm install bootstrap@5.3.3
 
 // 手風琴 (Accordion) // js
 import Collapse from 'bootstrap/js/dist/collapse'
+// import 'bootstrap'
 
 // 引入 VeeValidate 元件跟功能
 import {

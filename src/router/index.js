@@ -21,13 +21,13 @@ const routes = [
         component: () => import('../views/front/OrderQ&A.vue')
       },
       {
-        path: 'storemap', // 訂單查詢頁面
-        component: () => import('../views/front/StoreMap.vue')
+        path: 'storelist', // 訂單查詢頁面
+        component: () => import('../views/front/StoreList.vue')
       },
       {
         name: 'products',
         path: 'products/:category?', // 所有商品頁面
-        component: () => import('../views/front/UserProducts.vue')
+        component: () => import('../views/front/UserProductsAll.vue')
       },
       // 有加「 ? 」，/products、/products/:category都可選染
       // 若沒加「 ? 」，只能渲染/products/:category

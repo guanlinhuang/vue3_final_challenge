@@ -1,6 +1,10 @@
 <template>
   <div class="container-fluid">
-    <swiper :navigation="true" :modules="modules" :loop="true" class="swiperBanner">
+    <swiper :pagination="{
+      dynamicBullets: true,
+      clickable: true,
+    }"
+     :modules="modules" :loop="true" class="swiperBanner">
       <swiper-slide class="slideBanner">Slide 1</swiper-slide>
       <swiper-slide class="slideBanner2">Slide 2</swiper-slide>
       <swiper-slide class="slideBanner3">Slide 3</swiper-slide>
@@ -12,17 +16,17 @@
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue' // 載入Swiper Vue.js
 
-import { Navigation, Pagination, Autoplay } from 'swiper/modules' // 載入swiper 原生js
+import { Pagination } from 'swiper/modules' // 載入swiper 原生js
 // Autoplay（自動播放）、Pagination（頁碼）、Navigation（上下一則導航)
 
 import 'swiper/css' // 載入swiper 原生css // 必載入
 import 'swiper/css/pagination' // 載入頁碼樣式原生css // 可不載入
-import 'swiper/css/navigation' // 載入上下一則導航樣式原生css // 可不載入
+// import 'swiper/css/navigation' // 載入上下一則導航樣式原生css // 可不載入
 
 export default {
-  data () {
+  setup () {
     return {
-      modules: [Autoplay, Pagination, Navigation]
+      modules: [Pagination]
     }
   },
   components: { // 區域註冊
@@ -41,3 +45,6 @@ export default {
 <!-- npm install swiper --legacy-peer-dep -->
 
 <!-- :autoplay="{delay: 2500,disableOnInteraction: false}" -->
+
+<!-- dynamicBullets: true 動態分頁器，當你的slide很多時，開啟後，分頁器小點的數量會部分隱藏
+clickable: true 點選分頁器的指示點分頁器會控制Swiper切換 -->

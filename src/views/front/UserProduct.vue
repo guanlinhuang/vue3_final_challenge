@@ -26,15 +26,24 @@
         </div>
       </div>
     </div>
+    <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar>
   </template>
 
 <script>
+import SmallSidebar from '@/components/SmallSidebar.vue'
 export default {
   data () {
     return {
       product: {},
-      id: ''
+      status: {
+        loadingItem: ''
+      },
+      id: '',
+      carts: []
     }
+  },
+  components: { // 區域註冊
+    SmallSidebar
   },
   methods: {
     getProduct () { // 撈出某一商品id
@@ -48,6 +57,14 @@ export default {
         }
       })
     },
+    getCart () { // 取得購物車列表
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      // this.isLoading = true
+      this.$http.get(url).then((response) => {
+        this.carts = response.data.data.carts
+        console.log('this.carts', this.carts)
+      })
+    },
 
     addToCart (id, qty = 1) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
@@ -59,13 +76,15 @@ export default {
       this.$http.post(url, { data: cart }).then((response) => {
         this.isLoading = false
         this.$httpMessageState(response, '加入購物車')
-        this.$router.push('/user/cart')
+        // this.$router.push('/user/cart')
+        this.getCart()
       })
     }
   },
   created () {
     this.id = this.$route.params.productId // -Ne8gzmrkTBOmbLnw1PT
     this.getProduct()
+    this.getCart()
   }
 }
 </script>
