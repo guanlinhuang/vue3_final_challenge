@@ -1,0 +1,44 @@
+.userCart {
+  margin-top: 100px;
+  margin-bottom: 150px
+}
+
+.productName {
+  border-bottom: 1px solid
+}
+
+.productName:hover {
+  cursor: pointer;
+  color: #0dcaf0 !important;
+}
+
+// .coupon_form{
+//  width: 120px; 
+//  outline: none; // 可消除藍色外框
+//  border: 0;
+//  border-bottom: solid 1px #000;
+// }
+
+// .coupon_form:focus {
+//   border-bottom: solid 1px #BF4342;
+// }
+
+.noline:hover {
+  outline: none !important;
+}
+
+.stickyTop {
+  position: sticky;
+  top: 110px;
+}
+
+.btn-outline{
+  border: $cambrige_blue solid 1px;
+  color: $cambrige_blue;
+}
+
+.btn-outline:hover{
+  color: #fff;
+  background-color: $cambrige_blue;
+}
+

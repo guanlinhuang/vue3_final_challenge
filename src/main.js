@@ -12,6 +12,9 @@ import VueAxios from 'vue-axios'
 import Loading from 'vue3-loading-overlay' // npm install vue3-loading-overlay --legacy-peer-dep
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 
+// 小側邊欄SmallSidebar.vue
+import SmallSidebar from '@/components/SmallSidebar.vue'
+
 // 千分字號 & 轉換日期// js  // 可套用到全域 // 格式來自官網
 import { currency, date } from '@/methods/filters'
 
@@ -51,6 +54,7 @@ app.use(router)
 app.use(VueAxios, axios) // 用於登入頁面login.vue
 app.use('Collapse', Collapse) // 手風琴 (Accordion) // js
 app.component('Loading', Loading) // 讀取視覺套件 // 全域註冊
+app.component('SmallSidebar', SmallSidebar) // 小側邊欄SmallSidebar.vue // 全域註冊
 app.config.globalProperties.$filters = { // 千分字號 & 轉換日期 // 可套用到全域
   currency, date
 }

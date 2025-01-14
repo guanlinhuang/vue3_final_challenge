@@ -8,24 +8,18 @@
     ref="modal"
   >
     <!-- 透過ref方式存取這個DOM元素 -->
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content border-0">
-        <div class="modal-header bg-dark text-white">
+        <div class="modal-header bg-cambridge-blue text-white">
           <h5 class="modal-title" id="exampleModalLabel">
             <span>新增產品</span>
           </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
         </div>
         <!-- // 每個input需綁定v-model -->
         <!-- tempProduct.imageUrl 會自動產生 -->
         <div class="modal-body">
           <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
               <div class="mb-3">
                 <label for="image" class="form-label">輸入圖片網址</label>
                 <input
@@ -86,7 +80,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-6">
               <div class="mb-3">
                 <label for="title" class="form-label">標題</label>
                 <input
@@ -99,14 +93,18 @@
               </div>
               <div class="row gx-2">
                 <div class="mb-3 col-md-6">
-                  <label for="category" class="form-label">分類</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="category"
+                  <p class="mb-2">分類</p>
+                  <select
+                    class="form-select select_border"
+                    aria-label="Default select example"
                     v-model="tempProduct.category"
-                    placeholder="請輸入分類"
-                  />
+                  >
+                    <option value="咖啡">咖啡</option>
+                    <option value="果汁">果汁</option>
+                    <option value="冰沙">冰沙</option>
+                    <option value="甜點">甜點</option>
+                    <option value="組合餐">組合餐</option>
+                  </select>
                 </div>
                 <div class="mb-3 col-md-6">
                   <label for="price" class="form-label">單位</label>
@@ -181,19 +179,21 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-outline-secondary"
-            data-bs-dismiss="modal"
-          >
-            取消
+          <button type="button" class="btnHover me-1" data-bs-dismiss="modal">
+            <div>
+              <span>取消編輯</span>
+              <span>取消編輯</span>
+            </div>
           </button>
           <button
             type="button"
-            class="btn btn-primary"
+            class="btnHover me-1"
             @click="$emit('update-product', tempProduct)"
           >
-            Save
+            <div>
+              <span>儲存</span>
+              <span>儲存</span>
+            </div>
           </button>
         </div>
       </div>

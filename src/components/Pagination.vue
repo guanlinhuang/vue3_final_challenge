@@ -1,8 +1,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-      <li class="page-item" :class="{ 'disabled': !pages.has_pre }">
+    <ul class="pagination justify-content-center" style="width: 100%;">
+      <li class="page-item hidePrevButton" :class="{ 'disabled': !pages.has_pre }">
         <a
           class="page-link"
           href="#"
@@ -13,7 +13,7 @@
         </a>
       </li>
       <li
-        class="page-item"
+        class="page-item page_bottom"
         v-for="page in pages.total_pages"
         :key="page"
         :class="{ active: page === pages.current_page }"
@@ -25,7 +25,7 @@
           {{ page }}
         </a>
       </li>
-      <li class="page-item" :class="{ 'disabled': !pages.has_next }">
+      <li class="page-item hideNextButton" :class="{ 'disabled': !pages.has_next }">
         <a
           class="page-link"
           href="#"

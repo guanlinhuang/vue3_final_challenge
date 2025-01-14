@@ -3,12 +3,30 @@
 @import "./helpers/variables";
 @import "~bootstrap/scss/mixins";
 
-@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap"; // 載入完整的bootstrap
 //在 all.scss 之中，mixins 必須要最後再載入，避免前面有些變數還未載入卻有使用的狀況，這樣就會導致錯誤
 //所以不能只載入其中一個
 
 // 自定義
+@import "./components/color";
 @import "./components/HomeView";
+@import "./components/btnHover";
 @import "./components/swiper";
-@import "./components/UserProductsAll"
+@import "./components/SmallSidebar";
+@import "./components/isLoading";
+@import "./components/Navbar_front";
+@import "./components/Foot_front";
+@import "./components/UserAboutUs";
+@import "./components/UserProductsAll";
+@import "./components/UserProduct";
+@import "./components/UserCart";
+@import "./components/shoppingProcess";
+@import "./components/UserOrder";
+@import "./components/UserPay";
+@import "./components/UserOrderSearch";
+@import "./components/UserStoreList";
+@import "./components/backstage/BackstageLogin";
+@import "./components/backstage/backstageDashboard";
+@import "./components/backstage/BackstageOrder";
+@import "./components/backstage/ProductModal"
 

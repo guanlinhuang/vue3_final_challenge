@@ -1,5 +1,5 @@
 <template>
-  <div class="follow_us fs-3 d-flex flex-column align-items-center">
+  <div class="follow_us d-none d-lg-block fs-3 d-flex flex-column align-items-center">
     <div class="followBtn">
       <a href="#" class="p-2 ms-1 text-white d-block"
         ><i class="bi bi-facebook"></i
@@ -20,7 +20,7 @@
         to="/cart"
         class="nav-link text-white p-2 ms-1 position-relative"
         ><i class="bi bi-cart3"></i
-        ><span
+        ><span v-if="carts.length!==0"
           class="position-absolute start-0 translate-middle badge rounded-pill bg-danger"
           style="font-size: 13px; top: 10px"
           >{{ totalQty }}
@@ -96,14 +96,11 @@ export default {
       let total = 0
       this.carts.forEach(item => {
         total += item.qty
+        console.log('SmallSidebar', this.carts)
       })
       return total
     }
   },
-  // Cannot read properties of undefined (reading 'forEach')
-  // TypeError: Cannot read properties of undefined (reading 'forEach')
-  // 因為呼叫 forEach 來取得未定義的值，所以第一行需要加分號「;」（應該是吧)
-  // 但關掉讀取錯誤視窗，仍可以正常運作，重新整理仍會出現報錯
 
   // watch: {
   //   carts: {
@@ -119,7 +116,8 @@ export default {
 
   // },
   mounted () {
-    this.carts = this.cartss
+    // this.carts = this.cartss // 使用這段code會報錯 // TypeError: Cannot read properties of undefined (reading 'forEach')
+    this.carts = Array.isArray(this.cartss) ? this.cartss : [] // this.carts 需要確保是一個陣列 array 所以才不會出錯
   }
   // created () {
   //   emitter.on('updateCart', () => {
@@ -141,3 +139,4 @@ export default {
 this.carts變數有變動就會觸發computed 裡的cartsNum ()函式，接著回傳cartsNum到畫面 -->
 <!-- created:在模板渲染成html前調用，即通常初始化某些屬性值，然後再渲染成視圖。
        mounted:在模板渲染成html後調用，通常是初始化頁面完成後，再對html的dom節點進行一些需要的操作。 -->
+<!-- Array.isArray() 函式會檢查傳入的值是否為一個 Array -->

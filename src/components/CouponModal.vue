@@ -3,16 +3,14 @@
          aria-labelledby="exampleModalLabel" aria-hidden="true" ref="modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header bg-cambridge-blue text-white">
             <h5 class="modal-title" id="exampleModalLabel">優惠券</h5>
-            <button type="button" class="btn-close"
-                    data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="mb-3">
-              <label for="title">標題</label>
+              <label for="title">優惠券名稱</label>
               <input type="text" class="form-control" id="title" v-model="tempCoupon.title"
-                     placeholder="請輸入標題">
+                     placeholder="請輸入優惠券名稱">
             </div>
             <div class="mb-3">
               <label for="coupon_code">優惠碼</label>
@@ -43,9 +41,15 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary"
-                    @click="$emit('update-coupon', tempCoupon)">更新優惠券
+            <button type="button" class="btnHover" data-bs-dismiss="modal"><div>
+              <span>取消編輯</span>
+              <span>取消編輯</span>
+            </div></button>
+            <button type="button" class="btnHover"
+                    @click="$emit('update-coupon', tempCoupon)"><div>
+              <span>儲存</span>
+              <span>儲存</span>
+            </div>
             </button>
           </div>
         </div>

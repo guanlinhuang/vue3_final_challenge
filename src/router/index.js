@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Userboard from '../views/front/Userboard.vue'
+import Userboard from '../views/user/Userboard.vue'
 // import { Comment } from 'vue'
 
 const routes = [
@@ -9,78 +9,87 @@ const routes = [
     component: Userboard,
     children: [
       {
-        path: '', // 首頁頁面
-        component: () => import('../views/front/HomeView.vue')
+        path: '',
+        name: '首頁',
+        component: () => import('../views/user/HomeView.vue')
       },
       {
-        path: 'aboutGuanTony', // 關於GuanTony頁面
-        component: () => import('../views/front/AboutView.vue')
+        path: 'aboutus',
+        name: '關於我們',
+        component: () => import('../views/user/UserAboutUs.vue')
       },
       {
-        path: 'orderQ&A', // 訂單Q&A頁面
-        component: () => import('../views/front/OrderQ&A.vue')
+        path: 'orderQ&A',
+        name: '訂單Q&A',
+        component: () => import('../views/user/UserOrderQ&A.vue')
       },
       {
-        path: 'storelist', // 訂單查詢頁面
-        component: () => import('../views/front/StoreList.vue')
+        path: 'storelist',
+        name: '店舖清單',
+        component: () => import('../views/user/UserStoreList.vue')
       },
       {
-        name: 'products',
-        path: 'products/:category?', // 所有商品頁面
-        component: () => import('../views/front/UserProductsAll.vue')
+        path: 'productsall/:categoryName?',
+        name: '所有商品列表',
+        component: () => import('../views/user/UserProductsAll.vue')
       },
       // 有加「 ? 」，/products、/products/:category都可選染
       // 若沒加「 ? 」，只能渲染/products/:category
       {
-        path: 'products/:productId', // 某一產品頁面
-        component: () => import('../views/front/UserProduct.vue')
+        path: 'products/:productId',
+        name: '單一產品介紹',
+        component: () => import('../views/user/UserProduct.vue')
       },
       {
-        path: 'UserOrderSearch', // 訂單查詢頁面
-        component: () => import('../views/front/UserOrderSearch.vue')
+        path: 'UserOrderSearch',
+        name: '訂單查詢',
+        component: () => import('../views/user/UserOrderSearch.vue')
       },
       {
-        path: 'cart', // 購物車頁面
-        component: () => import('../views/front/UserCart.vue')
+        path: 'cart',
+        name: '購物車',
+        component: () => import('../views/user/UserCart.vue')
       },
       {
-        path: 'order', // 填寫資料頁面
-        component: () => import('../views/front/UserOrder.vue')
+        path: 'order',
+        name: '填寫資料',
+        component: () => import('../views/user/UserOrder.vue')
       },
       {
-        path: 'pay/:orderId', // 結帳頁面
-        component: () => import('../views/front/UserPay.vue')
+        path: 'pay/:orderId',
+        name: '結帳',
+        component: () => import('../views/user/UserPay.vue')
       }
     ]
   },
   {
     path: '/login',
     name: '登入頁面',
-    component: () => import('../views/back/Login.vue')
+    component: () => import('../views/backstage/BackstageLogin.vue')
   },
   {
     path: '/dashboard',
     name: '後台儀表板',
-    component: () => import('../views/back/Dashboard.vue'),
+    component: () => import('../views/backstage/BackstageDashboard.vue'),
     children: [ // 新增子路徑
       {
-        path: 'products', // 新增子路徑不需加「 / 」
-        name: '新增產品頁面',
-        component: () => import('../views/back/Products.vue')
+        path: 'products/:categoryName?', // 新增子路徑不需加「 / 」
+        name: '新增產品',
+        component: () => import('../views/backstage/BackstageProducts.vue')
       },
       {
         path: 'orders',
-        name: '訂單資料頁面',
-        component: () => import('../views/back/Orders.vue')
+        name: '訂單資料',
+        component: () => import('../views/backstage/BackstageOrders.vue')
       },
       {
         path: 'coupons',
-        name: '優惠券頁面',
-        component: () => import('../views/back/Coupons.vue')
+        name: '優惠券',
+        component: () => import('../views/backstage/BackstageCoupons.vue')
       },
       {
         path: 'cart', // 購物車頁面
-        component: () => import('../views/front/UserCart.vue')
+        component: () => import('../views/user/UserCart.vue')
       }
     ]
   }
@@ -89,7 +98,13 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   linkActiveClass: 'active', // 可以讓選項變成啟用中的樣式
-  routes
+  routes,
+  scrollBehavior (to, from, savedPosition) { // 控制網頁畫面的滾動位置
+    console.log('控制網頁畫面的滾動位置', to, from, savedPosition)
+    return {
+      top: 0
+    }
+  }
 })
 
 export default router // 匯出到main.js

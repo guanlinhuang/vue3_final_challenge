@@ -1,6 +1,6 @@
 <template>
   <div class="container py-5">
-    <h3 class="py-3">熱銷商品</h3>
+    <h3 class="py-3 text-center">熱銷商品</h3>
     <swiper
       class="product-swiper"
       :navigation="{
@@ -9,44 +9,57 @@
       }"
       :modules="modules"
       :loop="true"
-      :slidesPerView="4"
       :spaceBetween="30"
+      :slidesPerView="1"
+      :breakpoints="{
+        992: {slidesPerView: 6}
+      }"
     >
       <swiper-slide v-for="item in products" :key="item.id">
-        <div class="position-relative product">
-          <a @click="getProduct(item.id)">
+        <div class="position-relative text-center product h-100 mb-4 mb-lg-0">
+          <a @click="getProductPage(item.id)">
             <div
               v-if="item.origin_price !== item.price"
-              class="onSale position-absolute text-white bg-danger py-1 px-3" style="z-index:5"
+              class="onSale position-absolute text-white bg-danger py-1 px-3 d-none d-lg-block" style="z-index:5"
             >
               特 價
             </div>
-            <div class="product_img rounded-4">
+            <div class="product_img" style="height: 500px">
                   <img
                     :src="`${item.imageUrl}`" class="object-fit-cover"
                   />
                 </div>
-            <h5 class="my-1 fw-normal">{{ item.title }}</h5>
-            <div v-if="item.origin_price !== item.price">
-              <p class="mb-1 fs-4 text-danger">NT$ {{ item.price }}</p>
-            </div>
-            <div v-if="item.origin_price === item.price">
-              <p class="mb-1 fs-4">NT$ {{ item.price }}</p>
-            </div>
-            <div v-if="item.origin_price !== item.price">
-              <p class="mb-1 text-decoration-line-through">
-                NT$ {{ item.origin_price }}
-              </p>
-            </div>
+                <div class="d-flex justify-content-center align-items-center d-lg-block ">
+            <p class="my-1 fw-normal mx-2">{{ item.title }}</p>
+            <div class="price text-center d-flex d-lg-block align-items-center">
+                  <div v-if="item.origin_price !== item.price">
+                    <p class="mb-0 mb-lg-1 text-danger">NT$ {{ item.price }}</p>
+                  </div>
+                  <div v-if="item.origin_price === item.price">
+                    <p class="mb-0 mb-lg-1">NT$ {{ item.price }}</p>
+                  </div>
+                  <div v-if="item.origin_price !== item.price">
+                    <p
+                      class="product_origin_price ms-2 ms-lg-0 mb-0 mb-lg-3 text-decoration-line-through"
+                      style="font-size: 13px"
+                    >
+                      NT$ {{ item.origin_price }}
+                    </p>
+                  </div>
+                </div>
+              </div>
           </a>
         </div>
       </swiper-slide>
       <button class="swiper-button-next btn btn-light"></button>
-      <button class="swiper-button-prev btn btn-light"></button>
+      <button class="swiper-button-prev btn btn-light "></button>
     </swiper>
-    <div class="d-flex justify-content-center py-5">
-      <router-link to="/products" class="btn btn-outline-primary"
-        >more</router-link
+    <div class="d-flex justify-content-center">
+      <router-link to="/productsall" class="btnHover"
+        ><div>
+              <span>more</span>
+              <span>more</span>
+            </div></router-link
       >
     </div>
   </div>
@@ -78,15 +91,30 @@ export default {
   methods: {
     getProducts () {
       // 取得商品列表_all
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all` // *** api改${}
-      this.$http.get(url).then((response) => {
-        this.products = response.data.products
-        console.log(this.products)
-      })
+      this.isLoading = true
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
+      this.$http
+        .get(api)
+        .then((res) => {
+          if (res.data.success) {
+            this.products = res.data.products
+              .filter((e) => e.id !== this.id) // 篩選主要id以外的商品
+              .sort(() => Math.random() - 0.5) // 亂數排序
+            // .splice(1, 5)
+            this.isLoading = false
+            console.log('this.others', this.products)
+          }
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次')
+          this.isLoading = false
+        })
     },
-    getProduct (id) {
-      // 取得某一商品id，並導到該商品獨立頁面
-      this.$router.push(`/products/${id}`)
+    getProductPage (id) {
+      this.$router.push(`/products/${id}`) // 網址改某一商品id
+      this.id = id // 換新商品 id
+      this.getProduct() // 渲染新商品畫面
+      this.getProducts() // swiper products 重整
     }
   },
   created () {
@@ -157,7 +185,8 @@ autoplayDisableOnInteraction 設定true，用戶操作swiper之後自動切換�
 7. centeredSlides 預設第一塊居左，設定true可居中
 8. pagination="{  下方顯示第一頁/總頁數
   type: 'fraction',
-}" -->
+}"
+9. breakpoints：RWD 響應式斷點，992：當螢幕寬度大於或等於992px時 -->
 
 <!-- Swiper中文官網
 https://3.swiper.com.cn/ -->
