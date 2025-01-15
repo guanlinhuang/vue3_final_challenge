@@ -30,7 +30,7 @@
         >
       </div>
       <div class="row justify-content-center mt-5">
-        <div class="col col-lg-7 me-4">
+        <div class="col col-lg-7 me-4 d-none d-lg-block">
           <table class="mx-auto table align-middle">
             <thead>
               <tr class="text-center">
@@ -40,7 +40,7 @@
                     class="btn btn-outline-danger btn-sm"
                     @click="removeCartItemAll()"
                   >
-                  <i class="bi bi-x-lg"></i>
+                    <i class="bi bi-x-lg"></i>
                   </button>
                 </th>
                 <th></th>
@@ -59,7 +59,7 @@
                     :disabled="status.loadingItem === item.id"
                     @click="removeCartItem(item.id)"
                   >
-                  <i class="bi bi-x-lg"></i>
+                    <i class="bi bi-x-lg"></i>
                   </button>
                 </td>
                 <!-- <td class="text-center"><router-link to="/products/${item..product.id}">{{ item.product.title }}</router-link></td> -->
@@ -124,7 +124,7 @@
             </router-link>
           </div>
         </div>
-        <div class="col col-lg-4">
+        <div class="col col-lg-4 d-none d-lg-block">
           <div class="border px-3 pb-3 stickyTop">
             <div class="d-flex justify-content-between align-items-center my-3">
               <p class="mb-0">商品總價</p>
@@ -166,12 +166,186 @@
             </button> -->
             </div>
             <hr />
-            <div
-              class="d-flex justify-content-between align-items-center"
-            >
+            <div class="d-flex justify-content-between align-items-center">
               <p class="mb-0">總金額</p>
               <p class="mb-0 fs-3 text-success">
-                  NT${{ $filters.currency(Math.round(cart.final_total)) }}
+                NT${{ $filters.currency(Math.round(cart.final_total)) }}
+              </p>
+            </div>
+            <div v-if="cart.final_total !== cart.total">
+              <!-- <div class="d-flex justify-content-between align-items-center">
+                <p class="mb-0">總金額</p>
+                <p class="mb-0 fs-3 text-success">
+                  NT$
+                  {{ $filters.currency(Math.round(cart.final_total)) }}
+                </p>
+              </div> -->
+              <p class="mb-0 text-end text-danger">(已套用優惠券)</p>
+            </div>
+            <!-- // cart.final_total 是整個購物車的總金額(折扣後) -->
+            <div>
+              <router-link
+                to="/order"
+                type="button"
+                class="mt-3 py-2 btnHover w-100"
+              >
+                <div>
+                  <span>下一步</span>
+                  <span>下一步</span>
+                </div>
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-5">
+        <div class="col col-lg-7 me-4 d-block d-lg-none">
+          <table class="mx-auto table align-middle">
+            <!-- <thead>
+              <tr class="text-center">
+                <th>
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger btn-sm"
+                    @click="removeCartItemAll()"
+                  >
+                  <i class="bi bi-x-lg"></i>
+                  </button>
+                </th>
+                <th class="text-start" style="width: 250px">商品</th>
+                <th>數量</th>
+                <th>單價</th>
+                <th>總價</th>
+              </tr>
+            </thead> -->
+            <tbody>
+              <tr v-for="item in cart.carts" :key="item.id">
+                <!-- <td class="text-center">
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger btn-sm"
+                    :disabled="status.loadingItem === item.id"
+                    @click="removeCartItem(item.id)"
+                  >
+                  <i class="bi bi-x-lg"></i>
+                  </button>
+                </td> -->
+                <!-- <td class="text-center"><router-link to="/products/${item..product.id}">{{ item.product.title }}</router-link></td> -->
+                <td style="width: 70px">
+                  <div style="width: 70px; height: 100px">
+                    <img
+                      :src="item.product.imageUrl"
+                      alt=""
+                      class="w-100 h-100 object-fit-cover"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex flex-column justify-content-between">
+                  <div class="d-flex">
+                    <div>
+                      <a
+                        class="productName text-decoration-none text-dark"
+                        @click="getProductPage(item.product.id)"
+                        >{{ item.product.title }}</a
+                      >
+                    </div>
+                    <p class="mb-0 ms-3">${{ item.product.price }}</p>
+                  </div>
+                  <div class="d-flex">
+                    <div class="input-group" style="width: 100px;height: 30px;">
+                      <button
+                        class="btn border-0 p-1"
+                        type="button"
+                        @click="changeQty(-1, item)"
+                        :disabled="item.qty === 1"
+                      >
+                        <i class="bi bi-dash"></i>
+                      </button>
+                      <input
+                        type="number"
+                        class="form-control text-center noline p-0"
+                        @change="updateCart(item)"
+                        v-model.number="item.qty"
+                        min="1"
+                        readonly
+                      />
+                      <button
+                        class="btn border-0 p-1"
+                        type="button"
+                        @click="changeQty(1, item)"
+                      >
+                        <i class="bi bi-plus"></i>
+                      </button>
+                    </div><p class="my-auto ms-3">${{ item.total }}</p>
+                  </div></div>
+                </td>
+                <!-- <td style="width: 150px">
+                </td>
+                <td class="text-center"></td>
+                <td class="text-center"></td> -->
+              </tr>
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-end">
+            <router-link
+              to="/productsall"
+              type="button"
+              class="mt-3 py-2 btnHover"
+            >
+              <div>
+                <span>繼續選購</span>
+                <span>繼續選購</span>
+              </div>
+            </router-link>
+          </div>
+        </div>
+        <div class="col col-lg-4 d-block d-lg-none">
+          <div class="border px-3 pb-3 stickyTop">
+            <div class="d-flex justify-content-between align-items-center my-3">
+              <p class="mb-0">商品總價</p>
+              <p class="fs-5 mb-0">
+                NT${{ $filters.currency(Math.round(cart.total)) }}
+              </p>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="input-group mb-3 w-100">
+                <input
+                  type="text"
+                  class="form-control noline"
+                  placeholder="請輸入優惠碼"
+                  v-model="coupon_code"
+                  aria-label="Recipient's username"
+                  aria-describedby="button-addon2"
+                />
+                <button
+                  class="btn btn-outline"
+                  type="button"
+                  id="button-addon2"
+                  @click="addCouponCode"
+                >
+                  套用優惠碼
+                </button>
+              </div>
+              <!-- <div>
+              <input
+                type="text"
+                class="coupon_form me-3"
+                v-model="coupon_code"
+                placeholder="請輸入優惠碼"
+              /></div>
+            <button class="btn" type="button" @click="addCouponCode">
+              <div>
+                <span>套用優惠碼</span>
+                <span>套用優惠碼</span>
+              </div>
+            </button> -->
+            </div>
+            <hr />
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="mb-0">總金額</p>
+              <p class="mb-0 fs-3 text-success">
+                NT${{ $filters.currency(Math.round(cart.final_total)) }}
               </p>
             </div>
             <div v-if="cart.final_total !== cart.total">

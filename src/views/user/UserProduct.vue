@@ -7,7 +7,7 @@
     alt=""
     style="width: 100%; height: 300px; background-color: antiquewhite"
   /> -->
-  <div class="container py-lg-5">
+  <div class="container py-lg-5 UserProduct">
     <div class="row d-flex justify-content-lg-center">
       <div class="col-lg-3 me-5">
         <nav aria-label="breadcrumb" class="d-none d-lg-block">
@@ -96,7 +96,7 @@
       </div>
     </div>
     <div class="my-5">
-      <h4 class="py-3 fw-normal">看更多商品</h4>
+      <h4 class="py-lg-3 fw-normal ms-3 ms-lg-0">看更多商品</h4>
       <swiper
         class="product-swiper"
         :navigation="{
@@ -107,6 +107,9 @@
         :loop="true"
         :spaceBetween="3"
         :slidesPerView="3"
+        :breakpoints="{
+        992: {slidesPerView: 6,spaceBetween:30}
+      }"
       >
         <swiper-slide v-for="item in products" :key="item.id">
           <div class="position-relative text-center product h-100">
@@ -118,7 +121,7 @@
               >
                 特 價
               </div> -->
-              <div class="product_img" style="height: 200px;">
+              <div class="product_img">
                 <img :src="`${item.imageUrl}`" class="object-fit-cover" />
               </div>
               <!-- <p class="my-1 fw-normal">{{ item.title }}</p> -->
@@ -141,12 +144,7 @@
             </a>
           </div>
         </swiper-slide>
-        <button class="swiper-button-next btn btn-light">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+        <button class="swiper-button-next btn btn-light"></button>
         <button class="swiper-button-prev btn btn-light"></button>
       </swiper>
     </div>

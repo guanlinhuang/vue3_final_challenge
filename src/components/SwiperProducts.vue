@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-5">
+  <div class="container py-5 SwiperProducts">
     <h3 class="py-3 text-center">熱銷商品</h3>
     <swiper
       class="product-swiper"
@@ -24,7 +24,7 @@
             >
               特 價
             </div>
-            <div class="product_img" style="height: 500px">
+            <div class="swiper_img">
                   <img
                     :src="`${item.imageUrl}`" class="object-fit-cover"
                   />

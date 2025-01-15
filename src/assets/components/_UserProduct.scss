@@ -20,3 +20,21 @@ input {
 .productsall {
   border-bottom: 1px solid
 }
+
+.UserProduct .product_img {
+  overflow: hidden; // 超出的部分隱藏
+  height: 200px;
+  border-radius: none;
+
+  @include media-breakpoint-up(lg) {
+    height: 250px;
+    border-radius: 16px;
+  }
+
+}
+
+
+.UserProduct .product_img img {
+  width: 100%;
+  height: 100% //320px
+}
