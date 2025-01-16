@@ -84,7 +84,7 @@
           </button>
           <button
             type="button"
-            class="btnHover col me-1"
+            class="btnHover btnHover5 col me-1"
             @click="addToCart(product.id)"
           >
             <div>

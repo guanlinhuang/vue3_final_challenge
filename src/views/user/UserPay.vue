@@ -47,9 +47,9 @@
       </div>
       <h5 class="text-center my-5">感謝您的訂購</h5>
     </div>
-    <div class="mt-5 row justify-content-center">
+    <div class="mt-3 mt-lg-5 row justify-content-center">
       <div class="col col-lg-7">
-        <form class="border p-3" @submit.prevent="payOrder">
+        <form class="border m-1 m-lg-0 p-2 p-lg-3" @submit.prevent="payOrder">
           <h2 class="text-center mt-3 mb-5">訂單資訊</h2>
           <table class="table">
             <tbody>
@@ -111,7 +111,7 @@
         </form>
       </div>
     </div>
-    <div class="mt-2 mb-5 row justify-content-center">
+    <div class="mt-2 mb-5 row justify-content-center gx-0 m-1">
       <div class="col col-lg-7">
         <div class="accordion" id="accordionPanelsStayOpenExample">
           <div class="accordion-item">

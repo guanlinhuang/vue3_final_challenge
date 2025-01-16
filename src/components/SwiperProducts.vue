@@ -113,7 +113,7 @@ export default {
     getProductPage (id) {
       this.$router.push(`/products/${id}`) // 網址改某一商品id
       this.id = id // 換新商品 id
-      this.getProduct() // 渲染新商品畫面
+      // this.getProduct() // 渲染新商品畫面
       this.getProducts() // swiper products 重整
     }
   },

@@ -13,7 +13,7 @@
           <div>
             <Field
               id="orderId"
-              class="form-control"
+              class="form-control" style="width: 250px;"
               name="search"
               type="text"
               placeholder="請輸入Email or 電話"
