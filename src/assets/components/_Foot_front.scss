@@ -3,5 +3,8 @@
 }
 
 .footer a:hover{
-    color: #000 !important;
+    @include media-breakpoint-up(lg) {
+        color: #000 !important;
+      }
+    
 }

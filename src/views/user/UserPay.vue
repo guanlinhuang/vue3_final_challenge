@@ -85,12 +85,12 @@
               </tr>
             </tbody>
           </table>
-          <div v-if="order.is_paid === false" class="row">
-            <div class="col">
+          <div v-if="order.is_paid === false" class="row gx-2">
+            <div class="col-4">
               <router-link
-                to="/productsall"
+                to="/"
                 type="button"
-                class="btnHover w-100"
+                class="btnHover w-100" style="min-width: 0px;"
               >
                 <div>
                   <span>延後付款</span>
@@ -98,8 +98,8 @@
                 </div>
               </router-link>
             </div>
-            <div class="col">
-              <button class="btnHover w-100" type="submit">
+            <div class="col-8">
+              <button class="btnHover btnHover5 w-100" type="submit">
                 <div>
                   <span>立即付款</span>
                   <span>立即付款</span>
@@ -223,6 +223,7 @@ export default {
         console.log(res)
         if (res.data.success) {
           this.getOrder()
+          this.scrollTop() // 滑動到頂部
         }
       })
     },
@@ -236,6 +237,12 @@ export default {
         console.log('getCart', response)
         this.cart = response.data.data
         this.carts = response.data.data.carts // 用於側邊欄購物車標籤
+      })
+    },
+    scrollTop () { // 滑動到頂部
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
       })
     }
   },

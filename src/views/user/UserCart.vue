@@ -358,6 +358,7 @@
                   to="/productsall"
                   type="button"
                   class="mt-3 py-2 btnHover w-100"
+                  style="min-width: 0px"
                 >
                   <div>
                     <span>繼續選購</span>
@@ -365,15 +366,19 @@
                   </div>
                 </router-link>
               </div>
-            <div class="col-8">
-              <router-link to="/order" type="button" class="mt-3 py-2 btnHover btnHover5 w-100">
-                <div>
-                  <span>下一步</span>
-                  <span>下一步</span>
-                </div>
-              </router-link>
+              <div class="col-8">
+                <router-link
+                  to="/order"
+                  type="button"
+                  class="mt-3 py-2 btnHover btnHover5 w-100"
+                >
+                  <div>
+                    <span>下一步</span>
+                    <span>下一步</span>
+                  </div>
+                </router-link>
+              </div>
             </div>
-          </div>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="container py-4">
       <div class="row d-block d-lg-flex justify-content-around ms-3 ms-lg-0">
-        <div class="col col-lg-2 text-white mb-3">
+        <div class="col-5 col-lg-2 text-white mb-3">
           <router-link to="/aboutus" class="nav-link py-2"
             >關於GuanTony</router-link
           >
@@ -40,17 +40,17 @@
       <div class="footer_followUs d-flex ms-3 mt-3 d-lg-none">
         <div class="followBtn">
       <a href="#" class="p-2 ms-1 text-white d-block"
-        ><i class="bi bi-facebook"></i
+        ><i class="bi bi-facebook fs-1"></i
       ></a>
     </div>
     <div class="followBtn">
       <a href="#" class="p-2 ms-1 text-white d-block"
-        ><i class="bi bi-instagram"></i
+        ><i class="bi bi-instagram fs-1"></i
       ></a>
     </div>
     <div class="followBtn">
       <a href="#" class="p-2 ms-1 text-white d-block"
-        ><i class="bi bi-line"></i
+        ><i class="bi bi-line fs-1"></i
       ></a>
     </div>
       </div>

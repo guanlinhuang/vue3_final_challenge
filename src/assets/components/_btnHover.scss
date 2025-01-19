@@ -14,10 +14,7 @@
     overflow: hidden;
     padding: 10px 20px;
     border-radius: 4px;
-
-    @include media-breakpoint-up(lg) {
-        min-width: 150px;
-      }
+    min-width: 150px;
     
 }
 
@@ -106,7 +103,7 @@
 .btnHover2 {
     position: relative;
     z-index: 1;
-    min-width: 150px;
+    // min-width: 150px;
     background: #FFFFFF;
     border: 2px solid $cambrige_blue;
     border-radius: 4px;
