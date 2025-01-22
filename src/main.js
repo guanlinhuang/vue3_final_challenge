@@ -24,9 +24,9 @@ import $httpMessageState from './methods/pushMessageState'
 // 載入 bootstrap-icons
 import 'bootstrap-icons/font/bootstrap-icons.css' // npm install bootstrap@5.3.3 --legacy-peer-dep
 
-// 手風琴 (Accordion) // js
+// 手風琴 (Accordion) //折疊功能 // js
 import Collapse from 'bootstrap/js/dist/collapse'
-// import 'bootstrap'
+// import 'bootstrap' from 'bootstrap/js'
 
 // 引入 VeeValidate 元件跟功能
 import {
@@ -69,3 +69,4 @@ app.mount('#app') // 上面掛載了一些外掛后，將它綁定到html文件�
 
 // app.use 是用來載入套件js或自定義檔案
 // app.component 是用來註冊元件
+// ('Loading', Loading) 前者為名稱自定義，用在html標籤，後者為import進來的東西

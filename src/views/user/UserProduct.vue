@@ -24,7 +24,8 @@
             </li>
           </ol>
         </nav>
-        <img :src="product.imageUrl" alt="" class="img-fluid mb-3" />
+        <div class="product_img mb-3">
+        <img :src="product.imageUrl" alt="" class="object-fit-cover" /></div>
       </div>
       <div class="col-lg-4 mt-lg-5 px-4 px-lg-0">
         <h2>{{ product.title }}</h2>
@@ -121,7 +122,7 @@
               >
                 特 價
               </div> -->
-              <div class="product_img">
+              <div class="swiper_img">
                 <img :src="`${item.imageUrl}`" class="object-fit-cover" />
               </div>
               <!-- <p class="my-1 fw-normal">{{ item.title }}</p> -->
