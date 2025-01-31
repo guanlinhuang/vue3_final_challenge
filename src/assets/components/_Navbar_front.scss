@@ -1,5 +1,13 @@
-.navbar{ 
-    background-color: $cambrige_blue
+.navbar,.offcanvas { 
+    background-color: $cambrige_blue;
+}
+
+.navbar{
+    z-index: 1031 !important;
+}
+
+.offcanvas-header{
+    margin-top: 30px;
 }
 
 .nav-link{
@@ -28,4 +36,20 @@
     background: $eggshell;
     font-size:14px;
     color: 	#7B7B7B
+}
+
+.navbar-toggler {
+    border:none
+}
+
+.navbar-toggler:focus {
+    box-shadow: none
+}
+
+.bi-filter-right{
+    font-size: 35px;
+}
+
+.btn-close:focus {
+    box-shadow: none
 }

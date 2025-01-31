@@ -97,7 +97,8 @@
 
   .menu {
     overflow-x: scroll;
-    margin-top:86px
+    margin-top:86px;
+    z-index: 10;
   }
 
   .menu::-webkit-scrollbar { // 用於 Chrome、Safari 和現代 Edge，這樣可以隱藏滾動條。

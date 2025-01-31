@@ -25,8 +25,8 @@ import $httpMessageState from './methods/pushMessageState'
 import 'bootstrap-icons/font/bootstrap-icons.css' // npm install bootstrap@5.3.3 --legacy-peer-dep
 
 // 手風琴 (Accordion) //折疊功能 // js
-import Collapse from 'bootstrap/js/dist/collapse'
-// import 'bootstrap' from 'bootstrap/js'
+// import Collapse from 'bootstrap/js/dist/collapse'
+import 'bootstrap' // npm i @popperjs/core --legacy-peer-deps // 載入這個就可使用所有Bootstrap的 JS功能
 
 // 引入 VeeValidate 元件跟功能
 import {
@@ -52,7 +52,7 @@ setLocale('zh_TW')
 const app = createApp(App)
 app.use(router)
 app.use(VueAxios, axios) // 用於登入頁面login.vue
-app.use('Collapse', Collapse) // 手風琴 (Accordion) // js
+// app.use('Collapse', Collapse) // 手風琴 (Accordion) // js
 app.component('Loading', Loading) // 讀取視覺套件 // 全域註冊
 app.component('SmallSidebar', SmallSidebar) // 小側邊欄SmallSidebar.vue // 全域註冊
 app.config.globalProperties.$filters = { // 千分字號 & 轉換日期 // 可套用到全域

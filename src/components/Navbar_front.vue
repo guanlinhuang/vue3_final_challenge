@@ -1,83 +1,92 @@
 <template>
   <div class="container-fluid fixed-top">
     <div class="coupon d-flex justify-content-center align-items-center">
-      <p class="mb-0">10週年慶，輸入優惠碼 Guan2025，結帳享8折</p>
+      <p class="mb-0">輸入優惠碼 Guan2025，結帳享8折</p>
     </div>
-    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top">
+    <nav class="navbar navbar-light navbar-expand-lg">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Offcanvas navbar</a>
+        <a class="navbar-brand d-lg-none text-white mx-3" href="#">Logo</a>
         <button
-          class="navbar-toggler"
+          class="navbar-toggler d-lg-none"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasNavbar"
           aria-controls="offcanvasNavbar"
         >
-          <span class="navbar-toggler-icon"></span>
+          <!-- <span class="navbar-toggler-icon"></span> -->
+          <i class="bi bi-filter-right"></i>
         </button>
         <div
-          class="offcanvas offcanvas-end"
+          class="offcanvas offcanvas-end justify-content-center"
           tabindex="-1"
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
         >
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+            <!-- <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5> -->
             <button
               type="button"
               class="btn-close text-reset"
               data-bs-dismiss="offcanvas"
               aria-label="Close"
+              id="closeOffcanvas"
             ></button>
           </div>
-          <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <div class="offcanvas-body justify-content-center">
+            <div>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <router-link
+                  to="/aboutus"
+                  class="nav-link text-white border-underline"
+                  @click.prevent="closeOffcanvas"
+                  >關於GuanTony</router-link
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <router-link
+                  to="/productsall"
+                  class="nav-link text-white border-underline"
+                  @click.prevent="closeOffcanvas"
+                  >所有商品</router-link
+                >
               </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="offcanvasNavbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+              <li class="nav-item d-none d-lg-block">
+                <router-link to="/" class="nav-link text-white mx-4"
+                  >logo</router-link
                 >
-                  Dropdown
-                </a>
-                <ul
-                  class="dropdown-menu"
-                  aria-labelledby="offcanvasNavbarDropdown"
+              </li>
+              <li class="nav-item">
+                <router-link
+                  to="/UserOrderSearch"
+                  class="nav-link text-white border-underline"
+                  @click.prevent="closeOffcanvas"
+                  >訂單查詢</router-link
                 >
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </li>
-                </ul>
+              </li>
+              <li class="nav-item">
+                <router-link
+                  to="/storelist"
+                  class="nav-link text-white border-underline"
+                  @click.prevent="closeOffcanvas"
+                  >門市資訊</router-link
+                >
               </li>
             </ul>
-            <form class="d-flex">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button class="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
+          </div>
           </div>
         </div>
       </div>
     </nav>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    closeOffcanvas () { // 關閉 offcanvas
+      document.getElementById('closeOffcanvas').click() // getElementById :選取元素 // 選取close按鈕並觸發點擊事件
+      // document.getElementById('favoritesOffcanvasToggler').click()
+    }
+  }
+}</script>

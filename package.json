@@ -6,9 +6,10 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "npm run build && node ./deploy/ghpages.js" 
+    "deploy": "npm run build && node ./deploy/ghpages.js"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "@vee-validate/i18n": "^4.14.3",
     "@vee-validate/rules": "^4.14.3",
     "accordion-js": "^3.3.4",

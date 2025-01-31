@@ -1,24 +1,24 @@
 <template>
-  <div class="follow_us d-none d-lg-block fs-3 d-flex flex-column align-items-center">
-    <div class="followBtn">
-      <a href="#" class="p-2 ms-1 text-white d-block"
+  <div class="Smallsidebar d-none d-lg-block  d-flex flex-column align-items-center">
+    <div class="followUs mb-2 me-2 position-relative rounded-circle">
+      <a href="#" class="text-white d-block position-absolute top-50 start-50 translate-middle"
         ><i class="bi bi-facebook"></i
       ></a>
     </div>
-    <div class="followBtn">
-      <a href="#" class="p-2 ms-1 text-white d-block"
+    <div class="followUs mb-2 me-2 position-relative rounded-circle">
+      <a href="#" class="text-white d-block position-absolute top-50 start-50 translate-middle"
         ><i class="bi bi-instagram"></i
       ></a>
     </div>
-    <div class="followBtn">
-      <a href="#" class="p-2 ms-1 text-white d-block"
+    <div class="followUs mb-2 me-2 position-relative rounded-circle">
+      <a href="#" class="text-white d-block position-absolute top-50 start-50 translate-middle"
         ><i class="bi bi-line"></i
       ></a>
     </div>
-    <div class="followBtn">
+    <div class="addCart mb-2 me-2 position-relative rounded-circle">
       <router-link
         to="/cart"
-        class="nav-link text-white p-2 ms-1 position-relative"
+        class="nav-link text-white position-relative position-absolute top-50 start-50 translate-middle"
         ><i class="bi bi-cart3"></i
         ><span v-if="carts.length!==0"
           class="position-absolute start-0 translate-middle badge rounded-pill bg-danger"
@@ -29,8 +29,8 @@
       >
     </div>
     <!-- <a href="#" @click.prevent="logout" class="nav-link">登出</a> -->
-    <div class="followBtn">
-      <router-link to="#" class="nav-link text-white p-2 ms-1 position-relative"
+    <div class="addFavorite mb-2 me-2 position-relative rounded-circle">
+      <router-link to="#" class="nav-link text-white position-relative position-absolute top-50 start-50 translate-middle"
         ><i class="bi bi-suit-heart-fill"></i
         ><span
           class="position-absolute start-0 translate-middle badge rounded-pill bg-danger"
@@ -41,6 +41,36 @@
         ></router-link
       >
     </div>
+  </div>
+  <div class="Smallsidebar d-lg-none">
+    <div class="addCart mb-2 me-2 position-relative rounded-circle">
+      <router-link
+        to="/cart"
+        class="nav-link text-white position-relative position-absolute top-50 start-50 translate-middle"
+        ><i class="bi bi-cart3"></i
+        ><span v-if="carts.length!==0"
+          class="position-absolute start-0 translate-middle badge rounded-pill bg-danger"
+          style="font-size: 13px; top: 10px"
+          >{{ totalQty }}
+          <span class="visually-hidden">unread messages</span>
+        </span></router-link
+      >
+    </div>
+    <div class="addFavorite mb-2 me-2 position-relative rounded-circle">
+      <router-link to="#" class="nav-link text-white position-relative position-absolute top-50 start-50 translate-middle"
+        ><i class="bi bi-suit-heart-fill"></i
+        ><span
+          class="position-absolute start-0 translate-middle badge rounded-pill bg-danger"
+          style="font-size: 13px; top: 10px"
+        >
+          99
+          <span class="visually-hidden">unread messages</span></span
+        ></router-link
+      >
+    </div>
+  </div>
+  <div>
+
   </div>
 </template>
 
