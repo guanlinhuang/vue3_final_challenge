@@ -310,68 +310,70 @@
               aria-labelledby="panelsStayOpen-headingOne"
             >
               <div class="accordion-body"></div>
-      <table class="table">
-        <tbody>
-          <tr
-            v-for="item in cart.carts"
-            :key="item.id"
-            class="border-top border-bottom"
-          >
-            <td style="width: 70px">
-              <div style="width: 70px; height: 100px">
-                <img
-                  :src="item.product.imageUrl"
-                  alt=""
-                  class="w-100 h-100 object-fit-cover"
-                />
-              </div>
-            </td>
-            <td class="align-top">
-              <div class="d-flex mt-3 justify-content-between">
-                <div>
-                  <a
-                    class="productName text-decoration-none text-dark"
-                    @click="getProductPage(item.product.id)"
-                    >{{ item.product.title }}</a
+              <table class="table">
+                <tbody>
+                  <tr
+                    v-for="item in cart.carts"
+                    :key="item.id"
+                    class="border-top border-bottom"
                   >
-                </div>
-                <div class="me-2">
-                  <p class="mb-0 mb-3">數量：{{ item.qty }}</p>
-                  <p class="mb-0">總價：${{ item.total }}</p>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td></td>
-            <td>
-              <div class="me-2">
-                <p class="mb-0 text-end">
-                  商品總價&nbsp;&nbsp;&nbsp;&nbsp;NT$
-                  {{ $filters.currency(Math.round(cart.total)) }}
-                </p>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <div class="me-2">
-                <p class="mb-0 text-end">
-                  總金額
-                  <span class="fs-3 text-success">
-                    NT$
-                    {{ $filters.currency(Math.round(cart.final_total)) }}</span
-                  >
-                </p>
-              </div>
-              <div
-                v-if="cart.final_total !== cart.total"
-                style="padding-right: 5px"
-              >
-                <!-- <p class="mb-0 text-end">
+                    <td style="width: 70px">
+                      <div style="width: 70px; height: 100px">
+                        <img
+                          :src="item.product.imageUrl"
+                          alt=""
+                          class="w-100 h-100 object-fit-cover"
+                        />
+                      </div>
+                    </td>
+                    <td class="align-top">
+                      <div class="d-flex mt-3 justify-content-between">
+                        <div>
+                          <a
+                            class="productName text-decoration-none text-dark"
+                            @click="getProductPage(item.product.id)"
+                            >{{ item.product.title }}</a
+                          >
+                        </div>
+                        <div class="me-2">
+                          <p class="mb-0 mb-3">數量：{{ item.qty }}</p>
+                          <p class="mb-0">總價：${{ item.total }}</p>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td></td>
+                    <td>
+                      <div class="me-2">
+                        <p class="mb-0 text-end">
+                          商品總價&nbsp;&nbsp;&nbsp;&nbsp;NT$
+                          {{ $filters.currency(Math.round(cart.total)) }}
+                        </p>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>
+                      <div class="me-2">
+                        <p class="mb-0 text-end">
+                          總金額
+                          <span class="fs-3 text-success">
+                            NT$
+                            {{
+                              $filters.currency(Math.round(cart.final_total))
+                            }}</span
+                          >
+                        </p>
+                      </div>
+                      <div
+                        v-if="cart.final_total !== cart.total"
+                        style="padding-right: 5px"
+                      >
+                        <!-- <p class="mb-0 text-end">
                     總金額
                     <span class="fs-3 text-success">
                       NT$
@@ -382,39 +384,42 @@
                     <br />
                     <span class="text-end text-danger">(已套用優惠券)</span>
                   </p> -->
-                <p class="mb-0 text-end text-danger">(已套用優惠券)</p>
+                        <p class="mb-0 text-end text-danger">(已套用優惠券)</p>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- // cart.final_total 是整個購物車的總金額(折扣後) -->
+                </tfoot>
+              </table>
+              <div class="row px-2 gx-2">
+                <div class="col">
+                  <router-link
+                    to="/productsall"
+                    type="button"
+                    class="mt-3 py-2 btnHover w-100 d-block"
+                  >
+                    <div>
+                      <span>繼續選購</span>
+                      <span>繼續選購</span>
+                    </div>
+                  </router-link>
+                </div>
+                <div class="col">
+                  <button
+                    class="mt-3 py-2 btnHover w-100"
+                    @click="backToPage()"
+                  >
+                    <div>
+                      <span>返回購物車</span>
+                      <span>返回購物車</span>
+                    </div>
+                  </button>
+                </div>
               </div>
-            </td>
-          </tr>
-          <!-- // cart.final_total 是整個購物車的總金額(折扣後) -->
-        </tfoot>
-      </table>
-      <div class="row px-2 gx-2">
-        <div class="col">
-          <router-link
-            to="/productsall"
-            type="button"
-            class="mt-3 py-2 btnHover w-100 d-block"
-          >
-            <div>
-              <span>繼續選購</span>
-              <span>繼續選購</span>
-            </div>
-          </router-link>
-        </div>
-        <div class="col">
-          <button class="mt-3 py-2 btnHover w-100" @click="backToPage()">
-            <div>
-              <span>返回購物車</span>
-              <span>返回購物車</span>
-            </div>
-          </button>
-        </div>
-      </div>
-    </div>
             </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
 </template>
@@ -473,7 +478,7 @@ export default {
   },
 
   created () {
-    // this.getCart()
+    this.getCart()
   }
 }
 </script>
