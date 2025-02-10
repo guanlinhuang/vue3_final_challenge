@@ -71,7 +71,7 @@ export default {
       // this.isLoading = true
       this.$http.get(url).then((response) => {
         this.carts = response.data.data.carts
-        console.log('this.carts', this.carts)
+        // console.log('this.carts', this.carts)
       })
     }
   },

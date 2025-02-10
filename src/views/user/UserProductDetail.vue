@@ -7,9 +7,9 @@
     alt=""
     style="width: 100%; height: 300px; background-color: antiquewhite"
   /> -->
-  <div class="container py-lg-5 UserProduct">
+  <div class="container py-lg-5 UserProductDetail">
     <div class="row d-flex justify-content-lg-center">
-      <div class="col-lg-3 me-5">
+      <div class="col-lg-5 col-xl-4 me-5 mt-0 mt-sm-2">
         <nav aria-label="breadcrumb" class="d-none d-lg-block">
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -25,7 +25,8 @@
           </ol>
         </nav>
         <div class="product_img mb-3">
-        <img :src="product.imageUrl" alt="" class="object-fit-cover" /></div>
+          <img :src="product.imageUrl" alt="" class="object-fit-cover" />
+        </div>
       </div>
       <div class="col-lg-4 mt-lg-5 px-4 px-lg-0">
         <h2>{{ product.title }}</h2>
@@ -52,25 +53,41 @@
           v-model.number="item.qty"
         /></div> -->
         <div>{{ product.content }}</div>
-        <div class="input-group my-3">
-          <button
-            class="btn border-0"
-            type="button"
-            @click="changeQty(-1)"
-            :disabled="productsQty === 1"
-          >
-            <i class="bi bi-dash-lg"></i>
-          </button>
-          <input
-            type="number"
-            class="form-control text-center"
-            v-model="productsQty"
-            min="1"
-            readonly
-          />
-          <button class="btn border-0" type="button" @click="changeQty(1)">
-            <i class="bi bi-plus-lg"></i>
-          </button>
+        <div class="d-flex">
+          <div class="input-group my-3">
+            <button
+              class="btn border-0"
+              type="button"
+              @click="changeQty(-1)"
+              :disabled="productsQty === 1"
+            >
+              <i class="bi bi-dash-lg"></i>
+            </button>
+            <input
+              type="number"
+              class="form-control text-center"
+              v-model="productsQty"
+              min="1"
+              readonly
+            />
+            <button class="btn border-0" type="button" @click="changeQty(1)">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+          <div class="my-auto">
+            <button
+              type="button"
+              @click.stop="toggleFavorite(product)"
+              class="btn btn-favorite colorHeart fs-3"
+            >
+              <i
+                class="bi"
+                :class="
+                  favorite.includes(product.id) ? 'bi-heart-fill' : 'bi-heart'
+                " style="color:#8fc0a9"
+              ></i>
+            </button>
+          </div>
         </div>
         <div class="row gx-lg-0">
           <button
@@ -109,8 +126,8 @@
         :spaceBetween="3"
         :slidesPerView="3"
         :breakpoints="{
-        992: {slidesPerView: 6,spaceBetween:30}
-      }"
+          992: { slidesPerView: 6, spaceBetween: 30 },
+        }"
       >
         <swiper-slide v-for="item in products" :key="item.id">
           <div class="position-relative text-center product h-100">
@@ -150,7 +167,7 @@
       </swiper>
     </div>
   </div>
-  <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar>
+  <!-- <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar> -->
 </template>
 
 <script>
@@ -163,20 +180,24 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules' // 載入swipe
 import 'swiper/css' // 載入swiper 原生css // 必載入
 import 'swiper/css/pagination' // 載入頁碼樣式原生css // 可不載入
 import 'swiper/css/navigation' // 載入上下一則導航樣式原生css // 可不載入
+import saveFavorite from '@/methods/saveFavorite'
 export default {
   data () {
     return {
       product: {},
-      status: {
-        loadingItem: ''
-      },
+      // status: {
+      //   loadingItem: ''
+      // },
       id: '',
       carts: [],
       productsQty: 1,
       products: [], // swiper products
+      favorite: saveFavorite.getFavorite() || [], // import進來的saveFavorite // 預設為getFavorite() 或 回傳空陣列(如果localstorage沒東西)
+      favoriteProduct: [],
       modules: [Autoplay, Pagination, Navigation]
     }
   },
+  inject: ['emitter'], // 內層使用inject // 可使用外層元件Userboard.vue的mitt套件功能
   components: {
     // 區域註冊
     Swiper,
@@ -188,21 +209,22 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`
       this.isLoading = true
       this.$http.get(api).then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         this.isLoading = false
         if (response.data.success) {
           this.product = response.data.product
-          console.log('this.product', this.product)
+          // console.log('this.product', this.product)
         }
       })
     },
     getCart () {
-      // 取得購物車列表
+      // 取得購物車列表 // 用於側邊欄購物車標籤
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       // this.isLoading = true
       this.$http.get(url).then((response) => {
         this.carts = response.data.data.carts
-        console.log('this.carts', this.carts)
+        // console.log('productsDetail', this.carts)
+        this.emitter.emit('update-cart', this.carts)
       })
     },
 
@@ -235,24 +257,27 @@ export default {
         this.$httpMessageState(response, '加入購物車')
         this.getCart()
       })
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤')
+        })
     },
 
     // 更新購物車
-    // updateCart (item) {
-    //   // 更新購物車
-    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
-    //   // this.isLoading = true
-    //   // this.status.loadingItem = item.id // 用於disabled狀態
-    //   const cart = {
-    //     product_id: item.product_id,
-    //     qty: item.qty
-    //   }
-    //   this.$http.put(url, { data: cart }).then((res) => {
-    //     console.log('updateCart', res)
-    //     // this.status.loadingItem = ''
-    //     this.getCart()
-    //   })
-    // },
+    updateCart (item) {
+      // 更新購物車
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
+      // this.isLoading = true
+      // this.status.loadingItem = item.id // 用於disabled狀態
+      const cart = {
+        product_id: item.product_id,
+        qty: item.qty
+      }
+      this.$http.put(url, { data: cart }).then((res) => {
+        // console.log('updateCart', res)
+        // this.status.loadingItem = ''
+        this.getCart()
+      })
+    },
     // 加減按鈕
     changeQty (number) {
       this.productsQty += number
@@ -277,14 +302,57 @@ export default {
               .sort(() => Math.random() - 0.5) // 亂數排序
             // .splice(1, 5)
             this.isLoading = false
-            console.log('this.others', this.products)
+            // console.log('this.others', this.products)
           }
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次')
           this.isLoading = false
         })
+    },
+    getFavoriteProduct () { // 從所有產品清單篩選localstorage裡收藏的產品，並儲存到this.favoriteProduct
+      this.$http
+        .get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`)
+        .then((response) => {
+          this.favoriteProduct = response.data.products.filter((product) => this.favorite.includes(product.id))
+          // console.log(this.favoriteProduct.length)
+          this.emitter.emit('update-favorite', this.favoriteProduct)
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤')
+        })
+    },
+    toggleFavorite (product) { // 「 加入我的最愛 」按鈕 // 如果localstorage沒有該筆產品id，就加入收藏，如果已經存在，就移除收藏
+      if (this.favorite.includes(product.id)) {
+        this.favorite.splice(this.favorite.indexOf(product.id), 1) // 如果該產品已經存在，就移除收藏
+        this.$httpMessageState(
+          {
+            data: {
+              success: true
+            }
+          },
+          '移除收藏'
+        )
+      } else {
+        this.favorite.push(product.id) // 如果沒有該筆產品，就加入收藏
+        this.$httpMessageState(
+          {
+            data: {
+              success: true
+            }
+          },
+          '加入收藏'
+        )
+      }
+      saveFavorite.saveFavorite(this.favorite) // 觸發saveFavorite.js函式 //儲存或移除localstorage裡的產品
+      this.getFavoriteProduct()
+      // console.log('this.favorite', this.favorite)
+      // this.emitter.emit('update-favorite', this.favorite) // // 加入或移除收藏時，觸發emitter，傳遞到 UserFavorite.vue
     }
+    // updateFavorite () {
+    //   this.favorite = saveFavorite.getFavorite()
+    //   console.log('updateFavorite', this.favorite)
+    // }
   },
   created () {
     this.id = this.$route.params.productId

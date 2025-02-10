@@ -1,17 +1,17 @@
 <template>
   <div class="Smallsidebar d-none d-lg-block  d-flex flex-column align-items-center">
     <div class="followUs mb-2 me-2 position-relative rounded-circle">
-      <a href="#" class="text-white d-block position-absolute top-50 start-50 translate-middle"
+      <a href="https://www.facebook.com/share/18cBV1AWgK/?mibextid=wwXIfr" class="text-white d-block position-absolute top-50 start-50 translate-middle"
         ><i class="bi bi-facebook"></i
       ></a>
     </div>
     <div class="followUs mb-2 me-2 position-relative rounded-circle">
-      <a href="#" class="text-white d-block position-absolute top-50 start-50 translate-middle"
+      <a href="https://www.instagram.com/tony_5507?igsh=OHRobGxqMTVkb3Fo&utm_source=qr" class="text-white d-block position-absolute top-50 start-50 translate-middle"
         ><i class="bi bi-instagram"></i
       ></a>
     </div>
     <div class="followUs mb-2 me-2 position-relative rounded-circle">
-      <a href="#" class="text-white d-block position-absolute top-50 start-50 translate-middle"
+      <a href="https://line.me/ti/p/OwNL1F9kBd" class="text-white d-block position-absolute top-50 start-50 translate-middle"
         ><i class="bi bi-line"></i
       ></a>
     </div>
@@ -30,13 +30,13 @@
     </div>
     <!-- <a href="#" @click.prevent="logout" class="nav-link">登出</a> -->
     <div class="addFavorite mb-2 me-2 position-relative rounded-circle">
-      <router-link to="#" class="nav-link text-white position-relative position-absolute top-50 start-50 translate-middle"
+      <router-link to="/favorite" class="nav-link text-white position-relative position-absolute top-50 start-50 translate-middle"
         ><i class="bi bi-suit-heart-fill"></i
-        ><span
+        ><span v-if="favoriteProduct.length!==0"
           class="position-absolute start-0 translate-middle badge rounded-pill bg-danger"
           style="font-size: 13px; top: 10px"
         >
-          99
+          {{ favoriteProduct.length }}
           <span class="visually-hidden">unread messages</span></span
         ></router-link
       >
@@ -50,20 +50,20 @@
         ><i class="bi bi-cart3"></i
         ><span v-if="carts.length!==0"
           class="position-absolute start-0 translate-middle badge rounded-pill bg-danger"
-          style="font-size: 13px; top: 10px"
+          style="font-size: 13px; top: 10px;z-index: 10;"
           >{{ totalQty }}
           <span class="visually-hidden">unread messages</span>
         </span></router-link
       >
     </div>
     <div class="addFavorite mb-2 me-2 position-relative rounded-circle">
-      <router-link to="#" class="nav-link text-white position-relative position-absolute top-50 start-50 translate-middle"
+      <router-link to="/favorite" class="nav-link text-white position-relative position-absolute top-50 start-50 translate-middle"
         ><i class="bi bi-suit-heart-fill"></i
-        ><span
+        ><span v-if="favoriteProduct.length!==0"
           class="position-absolute start-0 translate-middle badge rounded-pill bg-danger"
           style="font-size: 13px; top: 10px"
         >
-          99
+        {{ favoriteProduct.length }}
           <span class="visually-hidden">unread messages</span></span
         ></router-link
       >
@@ -76,6 +76,7 @@
 
 <script>
 // import emitter from '@/methods/emitter'
+import saveFavorite from '@/methods/saveFavorite'
 export default {
   // props: { // 設定內層所接收的props
   //   cartss: {
@@ -85,33 +86,43 @@ export default {
   //     }
   //   }
   // },
-  props: ['cartss'],
-  watch: {
-    cartss () {
-      this.carts = this.cartss
-    }
-  },
-  data () {
-    return {
-      carts: []
-    }
-  },
-  // methods: {
-  //   // 取得購物車列表
-  //   getCart () {
-  //     const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-  //     // this.isLoading = true
-  //     this.$http.get(url).then((response) => {
-  //       // console.log('getCart', response)
-  //       // this.carts = response.data.data.carts
-  //       // this.cartLength = response.data.data.carts.length
-  //       // // this.isLoading = false
-  //       // console.log('this.cart', this.cartLength)
-  //       this.carts = response.data.data.carts
-  //       console.log('SmallSidebar', this.carts)
-  //     })
+  // props: ['cartss'],
+  // watch: {
+  //   cartss () {
+  //     this.carts = this.cartss
   //   }
   // },
+  data () {
+    return {
+      carts: [],
+      favorite: saveFavorite.getFavorite() || [],
+      favoriteProduct: []
+    }
+  },
+  inject: ['emitter'], // 內層使用inject // 可使用外層元件Userboard.vue的mitt套件功能
+  methods: {
+    // 取得購物車列表 // 用於重新整理的狀況下 // 若沒加此段code，重新整理後側邊欄標籤無法顯示數量
+    getCart () {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      // this.isLoading = true
+      this.$http.get(url).then((response) => {
+        this.carts = response.data.data.carts
+      }).catch((error) => {
+        console.error('購物車加載失敗', error)
+      })
+    },
+    getFavoriteProduct () { // 從所有產品清單篩選localstorage裡收藏的產品，並儲存到this.favoriteProduct // 用於重新整理的狀況下 // 若沒加此段code，重新整理後側邊欄標籤無法顯示數量
+      this.$http
+        .get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`)
+        .then((response) => {
+          this.favoriteProduct = response.data.products.filter((product) => this.favorite.includes(product.id))
+        })
+        .catch((error) => {
+          // this.isLoading = false
+          this.$httpMessageState(error, '連線錯誤')
+        })
+    }
+  },
   // computed: {
   //   cartsNum () {
   //     let cartNum = 0
@@ -124,10 +135,12 @@ export default {
   computed: {
     totalQty () { // 購物車內商品總數
       let total = 0
-      this.carts.forEach(item => {
-        total += item.qty
-        console.log('SmallSidebar', this.carts)
-      })
+      if (Array.isArray(this.carts)) { // 需要確保this.carts是一個陣列 array 這樣才不會計算出錯
+        this.carts.forEach(item => {
+          total += item.qty
+          // console.log('SmallSidebar', this.carts)
+        })
+      }
       return total
     }
   },
@@ -141,18 +154,28 @@ export default {
   //       })
   //       return cartNum
   //     },
-  //     immediate: true
+  //     // immediate: true
+  //     deep: true
   //   }
 
   // },
   mounted () {
     // this.carts = this.cartss // 使用這段code會報錯 // TypeError: Cannot read properties of undefined (reading 'forEach')
-    this.carts = Array.isArray(this.cartss) ? this.cartss : [] // this.carts 需要確保是一個陣列 array 所以才不會出錯
-  }
+    // this.carts = Array.isArray(this.cartss) ? this.cartss : [] // 需要確保this.carts是一個陣列 array 這樣才不會計算出錯
+    // this.getCart()
+    this.emitter.on('update-cart', (msg) => {
+      this.carts = msg
+      // this.getCart()
+    })
+    this.emitter.on('update-favorite', (msg) => {
+      this.favoriteProduct = msg
+      // this.getFavoriteProduct()
+    })
+  },
   // created () {
-  //   emitter.on('updateCart', () => {
-  //     this.getCart()
-  //   })
+  // emitter.on('updateCart', () => {
+  //   this.getCart()
+  // })
   // emitter.on('update-favorite', () => {
   //   this.favoriteNum = this.getLocalStorage()
   // })
@@ -161,6 +184,11 @@ export default {
   //   this.getCart()
   //   window.addEventListener('scroll', this.windowScroll)
   // }
+  created () {
+    this.getCart()
+    this.getFavoriteProduct()
+    // this.totalQty()
+  }
 }
 </script>
 

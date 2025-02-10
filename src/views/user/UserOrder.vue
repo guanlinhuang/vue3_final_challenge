@@ -109,7 +109,7 @@
           <router-link
             to="/productsall"
             type="button"
-            class="mt-3 py-2 me-3 btnHover"
+            class="mt-3 py-2 me-3 btnHover d-block"
           >
             <div>
               <span>繼續選購</span>
@@ -394,7 +394,7 @@
           <router-link
             to="/productsall"
             type="button"
-            class="mt-3 py-2 btnHover w-100"
+            class="mt-3 py-2 btnHover w-100 d-block"
           >
             <div>
               <span>繼續選購</span>
@@ -417,7 +417,7 @@
         </div>
     </div>
   </div>
-  <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar>
+  // <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar>
 </template>
 
 <script>
@@ -442,7 +442,7 @@ export default {
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(url).then((response) => {
-        console.log('getCart', response)
+        // console.log('getCart', response)
         this.cart = response.data.data
         this.carts = response.data.data.carts // 用於側邊欄購物車標籤
       })
@@ -474,7 +474,7 @@ export default {
   },
 
   created () {
-    this.getCart()
+    // this.getCart()
   }
 }
 </script>

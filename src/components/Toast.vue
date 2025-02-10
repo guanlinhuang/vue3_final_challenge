@@ -12,7 +12,7 @@
         :class="`bg-${msg.style}`"
         class="p-2 rounded me-2 d-inline-block"
       ></span>
-      <strong class="me-auto">{{ msg.title }}</strong>
+      <strong class="me-auto"> {{ msg.title }}</strong>
       <button
         type="button"
         class="btn-close"

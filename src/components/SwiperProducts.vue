@@ -101,7 +101,7 @@ export default {
               .sort(() => Math.random() - 0.5) // 亂數排序
             // .splice(1, 5)
             this.isLoading = false
-            console.log('this.others', this.products)
+            // console.log('this.others', this.products)
           }
         })
         .catch((err) => {

@@ -109,7 +109,7 @@ export default {
         this.orders = response.data.orders
         this.pagination = response.data.pagination
         this.isLoading = false
-        console.log('this.orders', this.orders)
+        // console.log('this.orders', this.orders)
       })
     },
     openModal (isNew, item) {
@@ -117,7 +117,7 @@ export default {
       this.isNew = false
       const orderComponent = this.$refs.orderModal
       orderComponent.showModal()
-      console.log('this.tempOrder', this.tempOrder)
+      // console.log('this.tempOrder', this.tempOrder)
     },
     openDelOrderModal (item) {
       this.tempOrder = { ...item }
@@ -141,7 +141,7 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}` // 刪除訂單API
       this.isLoading = true
       this.$http.delete(url).then((response) => {
-        console.log(response)
+        // console.log(response)
         const delComponent = this.$refs.delModal
         delComponent.hideModal()
         this.getOrders(this.currentPage)

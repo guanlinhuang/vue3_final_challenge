@@ -1,15 +1,16 @@
-.userCart {
+.userCart { // 考量到不同頁面可能不同排版，故未與 UserPay、UserOrder共用
   margin-top: 100px;
   margin-bottom: 150px
 }
 
+// 與 UserPay、UserOrder共用
 .productName {
   border-bottom: 1px solid
 }
 
 .productName:hover {
   cursor: pointer;
-  color: #0dcaf0 !important;
+  color: $cambrige_blue!important;;
 }
 
 // .coupon_form{

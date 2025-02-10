@@ -1,0 +1,48 @@
+$screen-height: 100vh;
+$banner-height: 264px;
+.h100 {
+  min-height: calc($screen-height - $banner-height);
+}
+.favoritebanner{
+  height: 264px;
+//   background: url('../../assets/img/bg_6.jpg');
+  background-size: cover;
+  background-position: 60%;
+}
+.favoritebanner-text{
+  color: #ffffff;
+  letter-spacing: .5rem;
+  text-shadow: -1px 0 black, 0 1px black,
+  1px 0 black, 0 -1px black;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  white-space: nowrap;
+}
+.bgcolor{
+  background: #2D2B1E;
+  color:#FEF2F2;
+}
+.btnShop{
+  color:#2D2B1E;
+}
+.btnShop:hover{
+  color:#838288;
+}
+.productImg{
+  width: 150px;
+  aspect-ratio: 4/3;
+  object-fit: contain;
+}
+@media(max-width:767px){
+  .table-layout{
+    width:100%;
+    table-layout: fixed;
+  }
+  .textover{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    word-break:keep-all;
+    white-space:nowrap;
+  }
+}

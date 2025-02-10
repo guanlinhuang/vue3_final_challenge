@@ -1,11 +1,11 @@
 <template>
   <NavbarFront></NavbarFront>
-  <SmallSidebar></SmallSidebar>
   <div class="HomeView">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <router-view></router-view>
     <ToastMessages></ToastMessages>
+    <SmallSidebar></SmallSidebar>
   </div>
   <FooterFront></FooterFront>
 </template>
@@ -13,7 +13,7 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-import emitter from '@/methods/emitter'
+import emitter from '@/methods/emitter' // mitt跨元件資料傳遞js
 import ToastMessages from '@/components/ToastMessages.vue'
 import NavbarFront from '@/components/Navbar_front.vue'
 import FooterFront from '@/components/Footer_front.vue'
@@ -34,7 +34,7 @@ export default {
     }
   },
   created () {
-    console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)// 檢查是否有把環境變數加到專案中
+    // console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)// 檢查是否有把環境變數加到專案中
   }
 }
 

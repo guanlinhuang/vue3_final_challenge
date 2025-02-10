@@ -389,7 +389,7 @@
         <router-link
           to="/productsall"
           type="button"
-          class="btnHover btn-lg rounded-0 mt-3"
+          class="btnHover btn-lg rounded-0 mt-3 d-block w-25 mx-auto"
         >
           <div>
             <span>去逛逛商店 <i class="bi bi-arrow-right" /></span>
@@ -406,7 +406,7 @@ export default {
   data () {
     return {
       cart: {},
-      // carts: [],
+      carts: [],
       coupon_code: '',
       // shipping: 250,
       status: {
@@ -415,22 +415,24 @@ export default {
       productsQty: ''
     }
   },
+  inject: ['emitter'], // 內層使用inject // 可使用外層元件Userboard.vue的mitt套件功能
   methods: {
     // 取得購物車列表
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       // this.isLoading = true
       this.$http.get(url).then((response) => {
-        console.log('getCart', response)
+        // console.log('getCart', response)
         this.cart = response.data.data
         this.carts = response.data.data.carts
         // this.productsQty = response.data.data.carts.item.qty
         // this.isLoading = false
         // console.log('this.cart', this.cart)
-        console.log('this.carts', this.carts)
+        // console.log('this.carts', this.carts)
         // console.log('this.productsQty', response.data.data.carts.item.qty)
+        this.emitter.emit('update-cart', this.carts)
       })
-      console.log(typeof this.shipping)
+      // console.log(typeof this.shipping)
     },
 
     // 更新購物車
@@ -444,7 +446,7 @@ export default {
         qty: item.qty
       }
       this.$http.put(url, { data: cart }).then((res) => {
-        console.log('updateCart', res)
+        // console.log('updateCart', res)
         // this.status.loadingItem = ''
         this.getCart()
       })
@@ -468,7 +470,7 @@ export default {
         this.$httpMessageState(response, '加入優惠券')
         this.getCart()
         // this.isLoading = false
-        console.log('addCouponCode', response)
+        // console.log('addCouponCode', response)
       })
     },
 
@@ -482,7 +484,7 @@ export default {
         this.status.loadingItem = '' // 解除禁用按鈕
         this.getCart()
         // this.isLoading = false // 關閉讀取效果
-        console.log('removeCartItem', response)
+        // console.log('removeCartItem', response)
       })
     },
 
@@ -491,6 +493,7 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`
       this.$http.delete(url).then((response) => {
         this.$httpMessageState(response, '移除所有購物車品項')
+        // this.emitter.emit('update-cart', this.carts)
         this.getCart()
         // this.isLoading = false
       })

@@ -39,17 +39,17 @@
       </div>
       <div class="footer_followUs d-flex ms-3 mt-3 d-lg-none">
         <div class="followBtn">
-      <a href="#" class="p-2 ms-1 text-white d-block"
+      <a href="https://www.facebook.com/share/18cBV1AWgK/?mibextid=wwXIfr" class="p-2 ms-1 text-white d-block"
         ><i class="bi bi-facebook fs-1"></i
       ></a>
     </div>
     <div class="followBtn">
-      <a href="#" class="p-2 ms-1 text-white d-block"
+      <a href="https://www.instagram.com/tony_5507?igsh=OHRobGxqMTVkb3Fo&utm_source=qr" class="p-2 ms-1 text-white d-block"
         ><i class="bi bi-instagram fs-1"></i
       ></a>
     </div>
     <div class="followBtn">
-      <a href="#" class="p-2 ms-1 text-white d-block"
+      <a href="https://line.me/ti/p/OwNL1F9kBd" class="p-2 ms-1 text-white d-block"
         ><i class="bi bi-line fs-1"></i
       ></a>
     </div>

@@ -27,35 +27,35 @@
       </div>
     </div>
   </div>
-  <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar>
+  <!-- <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar> -->
 </template>
 
 <script>
 
-import SmallSidebar from '@/components/SmallSidebar.vue'
+// import SmallSidebar from '@/components/SmallSidebar.vue'
 export default {
   data () {
     return {
-      carts: []
+      // carts: []
     }
   },
-  components: { // 區域註冊
-    SmallSidebar
-  },
+  // components: { // 區域註冊
+  //   SmallSidebar
+  // },
   methods: {
     // 取得購物車列表
-    getCart () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      // this.isLoading = true
-      this.$http.get(url).then((response) => {
-        console.log('getCart', response)
-        this.carts = response.data.data.carts
-        console.log('this.carts', this.carts)
-      })
-    }
+    // getCart () {
+    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+    //   // this.isLoading = true
+    //   this.$http.get(url).then((response) => {
+    //     // console.log('getCart', response)
+    //     this.carts = response.data.data.carts
+    //     // console.log('this.carts', this.carts)
+    //   })
+    // }
   },
   created () {
-    this.getCart()
+    // this.getCart()
   }
 }
 </script>

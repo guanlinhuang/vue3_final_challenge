@@ -38,7 +38,7 @@ const routes = [
       {
         path: 'products/:productId',
         name: '單一產品介紹',
-        component: () => import('../views/user/UserProduct.vue')
+        component: () => import('../views/user/UserProductDetail.vue')
       },
       {
         path: 'UserOrderSearch',
@@ -59,6 +59,11 @@ const routes = [
         path: 'pay/:orderId',
         name: '結帳',
         component: () => import('../views/user/UserPay.vue')
+      },
+      {
+        path: 'favorite',
+        name: '最愛',
+        component: () => import('../views/user/UserFavorite.vue')
       }
     ]
   },
@@ -100,7 +105,7 @@ const router = createRouter({
   linkActiveClass: 'active', // 可以讓選項變成啟用中的樣式
   routes,
   scrollBehavior (to, from, savedPosition) { // 控制網頁畫面的滾動位置
-    console.log('控制網頁畫面的滾動位置', to, from, savedPosition)
+    // console.log('控制網頁畫面的滾動位置', to, from, savedPosition)
     return {
       top: 0
     }

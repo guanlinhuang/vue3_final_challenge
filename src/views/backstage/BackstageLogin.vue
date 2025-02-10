@@ -77,7 +77,7 @@ export default {
           // console.log(token, expired)
           document.cookie = `hexToken=${token};expires=${new Date(expired)}` // hexToken、expires名稱自定義，new Date可把毫秒轉換為日期
           this.$router.push('/dashboard/products') // 登入成功後，跳轉到指定頁面
-          console.log(res.data)
+          // console.log(res.data)
         }
       })
     }

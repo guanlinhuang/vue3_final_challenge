@@ -1,4 +1,4 @@
-// mitt跨元件資料傳遞 // 先安裝套件npm install mitt --legacy-peer-deps
+// mitt跨元件資料傳遞js // 先安裝套件npm install mitt --legacy-peer-deps
 import mitt from 'mitt' // 匯入套件
 
 const emitter = mitt() // 定義變數

@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <a class="navbar-brand d-lg-none text-white mx-3" href="#">Logo</a>
         <button
-          class="navbar-toggler d-lg-none"
+          class="navbar-toggler d-lg-none p-0 pe-2"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasNavbar"
@@ -35,7 +35,7 @@
           <div class="offcanvas-body justify-content-center">
             <div>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
-              <li class="nav-item">
+              <li class="nav-item my-2 my-lg-0">
                 <router-link
                   to="/aboutus"
                   class="nav-link text-white border-underline"
@@ -43,7 +43,7 @@
                   >關於GuanTony</router-link
                 >
               </li>
-              <li class="nav-item">
+              <li class="nav-item my-2 my-lg-0">
                 <router-link
                   to="/productsall"
                   class="nav-link text-white border-underline"
@@ -56,7 +56,7 @@
                   >logo</router-link
                 >
               </li>
-              <li class="nav-item">
+              <li class="nav-item my-2 my-lg-0">
                 <router-link
                   to="/UserOrderSearch"
                   class="nav-link text-white border-underline"
@@ -64,7 +64,7 @@
                   >訂單查詢</router-link
                 >
               </li>
-              <li class="nav-item">
+              <li class="nav-item my-2 my-lg-0">
                 <router-link
                   to="/storelist"
                   class="nav-link text-white border-underline"

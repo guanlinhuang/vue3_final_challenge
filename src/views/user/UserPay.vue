@@ -90,7 +90,7 @@
               <router-link
                 to="/"
                 type="button"
-                class="btnHover w-100" style="min-width: 0px;"
+                class="btnHover w-100 d-block" style="min-width: 0px;"
               >
                 <div>
                   <span>延後付款</span>
@@ -190,7 +190,7 @@
       </div>
     </div>
   </div>
-  <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar>
+  <!-- <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar> -->
 </template>
 
 <script>
@@ -212,7 +212,7 @@ export default {
       this.$http.get(url).then((res) => {
         if (res.data.success) {
           this.order = res.data.order
-          console.log(this.order)
+          // console.log(this.order)
         }
       })
     },
@@ -220,7 +220,7 @@ export default {
       // 按下「確認付款去」按鈕，付款狀態欄位會變化，is_paid 從false轉為true
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`
       this.$http.post(url).then((res) => {
-        console.log(res)
+        // console.log(res)
         if (res.data.success) {
           this.getOrder()
           this.scrollTop() // 滑動到頂部
@@ -234,7 +234,7 @@ export default {
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(url).then((response) => {
-        console.log('getCart', response)
+        // console.log('getCart', response)
         this.cart = response.data.data
         this.carts = response.data.data.carts // 用於側邊欄購物車標籤
       })
@@ -248,9 +248,9 @@ export default {
   },
   created () {
     this.orderId = this.$route.params.orderId // 第一步驟：先取得網址id
-    console.log(this.orderId)
+    // console.log(this.orderId)
     this.getOrder()
-    this.getCart()
+    // this.getCart()
   }
 }
 </script>

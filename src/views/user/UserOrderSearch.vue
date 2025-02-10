@@ -160,11 +160,11 @@
       </div>
     </div>
   </div>
-  <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar>
+  <!-- <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar> -->
 </template>
 
 <script>
-import SmallSidebar from '@/components/SmallSidebar.vue'
+// import SmallSidebar from '@/components/SmallSidebar.vue'
 export default {
   data () {
     return {
@@ -178,10 +178,10 @@ export default {
       carts: []
     }
   },
-  components: {
-    // 區域註冊
-    SmallSidebar
-  },
+  // components: {
+  //   // 區域註冊
+  //   SmallSidebar
+  // },
   //   inject: ['emitter'],
   methods: {
     getOrder (page = 1) {
@@ -190,7 +190,7 @@ export default {
         if (res.data.success) {
           this.OrderList = res.data.orders
           this.pagination = res.data.pagination
-          console.log(res.data.orders, '222')
+          // console.log(res.data.orders, '222')
         }
       })
     },
@@ -203,7 +203,7 @@ export default {
       )
       this.isLoading = false
       this.email = this.searchEmail
-      console.log(this.filterOrder, '111')
+      // console.log(this.filterOrder, '111')
       this.getOrder()
     },
     payOrder (id) {
@@ -218,16 +218,16 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       // this.isLoading = true
       this.$http.get(url).then((response) => {
-        console.log('getCart', response)
+        // console.log('getCart', response)
         this.carts = response.data.data.carts
-        console.log('this.carts', this.carts)
+        // console.log('this.carts', this.carts)
       })
     }
   },
   created () {
-    console.log('test2')
+    // console.log('test2')
     this.getOrder()
-    this.getCart()
+    // this.getCart()
   }
   //   mounted () {
   //     this.emitter.emit('page-change', {

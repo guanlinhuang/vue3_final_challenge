@@ -78,19 +78,19 @@ export default {
     coupon () {
       this.tempCoupon = this.coupon
       // 將時間格式改為 YYYY-MM-DD
-      console.log(this.tempCoupon.due_date) // 1697551289.253
+      // console.log(this.tempCoupon.due_date) // 1697551289.253
       const dateAndTime = new Date(this.tempCoupon.due_date * 1000) // due_date /1000 轉換為毫秒是為了方便時間轉換，但傳進來之後又拿這個值去 *1000 會相互抵銷 (先轉換毫秒會對我們之後要處理日期會比較方便)
         .toISOString().split('T') // toISOString():返回YYYY-MM-DD  // split('T') 把原字串依照指定的符號分割成子字串，即把日期和時間分開
       this.due_date = dateAndTime[0] // 陣列含有日期和時間兩個元素，日期的索引位置為0
-      console.log(this.due_date) // 2023-10-17
-      console.log(dateAndTime) // Tue Oct 17 2023 21:58:37 GMT+0800 (中部標準時間)
+      // console.log(this.due_date) // 2023-10-17
+      // console.log(dateAndTime) // Tue Oct 17 2023 21:58:37 GMT+0800 (中部標準時間)
       // [this.due_date] = dateAndTime // 透過解構，把陣列第一個元素賦值到 this.due_date // [] 為解構賦值，可以把陣列或物件中的資料解開擷取成為獨立變數
     },
     due_date () {
       this.tempCoupon.due_date = Math.floor(new Date(this.due_date) / 1000)
       // 已經在有日期的情況下，監聽到要更改別的日期，就會需要重新賦予值到 this.tempCoupon.due_date
       // 可不用加Math.floor，但怕日期後面有幾分幾秒，所以把Math.floor當成一種慣例
-      console.log(this.tempCoupon.due_date)
+      // console.log(this.tempCoupon.due_date)
     }
   },
   mixins: [modalMixin] // 使用 mixin 整合相同程式碼
