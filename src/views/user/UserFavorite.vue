@@ -10,11 +10,11 @@
   <div class="container products_all">
     <div v-if="favorite.length !== 0" class="py-5">
     <h3 class="text-center">收藏清單</h3>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center gx-1 gx-lg-4">
       <div class="col col-lg-9 mt-lg-5" style="margin-top: 45px">
         <div class="row row-cols-2 row-cols-lg-5">
           <div
-            class="col mb-4 mb-lg-5 gx-1 gx-lg-4"
+            class="col mb-4 mb-lg-5"
             v-for="item in favoriteProduct"
             :key="item.id"
           >
