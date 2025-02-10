@@ -5,7 +5,7 @@
     style="width: 100%; height: 300px; background-color: antiquewhite"
   /> -->
   <div class="container userCart">
-    <div class="mt-5" v-if="cart.total !== 0">
+    <div class="pt-3" v-if="cart.total !== 0">
       <div
         class="shopping_process d-flex justify-content-center align-items-center"
       >

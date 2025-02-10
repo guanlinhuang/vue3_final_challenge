@@ -7,7 +7,8 @@
     alt=""
     style="width: 100%; height: 300px; background-color: antiquewhite"
   /> -->
-  <div class="container products_all py-5">
+  <div class="container products_all">
+    <div v-if="favorite.length !== 0" class="py-5">
     <h3 class="text-center">收藏清單</h3>
     <div class="row justify-content-center">
       <div class="col col-lg-9 mt-lg-5" style="margin-top: 45px">
@@ -17,54 +18,73 @@
             v-for="item in favoriteProduct"
             :key="item.id"
           >
-            <div class="position-relative text-center product d-flex flex-column h-100">
-                <a @click="getProductPage(item.id)">
-                  <div
-                    v-if="item.origin_price !== item.price"
-                    class="onSale position-absolute text-white bg-danger py-1 px-3"
-                    style="z-index: 5"
-                  >
-                    特 價
+            <div
+              class="position-relative text-center product d-flex flex-column h-100"
+            >
+              <a @click="getProductPage(item.id)">
+                <div
+                  v-if="item.origin_price !== item.price"
+                  class="onSale position-absolute text-white bg-danger py-1 px-3"
+                  style="z-index: 5"
+                >
+                  特 價
+                </div>
+                <div class="product_img">
+                  <img :src="`${item.imageUrl}`" class="object-fit-cover" />
+                </div>
+                <p class="my-1 fw-normal">{{ item.title }}</p>
+                <div class="price text-center">
+                  <div v-if="item.origin_price !== item.price">
+                    <p class="mb-1 text-danger">NT$ {{ item.price }}</p>
                   </div>
-                  <div class="product_img">
-                    <img :src="`${item.imageUrl}`" class="object-fit-cover" />
+                  <div v-if="item.origin_price === item.price">
+                    <p class="mb-1">NT$ {{ item.price }}</p>
                   </div>
-                  <p class="my-1 fw-normal">{{ item.title }}</p>
-                  <div class="price text-center">
-                    <div v-if="item.origin_price !== item.price">
-                      <p class="mb-1 text-danger">NT$ {{ item.price }}</p>
-                    </div>
-                    <div v-if="item.origin_price === item.price">
-                      <p class="mb-1">NT$ {{ item.price }}</p>
-                    </div>
-                    <div v-if="item.origin_price !== item.price">
-                      <p
-                        class="product_origin_price mb- ms-2 text-decoration-line-through"
-                        style="font-size: 13px"
-                      >
-                        NT$ {{ item.origin_price }}
-                      </p>
-                    </div>
+                  <div v-if="item.origin_price !== item.price">
+                    <p
+                      class="product_origin_price mb- ms-2 text-decoration-line-through"
+                      style="font-size: 13px"
+                    >
+                      NT$ {{ item.origin_price }}
+                    </p>
                   </div>
-                </a>
-                <div class="mt-auto">
+                </div>
+              </a>
+              <div class="mt-auto">
                 <button
                   type="button"
-                  class="btn btn-sm px-3 me-3 fs-5" style="color: #8fc0a9; border: #8fc0a9 1px solid;"
+                  class="btn btn-sm px-3 me-3 fs-5"
+                  style="color: #8fc0a9; border: #8fc0a9 1px solid"
                   @click="addToCart(item.id, 1)"
                 >
-                <i class="bi bi-cart-plus"></i>
+                  <i class="bi bi-cart-plus"></i>
                 </button>
                 <button
-                    type="button"
-                    class="btn btn-outline-danger btn-sm"
-                    @click="removeFavorite(item)"
-                  >
-                    <i class="bi bi-x-lg"></i>
-                  </button></div>
+                  type="button"
+                  class="btn btn-outline-danger btn-sm"
+                  @click="removeFavorite(item)"
+                >
+                  <i class="bi bi-x-lg"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+    </div></div>
+    <div v-else style="margin-top: 150px; margin-bottom: 250px">
+      <div class="text-center my-5">
+        <p class="fs-4 ls">您的收藏清單目前是空的唷！</p>
+        <router-link
+          to="/productsall"
+          type="button"
+          class="btnHover btn-lg rounded-0 mt-3 d-block w-25 mx-auto"
+        >
+          <div>
+            <span>去逛逛商店 <i class="bi bi-arrow-right" /></span>
+            <span>去逛逛商店 <i class="bi bi-arrow-right" /></span>
+          </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -185,6 +205,7 @@ export default {
   },
   created () {
     this.getFavoriteProduct()
+    console.log(this.favorite.length)
   }
   // mounted () {
   //   // this.emitter.on('update-favorite', this.updateFavorite) // on是監聽

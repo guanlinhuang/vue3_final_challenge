@@ -1,6 +1,6 @@
 <template>
   <div class="container userPay">
-    <div v-if="!order.is_paid" class="row justify-content-center">
+    <div v-if="!order.is_paid" class="row justify-content-center pt-3">
       <div class="process d-flex justify-content-center align-items-center">
         <span class="text-center mx-3"
           ><i class="bi bi-cart-check fs-3"></i>
@@ -23,7 +23,7 @@
         >
       </div>
     </div>
-    <div v-else class="row justify-content-center">
+    <div v-else class="row justify-content-center pt-3">
       <div class="process d-flex justify-content-center align-items-center">
         <span class="text-center mx-3"
           ><i class="bi bi-cart-check fs-3"></i>

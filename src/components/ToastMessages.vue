@@ -1,7 +1,7 @@
 <!-- 掌管定位 訊息的呈現 -->
 <template>
   <div
-    class="toast-container position-fixed pe-3 start-50 translate-middle"
+    class="toast-container position-fixed start-50 translate-middle"
     style="z-index: 1050;top:100px"
   >
     <Toast v-for="(msg, key) in messages" :key="key" :msg="msg" />

@@ -1,6 +1,6 @@
 <template>
   <div class="container userOrder">
-    <div class="process d-flex justify-content-center align-items-center">
+    <div class="pt-3 process d-flex justify-content-center align-items-center">
       <span class="text-center mx-3"
         ><i class="bi bi-cart-check fs-3"></i>
         <p>商品確認</p></span
@@ -417,7 +417,6 @@
         </div>
     </div>
   </div>
-  // <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar>
 </template>
 
 <script>

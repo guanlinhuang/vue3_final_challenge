@@ -170,7 +170,7 @@ export default {
     return {
       OrderList: [],
       pagination: {},
-      search: '0976582503',
+      search: '',
       filterOrder: {},
       searchState: false, // 預設v-if不顯示<thead>標題
       isLoading: false,
