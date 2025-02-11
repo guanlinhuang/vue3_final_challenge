@@ -302,7 +302,7 @@ export default {
     updateCategory (category) {
       // 路由路徑增加 分類名稱 // 更換新的網址後可跳回瀏覽器頂部
       this.$router.push({
-        name: '新增產品',
+        name: '產品列表',
         params: { categoryName: category } // 值 可透過params加入到 index.js路由products後面的/:categoryName? 路由
       })
     },

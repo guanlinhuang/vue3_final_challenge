@@ -79,23 +79,23 @@ const routes = [
     children: [ // 新增子路徑
       {
         path: 'products/:categoryName?', // 新增子路徑不需加「 / 」
-        name: '新增產品',
+        name: '產品列表', // 不能隨意改 // 因為BackstageProducts.vue裡有用到此名稱
         component: () => import('../views/backstage/BackstageProducts.vue')
       },
       {
         path: 'orders',
-        name: '訂單資料',
+        name: '訂單列表',
         component: () => import('../views/backstage/BackstageOrders.vue')
       },
       {
         path: 'coupons',
-        name: '優惠券',
+        name: '優惠券列表',
         component: () => import('../views/backstage/BackstageCoupons.vue')
-      },
-      {
-        path: 'cart', // 購物車頁面
-        component: () => import('../views/user/UserCart.vue')
       }
+      // {
+      //   path: 'cart', // 購物車頁面
+      //   component: () => import('../views/user/UserCart.vue')
+      // }
     ]
   }
 ]

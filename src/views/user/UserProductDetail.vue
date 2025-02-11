@@ -362,3 +362,6 @@ export default {
   }
 }
 </script>
+
+// @click.stop="toggleFavorite(product)" .stop的作用就如同大家熟知的 event.stopPropagation()，用來阻擋事件冒泡
+// 事件冒泡：事件點擊後，會一直冒泡上去

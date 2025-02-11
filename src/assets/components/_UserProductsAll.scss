@@ -1,10 +1,11 @@
 .product_img {
   overflow: hidden; // 超出的部分隱藏
-  height: 250px;
-  border-radius: none;
+  height: 330px;
+  border-radius: 8px;
 
   @include media-breakpoint-up(lg) {
     border-radius: 16px;
+    height: 250px;
   }
 
   //   @media(max-width: 1200px) {

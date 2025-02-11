@@ -208,7 +208,7 @@
         </Form>
       </div>
     </div>
-    <div class="d-lg-none mt-5">
+    <div class="d-lg-none mt-3">
       <Form class="p-2" v-slot="{ errors }" @submit="createOrder">
         <h2 class="text-center">顧客資訊</h2>
         <div class="mb-3">

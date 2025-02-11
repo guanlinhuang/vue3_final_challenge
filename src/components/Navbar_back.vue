@@ -80,18 +80,18 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
               <li class="nav-item my-2 my-lg-0">
                 <router-link
-                  to="/aboutus"
+                  to="/dashboard/products"
                   class="nav-link text-white border-underline"
                   @click.prevent="closeOffcanvas"
-                  >關於GuanTony</router-link
+                  >產品列表</router-link
                 >
               </li>
               <li class="nav-item my-2 my-lg-0">
                 <router-link
-                  to="/productsall"
+                  to="/dashboard/orders"
                   class="nav-link text-white border-underline"
                   @click.prevent="closeOffcanvas"
-                  >所有商品</router-link
+                  >訂單列表</router-link
                 >
               </li>
               <li class="nav-item d-none d-lg-block">
@@ -101,18 +101,18 @@
               </li>
               <li class="nav-item my-2 my-lg-0">
                 <router-link
-                  to="/UserOrderSearch"
+                  to="/dashboard/coupons"
                   class="nav-link text-white border-underline"
                   @click.prevent="closeOffcanvas"
-                  >訂單查詢</router-link
+                  >優惠券列表</router-link
                 >
               </li>
               <li class="nav-item my-2 my-lg-0">
                 <router-link
-                  to="/storelist"
+                  to="/"
                   class="nav-link text-white border-underline"
                   @click.prevent="closeOffcanvas"
-                  >門市資訊</router-link
+                  >用戶端</router-link
                 >
               </li>
               <li class="nav-item d-lg-none">
