@@ -100,58 +100,56 @@
           </div>
           <div class="d-lg-none">
             <div
-              class="row row-cols-1 mx-2 my-3 border rounded-3"
+              class="mx-2 my-3 px-2 border rounded-3"
               v-for="item in filterOrder"
               :key="item.id"
             >
-              <div class="col mt-3">
-                <div class="row">
-                  <div class="col-4">
-                    <h6 class="mb-0">建立日期</h6>
-                    <p class="mb-0">{{ $filters.date(item.create_at) }}</p>
-                  </div>
-                  <div class="col-8">
-                    <h6 class="mb-0">訂單編號</h6>
-                    <p class="mb-0">{{ item.id }}</p>
-                  </div>
+              <div class="row mt-3">
+                <div class="col-4">
+                  <h6 class="mb-0">建立日期</h6>
+                  <p class="mb-0">{{ $filters.date(item.create_at) }}</p>
+                </div>
+                <div class="col-8">
+                  <h6 class="mb-0">訂單編號</h6>
+                  <p class="mb-0">{{ item.id }}</p>
                 </div>
               </div>
-              <div class="col mt-3">
-                <div class="mx-1 py-3 border-top border-bottom">
+              <div class="py-3 border-top border-bottom mt-3">
                 <h6 class="mb-0">商品明細</h6>
                 <ul class="list-unstyled mb-0">
                   <li v-for="product in item.products" :key="product.id">
                     - {{ product.product.title }} - {{ product.qty }}
                     {{ product.product.unit }}
                   </li>
-                </ul></div>
+                </ul>
               </div>
-              <div class="col mt-3 mb-3">
-                <div class="row">
-                  <div class="col d-flex align-items-center">
-                    <h6 class="mb-0">總金額</h6><p class="mb-0 ms-3">${{ $filters.currency(Math.round(item.total)) }}</p>
-                  </div>
-                  <div class="col d-flex justify-content-end align-items-center">
-                    <p v-if="!item.is_paid" class="text-danger me-3 mb-0">
-                      尚未付款
-                    </p>
-                    <p v-else class="text-success me-3 mb-0">付款完成</p>
-                    <button
-                      v-if="item.is_paid"
-                      class="btn btn-outline-success btn-sm"
-                      @click.prevent="payOrder(item.id)"
-                    >
-                      檢視
-                    </button>
-                    <button
-                      v-else
-                      class="btn btn-outline-danger btn-sm"
-                      type="button"
-                      @click.prevent="payOrder(item.id)"
-                    >
-                      檢視、付款
-                    </button>
-                  </div>
+              <div class="row mt-3 mb-3">
+                <div class="col-5 d-flex align-items-center">
+                  <h6 class="mb-0">總金額</h6>
+                  <p class="mb-0 ms-3">
+                    ${{ $filters.currency(Math.round(item.total)) }}
+                  </p>
+                </div>
+                <div class="col-7 d-flex justify-content-end align-items-center">
+                  <p v-if="!item.is_paid" class="text-danger me-3 mb-0">
+                    尚未付款
+                  </p>
+                  <p v-else class="text-success me-3 mb-0">付款完成</p>
+                  <button
+                    v-if="item.is_paid"
+                    class="btn btn-outline-success btn-sm"
+                    @click.prevent="payOrder(item.id)"
+                  >
+                    檢視
+                  </button>
+                  <button
+                    v-else
+                    class="btn btn-outline-danger btn-sm"
+                    type="button"
+                    @click.prevent="payOrder(item.id)"
+                  >
+                    檢視、付款
+                  </button>
                 </div>
               </div>
             </div>
@@ -170,7 +168,7 @@ export default {
     return {
       OrderList: [],
       pagination: {},
-      search: '',
+      search: '0987654321',
       filterOrder: {},
       searchState: false, // 預設v-if不顯示<thead>標題
       isLoading: false,

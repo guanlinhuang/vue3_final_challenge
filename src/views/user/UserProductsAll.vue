@@ -176,7 +176,7 @@
                   </div>
                   <div v-if="item.origin_price !== item.price">
                     <p
-                      class="product_origin_price mb-1 ms-2 text-decoration-line-through"
+                      class="product_origin_price mb-1 text-decoration-line-through"
                       style="font-size: 13px"
                     >
                       NT$ {{ item.origin_price }}

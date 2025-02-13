@@ -1,11 +1,15 @@
 <template>
   <div class="bg-cambridge-blue vh-100 pt-5">
     <div class="container">
-      <Form class="row justify-content-center" v-slot="{ errors }" @submit="signIn">
+      <Form
+        class="row justify-content-center"
+        v-slot="{ errors }"
+        @submit="signIn"
+      >
         <div class="col-md-4">
           <h1 class="text-center my-5">管理員後台</h1>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email:&ensp;<span class="border border-dark">&ensp;kuanlin830410@gmail.com&ensp;</span></label>
+          <div class="mb-3 mx-4 mx-sm-0">
+            <label for="email" class="form-label">Email:&ensp;</label>
             <Field
               id="email"
               name="email"
@@ -18,8 +22,8 @@
             ></Field>
             <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
           </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password:&ensp;<span class="border border-dark">&ensp;test12345&ensp;</span></label>
+          <div class="mb-3 mx-4 mx-sm-0">
+            <label for="password" class="form-label">Password:&ensp;</label>
             <Field
               id="password"
               name="password"
@@ -30,10 +34,17 @@
               rules="required"
               v-model="user.password"
             ></Field>
-            <ErrorMessage name="password" class="invalid-feedback"></ErrorMessage>
+            <ErrorMessage
+              name="password"
+              class="invalid-feedback"
+            ></ErrorMessage>
           </div>
           <div class="text-center mt-4">
-            <button class="btnHover btn btn-outline-dark" type="submit" @click="push">
+            <button
+              class="btnHover btn btn-outline-dark"
+              type="submit"
+              @click="push"
+            >
               <div>
                 <span>登入 </span>
                 <span>登入</span>
@@ -85,4 +96,6 @@ export default {
 }
 </script>
 
-<!-- 務必先安裝好axios套件，並將下載好的套件加入在main.js -->
+// <!-- 務必先安裝好axios套件，並將下載好的套件加入在main.js -->
+// <span class="border border-dark">&ensp;kuanlin830410@gmail.com&ensp;</span>
+// <span class="border border-dark">&ensp;test12345&ensp;</span>

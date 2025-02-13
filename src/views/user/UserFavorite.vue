@@ -12,7 +12,7 @@
     <h3 class="text-center">收藏清單</h3>
     <div class="row justify-content-center">
       <div class="col col-lg-9 mt-lg-5" style="margin-top: 45px">
-        <div class="row row-cols-2 row-cols-lg-5 gx-1 gx-lg-4">
+        <div class="row row-cols-2 row-cols-lg-5 gx-1 gx-lg-4 p-1 p-lg-0">
           <div
             class="col mb-4 mb-lg-5"
             v-for="item in favoriteProduct"
@@ -42,7 +42,7 @@
                   </div>
                   <div v-if="item.origin_price !== item.price">
                     <p
-                      class="product_origin_price mb- ms-2 text-decoration-line-through"
+                      class="product_origin_price mb-1 text-decoration-line-through"
                       style="font-size: 13px"
                     >
                       NT$ {{ item.origin_price }}

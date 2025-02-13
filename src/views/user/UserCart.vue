@@ -199,7 +199,7 @@
         </div>
       </div>
       <div class="mt-3 mt-lg-0">
-        <div class="d-block d-lg-none">
+        <div class="d-lg-none">
           <table class="mx-auto table align-middle">
             <thead>
               <tr class="text-end">

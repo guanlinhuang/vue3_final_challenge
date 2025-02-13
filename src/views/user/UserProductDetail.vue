@@ -24,7 +24,7 @@
             </li>
           </ol>
         </nav>
-        <div class="product_img mb-3">
+        <div class="product_img mb-3 rounded-0">
           <img :src="product.imageUrl" alt="" class="object-fit-cover" />
         </div>
       </div>

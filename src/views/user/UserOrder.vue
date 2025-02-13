@@ -391,7 +391,7 @@
                   <!-- // cart.final_total 是整個購物車的總金額(折扣後) -->
                 </tfoot>
               </table>
-              <div class="row px-2 gx-2">
+              <div class="row px-2 gx-2 mb-2">
                 <div class="col">
                   <router-link
                     to="/productsall"
