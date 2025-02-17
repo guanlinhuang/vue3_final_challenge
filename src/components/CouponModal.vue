@@ -60,7 +60,7 @@
 import modalMixin from '@/mixins/modalMixin'
 export default {
   name: 'couponModal',
-  props: { // p253
+  props: {
     coupon: {}
   },
   data () {
@@ -90,7 +90,6 @@ export default {
       this.tempCoupon.due_date = Math.floor(new Date(this.due_date) / 1000)
       // 已經在有日期的情況下，監聽到要更改別的日期，就會需要重新賦予值到 this.tempCoupon.due_date
       // 可不用加Math.floor，但怕日期後面有幾分幾秒，所以把Math.floor當成一種慣例
-      // console.log(this.tempCoupon.due_date)
     }
   },
   mixins: [modalMixin] // 使用 mixin 整合相同程式碼

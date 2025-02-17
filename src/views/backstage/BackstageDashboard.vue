@@ -1,10 +1,5 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <NavbarBack></NavbarBack>
-    <!-- <div class="container-fluid mt-3 position-relative">
-        <ToastMessages></ToastMessages>
-        <router-view></router-view>
-    </div> -->
     <div class="backstage">
         <ToastMessages></ToastMessages>
         <router-view></router-view>
@@ -28,7 +23,6 @@ export default {
   },
   created () {
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1') // 取出token
-    // console.log(token)
     this.$http.defaults.headers.common.Authorization = `${token}` // 夾帶token到header
 
     const api = `${process.env.VUE_APP_API}api/user/check` // 確認是否維持登入狀態
@@ -36,8 +30,9 @@ export default {
       .then((res) => {
         if (!res.data.success) {
           this.$router.push('/login') // 若已登出狀態下，將跳轉到登入頁面
-        //   console.log(res)
         }
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
   }
 }

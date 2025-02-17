@@ -3,7 +3,7 @@
     ><section><span class="loader-18"></span></section
   ></Loading>
   <div class="order_search">
-    <div class="container py-5">
+    <div class="container mainContainer" style="padding-top: 100px; padding-bottom: 100px">
       <h3 class="text-center">訂單查詢</h3>
       <div class="py-4 py-lg-5">
         <Form
@@ -158,11 +158,9 @@
       </div>
     </div>
   </div>
-  <!-- <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar> -->
 </template>
 
 <script>
-// import SmallSidebar from '@/components/SmallSidebar.vue'
 export default {
   data () {
     return {
@@ -176,11 +174,6 @@ export default {
       carts: []
     }
   },
-  // components: {
-  //   // 區域註冊
-  //   SmallSidebar
-  // },
-  //   inject: ['emitter'],
   methods: {
     getOrder (page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/orders?page=${page}`
@@ -188,8 +181,9 @@ export default {
         if (res.data.success) {
           this.OrderList = res.data.orders
           this.pagination = res.data.pagination
-          // console.log(res.data.orders, '222')
         }
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
     },
     searchOrder () {
@@ -201,7 +195,6 @@ export default {
       )
       this.isLoading = false
       this.email = this.searchEmail
-      // console.log(this.filterOrder, '111')
       this.getOrder()
     },
     payOrder (id) {
@@ -214,26 +207,18 @@ export default {
     },
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      // this.isLoading = true
       this.$http.get(url).then((response) => {
-        // console.log('getCart', response)
         this.carts = response.data.data.carts
-        // console.log('this.carts', this.carts)
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
     }
   },
   created () {
-    // console.log('test2')
     this.getOrder()
-    // this.getCart()
   }
-  //   mounted () {
-  //     this.emitter.emit('page-change', {
-  //       data: 'orderSearch'
-  //     })
-  //   }
 }
 </script>
 
-// this.$router.resolve 可開新視窗
-// this.$router.push 不會開新視窗
+<!-- this.$router.resolve 可開新視窗 -->
+<!-- this.$router.push 不會開新視窗 -->

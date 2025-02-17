@@ -13,7 +13,6 @@
 </template>
 
 <script>
-// Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue' // 載入Swiper Vue.js
 
 import { Autoplay, Pagination } from 'swiper/modules' // 載入swiper 原生js

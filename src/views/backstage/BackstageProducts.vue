@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <Loading :active="isLoading"
     ><section><span class="loader-18"></span></section
@@ -145,8 +144,6 @@
                 </div>
               </td>
               <td class="align-top text-start">{{ item.title }}</td>
-              <!-- <td class="text-right">{{ item.origin_price }}</td>
-        <td class="text-right">{{ item.price }}</td> -->
               <td class="text-right">
                 ${{ $filters.currency(item.origin_price) }}
               </td>
@@ -262,28 +259,6 @@ export default {
   },
   inject: ['emitter'], // 內層使用inject // 可使用外層元件Dashboard.vue的mitt套件功能
   methods: {
-    // getProducts (page = 1) {
-    //   // 從遠端資料庫撈資料 // 加入參數預設值page = 1，若沒有加入，也會直接載入第一頁
-    //   const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/all` // 透過這個api取得遠端資料
-    //   // 原:api_path 改為個人api ${process.env.VUE_APP_PATH}
-    //   // 因為連到 VUE_APP_PATH，即個人api，所以需要登入自己的帳密，才能取得個人資料庫res.tata
-
-    //   this.isLoading = true // 取得遠端資料時，進入讀取狀態
-    //   this.$http
-    //     .get(api) // 因為改成get，即只取得資料，所以後面不需加入任何this.user
-    //     .then((res) => {
-    //       if (res.data.success) {
-    //         this.isLoading = false // 遠端資料已取得完畢，關閉讀取效果
-    //         console.log(res.data)
-    //         this.products = res.data.products
-    //         // this.pagination = res.data.pagination // 將遠端資料data儲存到本地端的data，並將本地端data選染到頁面，也可看開發人員工具的vue
-    //         console.log('this.products', this.products)
-    //         console.log('this.products.id', this.products.category)
-    //       }
-    //       console.log(res.data)
-    //       this.productsFilter2()
-    //     })
-    // },
     getProducts (page = 1) {
       // 取得商品列表_all
       this.isLoading = true // 取得遠端資料時，進入讀取狀態
@@ -298,29 +273,18 @@ export default {
             this.isLoading = false // 遠端資料已取得完畢，關閉讀取效果
             return
           }
-          // this.products = response.data.products
-          // console.log('this.products', this.products)
           this.products = Object.values(response.data.products) // 須先將物件轉為陣列，才能使用filter功能(物件無法使用filter)
-          // this.pagination = response.data.pagination
-          // console.log('this.products', this.products)
           this.isLoading = false
-          // this.productsFilter2()
-          // this.setPagination(page)
-          // console.log('getProducts789', this.pagination)
-          // this.updateCategory()
           const { categoryName } = this.$route.params // 取值分類名稱作為變數名稱
           if (categoryName) {
             this.categoryName = categoryName // 儲存於本地端this.categoryName
-            // console.log('getProducts123', this.pagination)
           }
           if (this.categoryName !== '') {
             // 跟前面的if一起執行，按到有類別名稱的按鈕，頁碼消失  // 不要輸入else if，頁碼不會消失
             this.pagination = {}
-            // console.log('getProducts456', this.pagination)
           } else {
             // 初始化(還沒篩選分類時)
             this.setPagination(page)
-            // console.log('getProducts789', this.pagination)
             this.updateCategory() // 按下上下一頁按鈕，不用加入參數，也可跳回瀏覽器頂部（即使updateCategory與頁碼無相關）
           }
           this.isLoading = false
@@ -343,23 +307,14 @@ export default {
       if (this.pagination.current_page >= this.pagination.total_pages) {
         this.pagination.current_page = this.pagination.total_pages
         this.pagination.has_next = false // 當前頁碼大於或等於總頁數，回傳false，下一頁按鈕無法使用(隱藏按鈕）
-        // console.log('setPagination123', this.pagination.has_next)
       } else {
         this.pagination.has_next = true // 當前頁碼小於總頁數，回傳true，下一頁按鈕可使用(顯示按鈕)
-        // console.log('setPagination456', this.pagination.has_next)
       }
       // 每頁呈現商品數的計算公式
       const minPage = this.pagination.current_page * perPage - perPage
       const maxPage = this.pagination.current_page * perPage
       this.products = this.products.slice(minPage, maxPage) // 從minPage起始位置開始往後刪除maxPage個商品(含起始位置)
-      // console.log('計算公式', this.products)
     },
-    // updateCategory (category) { // 路由路徑增加 分類名稱 // 更換新的網址後可跳回瀏覽器頂部
-    //   this.$router.push({
-    //     name: '所有商品列表',
-    //     params: { categoryName: category } // 值 可透過params加入到 index.js路由products後面的/:categoryName? 路由
-    //   })
-    // },
     updateCategory (category) {
       // 路由路徑增加 分類名稱 // 更換新的網址後可跳回瀏覽器頂部
       this.$router.push({
@@ -370,12 +325,10 @@ export default {
     changeClass (index) {
       // 改變篩選名稱active
       this.isActive = index
-      // console.log('changeClass')
     },
 
     // 加入openModal，點擊「增加產品」或「編輯」按鈕，會打開Modal
     openModal (isNew, item) {
-      // console.log(isNew, item)
       if (isNew) {
         // 新增按鈕專用，傳入true，會執行
         this.tempProduct = {} // 清空tempProduct
@@ -414,7 +367,6 @@ export default {
       // 中括號[]可載入方法post或put // 原this.$http.post/put 改為this.$http[httpMethod]
       this.$http[httpMethod](api, { data: this.tempProduct }).then(
         (response) => {
-          // console.log(response)
           // 3.確認（儲存）資料後，關閉modal
           productComponent.hideModal()
           // 4.觸發getProducts()來重新渲染畫面（重新取得列表資料）
@@ -438,23 +390,24 @@ export default {
             })
           }
         }
-      )
+      ).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
+      })
     },
     // 開啟刪除 Modal
     openDelProductModal (item) {
       this.tempProduct = { ...item } // ... 以展開方式把要刪除的當前的產品資料取出來
-      // const delProduct = this.tempProduct
-      // console.log(delProduct) // 測試有沒有成功取出產品資料
       const delComponent = this.$refs.delModal // 打開刪除modal
       delComponent.showModal()
     },
     delProduct () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`
       this.$http.delete(url).then((response) => {
-        // console.log(response.data)
         const delComponent = this.$refs.delModal
         delComponent.hideModal() // 確認(刪除)資料後，關閉modal
         this.getProducts() // 觸發getProducts來重新渲染畫面
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
     }
   },
@@ -462,7 +415,6 @@ export default {
     categoryName (n, o) {
       // 監聽到categoryName有變化時，才會呼叫getProducts()函式
       // 沒設定監聽，永遠不會呼叫getProducts()函式，只有重新整理才會呼叫
-      // console.log(n, o)
       if (n === '' || o === '') {
         // || 或 、 && 且
         this.getProducts()
@@ -476,7 +428,6 @@ export default {
   computed: {
     // 類別篩選 // productsFilter沒有定義在data裡，直接用Computed來運算出來
     productsFilter () {
-      // console.log('productsFilter123')
       return this.products.filter((item) => {
         return item.category.match(this.categoryName) // 篩選到的類別儲存到本地端productsFilter
       })

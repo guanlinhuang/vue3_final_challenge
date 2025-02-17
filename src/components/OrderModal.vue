@@ -37,6 +37,11 @@
                     <th>地址</th>
                     <td>{{ tempOrder.user.address }}</td>
                   </tr>
+                  <tr>
+                    <th>留言</th>
+                    <td v-if="tempOrder.message">{{ tempOrder.message }}</td>
+                    <td v-else>無</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -109,8 +114,6 @@
               <span>關閉視窗</span>
             </div>
           </button>
-          <!-- <button type="button" class="btn btn-primary"
-                    @click="$emit('update-paid', tempOrder)">確認</button> -->
         </div>
       </div>
     </div>

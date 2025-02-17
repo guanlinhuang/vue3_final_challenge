@@ -42,15 +42,3 @@ export default {
   mixins: [modalMixin] // 使用 mixin 整合相同程式碼
 }
 </script>
-
-<!-- // methods: {
-//   showModal () {
-//     this.modal.show()
-//   },
-//   hideModal () {
-//     this.modal.hide()
-//   }
-// },
-// mounted () {
-//   this.modal = new Modal(this.$refs.modal)
-// } -->

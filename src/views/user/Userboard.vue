@@ -1,8 +1,6 @@
 <template>
   <NavbarFront></NavbarFront>
   <div class="HomeView">
-    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <router-view></router-view>
     <ToastMessages></ToastMessages>
     <SmallSidebar></SmallSidebar>
@@ -11,8 +9,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
 import emitter from '@/methods/emitter' // mitt跨元件資料傳遞js
 import ToastMessages from '@/components/ToastMessages.vue'
 import NavbarFront from '@/components/Navbar_front.vue'
@@ -20,9 +16,7 @@ import FooterFront from '@/components/Footer_front.vue'
 import SmallSidebar from '@/components/SmallSidebar'
 
 export default {
-  name: 'HomeView',
   components: {
-    // HelloWorld,
     ToastMessages,
     NavbarFront,
     FooterFront,

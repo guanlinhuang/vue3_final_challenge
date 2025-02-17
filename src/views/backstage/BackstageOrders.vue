@@ -28,8 +28,8 @@
                 <i class="bi bi-x-lg"></i>
               </button>
             </td>
-            <td>{{ $filters.date(item.create_at) }}</td>
-            <td>{{ item.id }}</td>
+            <td class="align-middle">{{ $filters.date(item.create_at) }}</td>
+            <td class="align-middle">{{ item.id }}</td>
             <td>
               <ul class="list-unstyled">
                 <li v-for="(product, i) in item.products" :key="i">
@@ -175,15 +175,15 @@ export default {
         this.orders = response.data.orders
         this.pagination = response.data.pagination
         this.isLoading = false
-        // console.log('this.orders', this.orders)
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
     },
     openModal (isNew, item) {
-      this.tempOrder = { ...item }
+      this.tempOrder = { ...item } // 三個點是把當前的產品資料取出來
       this.isNew = false
       const orderComponent = this.$refs.orderModal
       orderComponent.showModal()
-      // console.log('this.tempOrder', this.tempOrder)
     },
     openDelOrderModal (item) {
       this.tempOrder = { ...item }
@@ -201,22 +201,24 @@ export default {
         this.$httpMessageState(response, '更新付款狀態')
         this.getOrders(this.currentPage)
         this.$refs.orderModal.hideModal()
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
     },
     delOrder () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}` // 刪除訂單API
       this.isLoading = true
       this.$http.delete(url).then((response) => {
-        // console.log(response)
         const delComponent = this.$refs.delModal
         delComponent.hideModal()
         this.getOrders(this.currentPage)
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
     }
   },
   created () {
     this.getOrders()
-    // console.log(process.env.VUE_APP_API)
   }
 }
 </script>

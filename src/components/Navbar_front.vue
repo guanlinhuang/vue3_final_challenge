@@ -13,7 +13,6 @@
           data-bs-target="#offcanvasNavbar"
           aria-controls="offcanvasNavbar"
         >
-          <!-- <span class="navbar-toggler-icon"></span> -->
           <i class="bi bi-filter-right"></i>
         </button>
         <div
@@ -23,7 +22,6 @@
           aria-labelledby="offcanvasNavbarLabel"
         >
           <div class="offcanvas-header">
-            <!-- <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5> -->
             <button
               type="button"
               class="btn-close text-reset"
@@ -86,7 +84,6 @@ export default {
   methods: {
     closeOffcanvas () { // 關閉 offcanvas
       document.getElementById('closeOffcanvas').click() // getElementById :選取元素 // 選取close按鈕並觸發點擊事件
-      // document.getElementById('favoritesOffcanvasToggler').click()
     }
   }
 }</script>

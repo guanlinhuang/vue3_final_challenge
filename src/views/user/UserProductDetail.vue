@@ -2,11 +2,6 @@
   <Loading :active="isLoading"
     ><section><span class="loader-18"></span></section
   ></Loading>
-  <!-- <img
-    src=""
-    alt=""
-    style="width: 100%; height: 300px; background-color: antiquewhite"
-  /> -->
   <div class="container py-lg-5 UserProductDetail">
     <div class="row d-flex justify-content-lg-center">
       <div class="col-lg-5 col-xl-4 me-5 mt-0 mt-sm-2">
@@ -44,14 +39,6 @@
         </div>
 
         <hr class="w-auto" />
-        <!-- <div v-for="item in carts" :key="item.id">
-        <input
-          type="number"
-          class="form-control"
-          min="1"
-          @change="updateCart(item)"
-          v-model.number="item.qty"
-        /></div> -->
         <div>{{ product.content }}</div>
         <div class="d-flex">
           <div class="input-group my-3">
@@ -132,33 +119,9 @@
         <swiper-slide v-for="item in products" :key="item.id">
           <div class="position-relative text-center product h-100">
             <a @click="getProductPage(item.id)">
-              <!-- <div
-                v-if="item.origin_price !== item.price"
-                class="onSale position-absolute text-white bg-danger py-1 px-3"
-                style="z-index: 5"
-              >
-                特 價
-              </div> -->
               <div class="swiper_img">
                 <img :src="`${item.imageUrl}`" class="object-fit-cover" />
               </div>
-              <!-- <p class="my-1 fw-normal">{{ item.title }}</p> -->
-              <!-- <div class="price text-center">
-                <div v-if="item.origin_price !== item.price">
-                  <p class="mb-1 text-danger">NT$ {{ item.price }}</p>
-                </div>
-                <div v-if="item.origin_price === item.price">
-                  <p class="mb-1">NT$ {{ item.price }}</p>
-                </div>
-                <div v-if="item.origin_price !== item.price">
-                  <p
-                    class="product_origin_price mb- ms-2 text-decoration-line-through"
-                    style="font-size: 13px"
-                  >
-                    NT$ {{ item.origin_price }}
-                  </p>
-                </div>
-              </div> -->
             </a>
           </div>
         </swiper-slide>
@@ -167,11 +130,9 @@
       </swiper>
     </div>
   </div>
-  <!-- <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar> -->
 </template>
 
 <script>
-// Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue' // 載入Swiper Vue.js
 
 import { Navigation, Pagination, Autoplay } from 'swiper/modules' // 載入swiper 原生js
@@ -185,9 +146,6 @@ export default {
   data () {
     return {
       product: {},
-      // status: {
-      //   loadingItem: ''
-      // },
       id: '',
       carts: [],
       productsQty: 1,
@@ -209,22 +167,22 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`
       this.isLoading = true
       this.$http.get(api).then((response) => {
-        // console.log(response.data)
         this.isLoading = false
         if (response.data.success) {
           this.product = response.data.product
-          // console.log('this.product', this.product)
         }
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
     },
     getCart () {
       // 取得購物車列表 // 用於側邊欄購物車標籤
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      // this.isLoading = true
       this.$http.get(url).then((response) => {
         this.carts = response.data.data.carts
-        // console.log('productsDetail', this.carts)
         this.emitter.emit('update-cart', this.carts)
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
     },
 
@@ -241,6 +199,8 @@ export default {
         this.$httpMessageState(response, '加入購物車')
         this.getCart()
         this.$router.push('/cart')
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
     },
 
@@ -266,16 +226,14 @@ export default {
     updateCart (item) {
       // 更新購物車
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
-      // this.isLoading = true
-      // this.status.loadingItem = item.id // 用於disabled狀態
       const cart = {
         product_id: item.product_id,
         qty: item.qty
       }
       this.$http.put(url, { data: cart }).then((res) => {
-        // console.log('updateCart', res)
-        // this.status.loadingItem = ''
         this.getCart()
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
     },
     // 加減按鈕
@@ -300,9 +258,7 @@ export default {
             this.products = res.data.products
               .filter((e) => e.id !== this.id) // 篩選主要id以外的商品
               .sort(() => Math.random() - 0.5) // 亂數排序
-            // .splice(1, 5)
             this.isLoading = false
-            // console.log('this.others', this.products)
           }
         })
         .catch((err) => {
@@ -315,7 +271,6 @@ export default {
         .get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`)
         .then((response) => {
           this.favoriteProduct = response.data.products.filter((product) => this.favorite.includes(product.id))
-          // console.log(this.favoriteProduct.length)
           this.emitter.emit('update-favorite', this.favoriteProduct)
         })
         .catch((error) => {
@@ -346,13 +301,7 @@ export default {
       }
       saveFavorite.saveFavorite(this.favorite) // 觸發saveFavorite.js函式 //儲存或移除localstorage裡的產品
       this.getFavoriteProduct()
-      // console.log('this.favorite', this.favorite)
-      // this.emitter.emit('update-favorite', this.favorite) // // 加入或移除收藏時，觸發emitter，傳遞到 UserFavorite.vue
     }
-    // updateFavorite () {
-    //   this.favorite = saveFavorite.getFavorite()
-    //   console.log('updateFavorite', this.favorite)
-    // }
   },
   created () {
     this.id = this.$route.params.productId
@@ -363,5 +312,5 @@ export default {
 }
 </script>
 
-// @click.stop="toggleFavorite(product)" .stop的作用就如同大家熟知的 event.stopPropagation()，用來阻擋事件冒泡
-// 事件冒泡：事件點擊後，會一直冒泡上去
+<!-- // @click.stop="toggleFavorite(product)" .stop的作用就如同大家熟知的 event.stopPropagation()，用來阻擋事件冒泡
+// 事件冒泡：事件點擊後，會一直冒泡上去 -->

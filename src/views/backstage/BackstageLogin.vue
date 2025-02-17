@@ -54,10 +54,13 @@
         </div>
       </Form>
     </div>
+    <ToastMessages></ToastMessages>
   </div>
 </template>
 
 <script>
+import emitter from '@/methods/emitter' // mitt跨元件資料傳遞 // 在Dashboard.vue中僅需載入一次mitt，可讓所有元件都可以使用到mitt功能
+import ToastMessages from '@/components/ToastMessages.vue' // 吐司訊息
 export default {
   data () {
     return {
@@ -67,30 +70,32 @@ export default {
       }
     }
   },
+  components: {
+    ToastMessages
+  },
+  provide () { // 本外層元件加入provide // 可讓內層元件(加入inject)可以使用本外層元件的mitt套件功能
+    return {
+      emitter
+    }
+  },
   methods: {
-    // signIn () {
-    //   console.log('login')
-    //   // 串接api之前，先把路徑組起來，加入環境變數
-    //   const api = `${process.env.VUE_APP_API}admin/signin` // api路經 // env環境變數站點的位置＋登入的實際API
-    //   this.$http.post(api, this.user) // 使用this.$http來取得他的方法 //（api路經 , 夾帶的資料）
-    //     .then((res) => { // 串接
-    //       const { token, expired } = res.data // 先建立變數跟值
-    //       console.log(token, expired)
-    //       document.cookie = `hexToken=${token};expires=${new Date(expired)}` // hexToken名稱自定義 // new Date 可轉換為日期
-    //       console.log(res)
-    //     })
-    // },
     signIn () {
       const api = `${process.env.VUE_APP_API}admin/signin` // 登入頁面api
-      this.$http.post(api, this.user).then((res) => {
-        if (res.data.success) {
-          const { token, expired } = res.data // 建立變數跟值
-          // console.log(token, expired)
-          document.cookie = `hexToken=${token};expires=${new Date(expired)}` // hexToken、expires名稱自定義，new Date可把毫秒轉換為日期
-          this.$router.push('/dashboard/products') // 登入成功後，跳轉到指定頁面
-          // console.log(res.data)
-        }
-      })
+      this.$http
+        .post(api, this.user)
+        .then((res) => {
+          if (res.data.success) {
+            const { token, expired } = res.data // 建立變數跟值
+            document.cookie = `hexToken=${token};expires=${new Date(expired)}` // hexToken、expires名稱自定義 // token: 驗證碼 // new Date可把毫秒轉換為有效日期，過了這個日期驗證碼就會失效
+            this.$httpMessageState(res, '登入')
+            this.$router.push('/dashboard/products') // 登入成功後，跳轉到指定頁面
+          } else {
+            this.$httpMessageState(res, '登入')
+          }
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤')
+        })
     }
   }
 }

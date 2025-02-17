@@ -238,12 +238,10 @@ export default {
       console.dir(uploadedFile)
       const formData = new FormData() // 建立的FormData物件讓前端利用 javaScritp 模擬表單來傳送資料給後端
       formData.append('file-to-upl', uploadedFile) // 增加一個欄位到表單中 // file-to-upload 是 上傳表單 (前端測試使用) API 裡的的name屬性名稱
-      // console.log(formData)
 
       // 把formData圖片資料透過api發送到遠端
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
-      this.$http.post(url, formData).then((response) => {
-        // console.log(response.data) // 圖片檔案儲存到伺服器後所自動產生的路徑
+      this.$http.post(url, formData).then((response) => { // 圖片檔案儲存到伺服器後所自動產生的路徑
         if (response.data.success) {
           // 如果上傳成功，圖片路徑儲存到本地端data裡
           this.tempProduct.imageUrl = response.data.imageUrl

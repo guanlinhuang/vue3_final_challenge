@@ -1,5 +1,5 @@
 <template>
-  <div class="container userOrder">
+  <div class="container mainContainer userOrder">
     <div class="pt-3 process d-flex justify-content-center align-items-center">
       <span class="text-center mx-3"
         ><i class="bi bi-cart-check fs-3"></i>
@@ -87,17 +87,6 @@
                   v-if="cart.final_total !== cart.total"
                   style="padding-right: 5px"
                 >
-                  <!-- <p class="mb-0 text-end">
-                    總金額
-                    <span class="fs-3 text-success">
-                      NT$
-                      {{
-                        $filters.currency(Math.round(cart.final_total))
-                      }}</span
-                    >
-                    <br />
-                    <span class="text-end text-danger">(已套用優惠券)</span>
-                  </p> -->
                   <p class="mb-0 text-end text-danger">(已套用優惠券)</p>
                 </div>
               </td>
@@ -437,18 +426,21 @@ export default {
           tel: '',
           address: ''
         },
-        message: '',
-        carts: []
-      }
+        message: ''
+      },
+      carts: []
     }
   },
+  inject: ['emitter'], // 內層使用inject
   methods: {
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(url).then((response) => {
-        // console.log('getCart', response)
         this.cart = response.data.data
         this.carts = response.data.data.carts // 用於側邊欄購物車標籤
+        this.emitter.emit('update-cart', this.carts)
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
     },
     createOrder () {
@@ -458,9 +450,11 @@ export default {
         if (res.data.success) {
           const id = res.data.orderId
           this.$router.push(`/pay/${id}`) // 導到付款頁面
-          // emitter.emit('updateCart')
           this.$httpMessageState(res, '建立訂單')
+          this.getCart()
         }
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
     },
     isPhoneNumber (value) {

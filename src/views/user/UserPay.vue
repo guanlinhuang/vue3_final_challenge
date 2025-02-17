@@ -1,5 +1,5 @@
 <template>
-  <div class="container userPay">
+  <div class="container mainContainer userPay">
     <div v-if="!order.is_paid" class="row justify-content-center pt-3">
       <div class="process d-flex justify-content-center align-items-center">
         <span class="text-center mx-3"
@@ -72,6 +72,11 @@
               <tr>
                 <th>地址</th>
                 <td>{{ order.user.address }}</td>
+              </tr>
+              <tr>
+                <th>留言</th>
+                <td v-if="order.message">{{ order.message }}</td>
+                <td v-else>無</td>
               </tr>
               <tr>
                 <th>付款狀態</th>
@@ -190,7 +195,6 @@
       </div>
     </div>
   </div>
-  <!-- <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar> -->
 </template>
 
 <script>
@@ -212,7 +216,6 @@ export default {
       this.$http.get(url).then((res) => {
         if (res.data.success) {
           this.order = res.data.order
-          // console.log(this.order)
         }
       })
     },
@@ -220,11 +223,12 @@ export default {
       // 按下「確認付款去」按鈕，付款狀態欄位會變化，is_paid 從false轉為true
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`
       this.$http.post(url).then((res) => {
-        // console.log(res)
         if (res.data.success) {
           this.getOrder()
           this.scrollTop() // 滑動到頂部
         }
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
     },
     getProductPage (id) {
@@ -234,9 +238,10 @@ export default {
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(url).then((response) => {
-        // console.log('getCart', response)
         this.cart = response.data.data
         this.carts = response.data.data.carts // 用於側邊欄購物車標籤
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
     },
     scrollTop () { // 滑動到頂部
@@ -248,9 +253,7 @@ export default {
   },
   created () {
     this.orderId = this.$route.params.orderId // 第一步驟：先取得網址id
-    // console.log(this.orderId)
     this.getOrder()
-    // this.getCart()
   }
 }
 </script>

@@ -1,12 +1,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Userboard from '../views/user/Userboard.vue'
+import UserBoard from '../views/user/UserBoard'
 // import { Comment } from 'vue'
 
 const routes = [
   {
     path: '/',
-    name: 'Userboard',
-    component: Userboard,
+    name: 'UserBoard',
+    component: UserBoard,
     children: [
       {
         path: '',
@@ -17,11 +17,6 @@ const routes = [
         path: 'aboutus',
         name: '關於我們',
         component: () => import('../views/user/UserAboutUs.vue')
-      },
-      {
-        path: 'orderQ&A',
-        name: '訂單Q&A',
-        component: () => import('../views/user/UserOrderQ&A.vue')
       },
       {
         path: 'storelist',

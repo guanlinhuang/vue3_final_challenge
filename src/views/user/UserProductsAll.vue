@@ -1,11 +1,6 @@
 <template>
   <Loading :active="isLoading"><section><span class="loader-18"></span></section></Loading>
-  <!-- <img
-    src=""
-    alt=""
-    style="width: 100%; height: 300px; background-color: antiquewhite"
-  /> -->
-  <div class="container products_all">
+  <div class="container products_all mainContainer">
     <div class="row justify-content-center">
        <div class="d-lg-none w-100 menu fixed-top px-0">
         <ul
@@ -194,24 +189,16 @@
       </div>
     </div>
   </div>
-  <!-- <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar> -->
 </template>
 
 <script>
 import Pagination from '@/components/Pagination.vue'
-// import SmallSidebar from '@/components/SmallSidebar.vue'
 
 export default {
   data () {
     return {
       products: [],
-      // product: {},
-      // status: {
-      //   loadingItem: ''
-      // },
       categoryName: '', // 篩選名稱
-      // cart: {}
-      // coupon_code: '',
       isActive: 1, // 篩選資料按鈕用
       pagination: {}, // 每個分頁的產品資料
       carts: [], // 用於側邊欄購物車標籤
@@ -225,55 +212,25 @@ export default {
     // SmallSidebar
   },
   methods: {
-    // getProducts (page = 1) { // 用於選染分頁的產品資料
-    //   // 取得商品列表_all
-    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/?page=${page}` // *** api改${}
-    //   // this.isLoading = true
-    //   this.$http.get(url).then((response) => {
-    //     this.products = response.data.products
-    //     this.filterProducts = response.data.products // 因應v-else，遠端所有資料儲存於本地端filterProducts，讓this.filterProducts 等同於 this.products，這樣才有辦法顯示跟隱藏
-    //     this.pagination = response.data.pagination // 將遠端分頁的產品資料儲存到本地端
-    //     // this.isLoading = false
-    //     console.log('getproducts:', response)
-    //     console.log('pagination', this.pagination)
-    //     // // this.isLoading = false
-    //     // const { categoryItem } = this.$route.params // 取得
-    //     // if (categoryItem) {
-    //     //   this.categoryItem = categoryItem
-    //     //   console.log(this.categoryItem)
-    //     // }
-    //     // if (this.categoryItem !== '') {
-    //     //   this.pagination = {}
-    //     // }
-    //     // this.categoryFilter(category)
-    //   })
-    // },
     getProducts (page = 1) {
       // 取得商品列表_all
       this.isLoading = true
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all` // *** api改${}
-      // this.isLoading = true
       this.$http.get(url).then((response) => {
         if (!response.data.success) {
           this.isLoading = false
           return
         }
         this.products = response.data.products
-        // console.log('this.products.length', this.products.length)
-        // console.log('response.data.products', response.data.products)
-        // console.log('this.products', this.products)
         const { categoryName } = this.$route.params // 取值分類名稱作為變數名稱
         if (categoryName) {
           this.categoryName = categoryName // 儲存於本地端this.categoryName
-          // console.log('getProducts123', this.pagination)
         }
         if (this.categoryName !== '') {
           // 跟前面的if一起執行，按到有類別名稱的按鈕，頁碼消失  // 不要輸入else if，頁碼不會消失
           this.pagination = {}
-          // console.log('getProducts456', this.pagination)
         } else { // 初始化(還沒篩選分類時)
           this.setPagination(page)
-          // console.log('getProducts789', this.pagination)
           this.updateCategory() // 按下上下一頁按鈕，不用加入參數，也可跳回瀏覽器頂部（即使updateCategory與頁碼無相關）
         }
         this.isLoading = false
@@ -296,16 +253,13 @@ export default {
       if (this.pagination.current_page >= this.pagination.total_pages) {
         this.pagination.current_page = this.pagination.total_pages
         this.pagination.has_next = false // 當前頁碼大於或等於總頁數，回傳false，下一頁按鈕無法使用(隱藏按鈕）
-        // console.log('setPagination123', this.pagination.has_next)
       } else {
         this.pagination.has_next = true // 當前頁碼小於總頁數，回傳true，下一頁按鈕可使用(顯示按鈕)
-        // console.log('setPagination456', this.pagination.has_next)
       }
       // 每頁呈現商品數的計算公式
       const minPage = this.pagination.current_page * perPage - perPage
       const maxPage = this.pagination.current_page * perPage
       this.products = this.products.slice(minPage, maxPage) // 從minPage起始位置開始往後刪除maxPage個商品(含起始位置)
-      // console.log('計算公式', this.products)
     },
     updateCategory (category) { // 路由路徑增加 分類名稱 // 更換新的網址後可跳回瀏覽器頂部
       this.$router.push({
@@ -316,73 +270,18 @@ export default {
     getCart () {
       // 取得購物車列表 // 用於側邊欄購物車標籤
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      // this.isLoading = true
       this.$http.get(url).then((response) => {
         this.carts = response.data.data.carts
-        // console.log('this.carts', this.carts)
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
     },
     getProductPage (id) {
       // 取得某一商品id，並導到該商品獨立頁面
       this.$router.push(`/products/${id}`)
     },
-
-    // push () {
-    //   this.$router.push('/products/')
-    // },
-
-    // categoryFilter (category) {
-    // const buttonGroup = document.querySelector('.button-group')
-    // buttonGroup.addEventListener('click', function (e) {
-    //   if (e.target.nodeName === 'BUTTON') { // 點擊到按鈕的HTML標籤位置，執行以下code
-    //     // 加屬性active，可使按鈕背景常亮
-    //     document.querySelectorAll('.btn').forEach(function (item, index) {
-    //       item.classList.remove('active')
-    //     })
-    //     e.target.classList.add('active')
-    //     // var btn = e.target.nodeName === 'BUTTON'
-    //   }
-    // if (e.target.dataset.type !== 'all') { // 點擊「全部」之外的按鈕，篩選出相對應的種類資料
-    //   const type = e.target.dataset.type
-    // if (category !== 'all') {
-    //   this.filterProducts_2 = this.products.filter((item) => {
-    //   // 篩選後的filterProducts將會蓋過初始化的filterProducts
-    //     return item.category === category
-    //   })
-    // } else {
-    //   this.filterProducts = this.products
-    //   // window.location.reload() // 重新整理
-    // }
-    // console.log(e.target.dataset.type)
-    // renderData(filterData)
-    // console.log(this.filterProducts_2, '123')
-
-    // else { // 點擊「全部」按鈕，重新渲染全部資料
-    //   console.log('全部種類')
-    //   renderData(newData)
-    // }
-
-    // })
-    // e.target.getAttribute("data-type") = e.target.dataset.type
-    // }
-    // addCart (id) { // 商品加到購物車
-    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart` // 加入購物車api
-    //   this.status.loadingItem = id
-    //   const cart = {
-    //     product_id: id,
-    //     qty: 1
-    //   }
-    //   this.$http.post(url, { data: cart }).then((res) => { // 某一商品id加入到購物車
-    //     this.status.loadingItem = ''
-    //     // 回傳成功後清空，讓兩邊id不再相同，否則會一直處於disabled狀態
-    //     console.log('addCart', res)
-    //     // this.getCart()
-    //   })
-    // }
-    // },
     changeClass (index) { // 改變isActive的值
       this.isActive = index
-      // console.log('changeClass')
     }
   },
 
@@ -390,7 +289,6 @@ export default {
     categoryName (n, o) {
       // 監聽到categoryName有變化時，才會呼叫getProducts()函式
       // 沒設定監聽，永遠不會呼叫getProducts()函式，只有重新整理才會呼叫
-      // console.log(n, o)
       if (n === '' || o === '') {
         // || 或 、 && 且
         this.getProducts()
@@ -405,7 +303,6 @@ export default {
   computed: {
     // 類別篩選 // productsFilter沒有定義在data裡，直接用Computed來運算出來
     productsFilter () {
-      // console.log('productsFilter123')
       return this.products.filter((item) => {
         return item.category.match(this.categoryName) // 篩選到的類別儲存到本地端productsFilter
       })
@@ -414,9 +311,6 @@ export default {
 
   created () {
     this.getProducts()
-    // this.getProducts_2()
-    // console.log('getProducts2', this.$route.params.category)
-    // this.getCart() // 用於側邊欄購物車標籤
   }
 }
 </script>
@@ -433,35 +327,5 @@ match() 當輸入的文字有部分相符，會把該產品列出來
 button裡的
 問：categoryFilter = '背包' 的值 好像可以直截儲存在本地端this.categoryFilter？
 categoryFilter = ''，可篩選出全部商品？ 不會因為是空值，而篩選不出 -->
-
-<!-- <div>
-                  <button type="button" class="btn btn-outline-none p-0 px-1">
-                    <i class="bi bi-suit-heart fs-3"></i>
-                  </button>
-                  <button type="button" class="btn btn-outline-secondary w-75 ms-1">
-                    加入購物車
-                  </button>
-                </div> -->
-
-                <!-- <button data-type="all" type="button" class="allBtn btn btn-type border-dark border-2 active" @click.prevent="categoryFilter(''), updateCate p-2gory('')">全部商品</button>
-        <button data-type="N04" type="button" class="vegetablesBtn btn btn-type border-dark border-2" @click.prevent="categoryFilter('手套'), updateCategory('手套')">手套</button>
-        <button data-type="N05" type="button" class="fruitsBtn btn btn-type border-dark border-2" @click.prevent="categoryFilter('手套22'), updateCategory('手套22')">手套22</button>
-        <button data-type="N06" type="button" class="flowersBtn btn btn-type border-dark border-2" @click.prevent="categoryFilter('測試分類'), updateCategory('測試分類')">測試分類</button> -->
-
-<!-- 問題一（已解決）
-篩選類別再重新整理，一直轉圈圈
-原本是products/:categoryName? 改成 productsall/:categoryName?
-因為另有一樣的路由products/:productId（單一產品介紹），才會出現錯誤，修改不同路徑後則可正常渲染
-
-問題二（已解決）
-篩選類別後上下頁按鈕沒消失（頁碼有消失）
-
-問題三
-篩選類別後點擊nav的「所有商品」按鈕，沒有重新渲染所有商品列表
-
-問題四（已解決）
-監聽watch，可讓上下頁按鈕消失，邏輯為何
-若沒使用watch，將只執行computed，getProducts()、setPagination()不會被執行
-有使用watch，computed、getProducts()、setPagination()會執行 -->
 
 <!-- overflow-x: scroll 強制顯示水平滾動條，無論內容是否超出容器寬度。這通常用於確保用戶能夠在內容過多時水平滾動來查看隱藏的部分 -->

@@ -2,12 +2,7 @@
   <Loading :active="isLoading"
     ><section><span class="loader-18"></span></section
   ></Loading>
-  <!-- <img
-    src=""
-    alt=""
-    style="width: 100%; height: 300px; background-color: antiquewhite"
-  /> -->
-  <div class="container products_all">
+  <div class="container products_all mainContainer">
     <div v-if="favorite.length !== 0" class="py-5">
     <h3 class="text-center">收藏清單</h3>
     <div class="row justify-content-center">
@@ -72,7 +67,7 @@
         </div>
       </div>
     </div></div>
-    <div v-else style="margin-top: 150px; margin-bottom: 250px">
+    <div v-else style="padding-top: 180px; padding-bottom: 250px">
       <div class="text-center my-5">
         <p class="fs-4 ls">您的收藏清單目前是空的唷！</p>
         <router-link
@@ -88,7 +83,6 @@
       </div>
     </div>
   </div>
-  <!-- <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar> -->
 </template>
 
 <script>
@@ -101,9 +95,6 @@ export default {
       favoriteProduct: [],
       isLoading: false,
       carts: []
-      // status: {
-      //   loadingItem: ''
-      // }
     }
   },
   inject: ['emitter'], // 內層使用inject // 可使用外層元件Userboard.vue的mitt套件功能
@@ -120,7 +111,6 @@ export default {
           this.favoriteProduct = response.data.products.filter((product) =>
             this.favorite.includes(product.id)
           )
-          // console.log(this.favoriteProduct.length)
           this.emitter.emit('update-favorite', this.favoriteProduct)
         })
         .catch((error) => {
@@ -131,11 +121,11 @@ export default {
     getCart () {
       // 取得購物車列表 // 用於側邊欄購物車標籤
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      // this.isLoading = true
       this.$http.get(url).then((response) => {
         this.carts = response.data.data.carts
-        // console.log('this.carts', this.carts)
         this.emitter.emit('update-cart', this.carts)
+      }).catch((error) => {
+        this.$httpMessageState(error, '連線錯誤')
       })
     },
     removeFavorite (item) {
@@ -154,28 +144,6 @@ export default {
       this.isLoading = false
       this.getFavoriteProduct() // 重新渲染畫面
     },
-    // updateFavorite () {
-    //   this.favorite = saveFavorite.getFavorite()
-    // },
-    // addToCart (id, qty) {
-    //   const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-    //   const data = {
-    //     product_id: id,
-    //     qty
-    //   }
-    //   this.status.loadingItem = id
-    //   this.$http
-    //     .post(api, { data })
-    //     .then((response) => {
-    //       this.status.loadingItem = ''
-    //       this.qty = 1
-    //       // this.emitter.emit('update-cart', id)
-    //       this.$httpMessageState(response, ` ${response.data.data.product.title} 加入購物車 `)
-    //     })
-    //     .catch((error) => {
-    //       this.$httpMessageState(error, '連線錯誤')
-    //     })
-    // }
     addToCart (id, qty = this.productsQty) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       const cart = {
@@ -187,7 +155,6 @@ export default {
         .post(url, { data: cart })
         .then((response) => {
           this.isLoading = false
-          // this.emitter.emit('update-cart', id)
           this.$httpMessageState(
             response,
             ` ${response.data.data.product.title} 加入購物車 `
@@ -207,9 +174,5 @@ export default {
     this.getFavoriteProduct()
     console.log(this.favorite.length)
   }
-  // mounted () {
-  //   // this.emitter.on('update-favorite', this.updateFavorite) // on是監聽
-  //   this.getFavoriteProduct()
-  // }
 }
 </script>

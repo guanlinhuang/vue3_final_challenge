@@ -78,20 +78,6 @@
 // import emitter from '@/methods/emitter'
 import saveFavorite from '@/methods/saveFavorite'
 export default {
-  // props: { // 設定內層所接收的props
-  //   cartss: {
-  //     type: Array, // 預期傳進來的型別是陣列，所以先定義類型為物件Object
-  //     default () {
-  //       return [] // 如外層沒有正確傳遞，給它一個預設值-空的物件
-  //     }
-  //   }
-  // },
-  // props: ['cartss'],
-  // watch: {
-  //   cartss () {
-  //     this.carts = this.cartss
-  //   }
-  // },
   data () {
     return {
       carts: [],
@@ -104,7 +90,6 @@ export default {
     // 取得購物車列表 // 用於重新整理的狀況下 // 若沒加此段code，重新整理後側邊欄標籤無法顯示數量
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      // this.isLoading = true
       this.$http.get(url).then((response) => {
         this.carts = response.data.data.carts
       }).catch((error) => {
@@ -118,76 +103,36 @@ export default {
           this.favoriteProduct = response.data.products.filter((product) => this.favorite.includes(product.id))
         })
         .catch((error) => {
-          // this.isLoading = false
           this.$httpMessageState(error, '連線錯誤')
         })
     }
   },
-  // computed: {
-  //   cartsNum () {
-  //     let cartNum = 0
-  //     this.carts.forEach(item => {
-  //       cartNum += item.qty
-  //     })
-  //     return cartNum
-  //   }
-  // },
   computed: {
     totalQty () { // 購物車內商品總數
       let total = 0
       if (Array.isArray(this.carts)) { // 需要確保this.carts是一個陣列 array 這樣才不會計算出錯
         this.carts.forEach(item => {
           total += item.qty
-          // console.log('SmallSidebar', this.carts)
         })
       }
       return total
     }
   },
 
-  // watch: {
-  //   carts: {
-  //     hander (n, o) {
-  //       let cartNum = 0
-  //       this.carts.forEach(function (e) {
-  //         cartNum += e.qty
-  //       })
-  //       return cartNum
-  //     },
-  //     // immediate: true
-  //     deep: true
-  //   }
-
-  // },
   mounted () {
     // this.carts = this.cartss // 使用這段code會報錯 // TypeError: Cannot read properties of undefined (reading 'forEach')
     // this.carts = Array.isArray(this.cartss) ? this.cartss : [] // 需要確保this.carts是一個陣列 array 這樣才不會計算出錯
     // this.getCart()
     this.emitter.on('update-cart', (msg) => {
       this.carts = msg
-      // this.getCart()
     })
     this.emitter.on('update-favorite', (msg) => {
       this.favoriteProduct = msg
-      // this.getFavoriteProduct()
     })
   },
-  // created () {
-  // emitter.on('updateCart', () => {
-  //   this.getCart()
-  // })
-  // emitter.on('update-favorite', () => {
-  //   this.favoriteNum = this.getLocalStorage()
-  // })
-  // },
-  // mounted () {
-  //   this.getCart()
-  //   window.addEventListener('scroll', this.windowScroll)
-  // }
   created () {
     this.getCart()
     this.getFavoriteProduct()
-    // this.totalQty()
   }
 }
 </script>

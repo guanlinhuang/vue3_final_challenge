@@ -68,11 +68,12 @@ export default {
     // 取得購物車列表
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      // this.isLoading = true
       this.$http.get(url).then((response) => {
         this.carts = response.data.data.carts
-        // console.log('this.carts', this.carts)
       })
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤')
+        })
     }
   },
   created () {
@@ -81,4 +82,4 @@ export default {
 }
 </script>
 
-<!-- s// swiper 必須設定顯示區域尺寸 -->
+<!-- // swiper 必須設定顯示區域尺寸 -->

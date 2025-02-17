@@ -8,8 +8,8 @@
 //所以不能只載入其中一個
 
 // 自定義
-@import "./components/app";
 @import "./components/color";
+@import "./components/app";
 @import "./components/HomeView";
 @import "./components/btnHover";
 @import "./components/swiper";
@@ -24,11 +24,8 @@
 @import "./components/shoppingProcess";
 @import "./components/UserOrder";
 @import "./components/UserPay";
-@import "./components/UserOrderSearch";
-@import "./components/UserStoreList";
-@import "./components/backstage/BackstageLogin";
-@import "./components/backstage/backstageDashboard";
+@import "./components/UserFavorite";
 @import "./components/backstage/BackstageOrder";
 @import "./components/backstage/ProductModal";
-@import "./components/UserFavorite"
+@import "./components/backstage/backstage"
 

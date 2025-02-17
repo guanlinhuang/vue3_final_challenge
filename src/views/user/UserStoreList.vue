@@ -1,7 +1,6 @@
 <template>
-  <!-- <div class="storeList_banner"></div> -->
   <div class="store">
-    <div class="container py-5">
+    <div class="container py-5 mainContainer">
       <h3 class="text-center">門市資訊</h3>
       <div class="store_btn my-4 my-lg-5 row row-cols-2 row-cols-lg-6 gx-1 gx-lg-3 mx-1 mx-lg-0">
         <div class="col">
@@ -330,45 +329,24 @@
       </div>
     </div>
   </div>
-  <!-- <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar> -->
 </template>
 
 <script>
-// import SmallSidebar from '@/components/SmallSidebar.vue'
 
 export default {
   data () {
     return {
       name: '台中創始店',
-      isActive: 1, // 篩選資料按鈕用
-      carts: []
+      isActive: 1 // 篩選資料按鈕用
     }
   },
-  // components: {
-  //   // 區域註冊
-  //   SmallSidebar
-  // },
   methods: {
     storeFilter (name) {
       this.name = name
     },
     changeClass (index) {
       this.isActive = index
-      // console.log('changeClass')
-    },
-    // 取得購物車列表
-    getCart () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      // this.isLoading = true
-      this.$http.get(url).then((response) => {
-        // console.log('getCart', response)
-        this.carts = response.data.data.carts
-        // console.log('this.carts', this.carts)
-      })
     }
-  },
-  created () {
-    // this.getCart()
   }
 }
 </script>

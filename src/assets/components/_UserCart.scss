@@ -1,6 +1,6 @@
 .userCart { // 考量到不同頁面可能不同排版，故未與 UserPay、UserOrder共用
-  margin-top: 100px;
-  margin-bottom: 150px;
+  padding-top: 30px;
+  padding-bottom: 150px;
   font-size: 13px;
   @include media-breakpoint-up(lg) {
     font-size: 16px;
@@ -28,15 +28,16 @@
 //   border-bottom: solid 1px #BF4342;
 // }
 
-.noline:hover {
-  outline: none !important;
-}
+// .noline:hover {
+//   outline: none !important;
+// }
 
-.stickyTop {
-  position: sticky;
-  top: 110px;
-}
+// .stickyTop {
+//   position: sticky;
+//   top: 110px;
+// }
 
+//「 套用優惠碼 」按鈕
 .btn-outline{
   border: $cambrige_blue solid 1px;
   color: $cambrige_blue;

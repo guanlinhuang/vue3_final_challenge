@@ -1,10 +1,5 @@
 <template>
-  <!-- <img
-    src=""
-    alt=""
-    style="width: 100%; height: 300px; background-color: antiquewhite"
-  /> -->
-  <div class="container userCart">
+  <div class="container userCart mainContainer">
     <div class="pt-3" v-if="cart.total !== 0">
       <div
         class="shopping_process d-flex justify-content-center align-items-center"
@@ -62,7 +57,6 @@
                     <i class="bi bi-x-lg"></i>
                   </button>
                 </td>
-                <!-- <td class="text-center"><router-link to="/products/${item..product.id}">{{ item.product.title }}</router-link></td> -->
                 <td style="width: 70px">
                   <div style="width: 70px; height: 100px">
                     <img
@@ -151,19 +145,6 @@
                   套用優惠碼
                 </button>
               </div>
-              <!-- <div>
-              <input
-                type="text"
-                class="coupon_form me-3"
-                v-model="coupon_code"
-                placeholder="請輸入優惠碼"
-              /></div>
-            <button class="btn" type="button" @click="addCouponCode">
-              <div>
-                <span>套用優惠碼</span>
-                <span>套用優惠碼</span>
-              </div>
-            </button> -->
             </div>
             <hr />
             <div class="d-flex justify-content-between align-items-center">
@@ -173,13 +154,6 @@
               </p>
             </div>
             <div v-if="cart.final_total !== cart.total">
-              <!-- <div class="d-flex justify-content-between align-items-center">
-                <p class="mb-0">總金額</p>
-                <p class="mb-0 fs-3 text-success">
-                  NT$
-                  {{ $filters.currency(Math.round(cart.final_total)) }}
-                </p>
-              </div> -->
               <p class="mb-0 text-end text-danger">(已套用優惠券)</p>
             </div>
             <!-- // cart.final_total 是整個購物車的總金額(折扣後) -->
@@ -213,25 +187,10 @@
                     <i class="bi bi-x-lg"></i>
                   </button>
                 </th>
-                <!-- <th class="text-start" style="width: 250px">商品</th>
-                <th>數量</th>
-                <th>單價</th>
-                <th>總價</th> -->
               </tr>
             </thead>
             <tbody>
               <tr v-for="item in cart.carts" :key="item.id">
-                <!-- <td class="text-center">
-                  <button
-                    type="button"
-                    class="btn btn-outline-danger btn-sm"
-                    :disabled="status.loadingItem === item.id"
-                    @click="removeCartItem(item.id)"
-                  >
-                  <i class="bi bi-x-lg"></i>
-                  </button>
-                </td> -->
-                <!-- <td class="text-center"><router-link to="/products/${item..product.id}">{{ item.product.title }}</router-link></td> -->
                 <td style="width: 70px">
                   <div style="width: 70px; height: 100px">
                     <img
@@ -284,10 +243,6 @@
                     </button>
                   </div>
                 </td>
-                <!-- <td style="width: 150px">
-                </td>
-                <td class="text-center"></td>
-                <td class="text-center"></td> -->
               </tr>
             </tbody>
           </table>
@@ -319,19 +274,6 @@
                   套用優惠碼
                 </button>
               </div>
-              <!-- <div>
-              <input
-                type="text"
-                class="coupon_form me-3"
-                v-model="coupon_code"
-                placeholder="請輸入優惠碼"
-              /></div>
-            <button class="btn" type="button" @click="addCouponCode">
-              <div>
-                <span>套用優惠碼</span>
-                <span>套用優惠碼</span>
-              </div>
-            </button> -->
             </div>
             <hr />
             <div class="d-flex justify-content-between align-items-center">
@@ -341,18 +283,10 @@
               </p>
             </div>
             <div v-if="cart.final_total !== cart.total">
-              <!-- <div class="d-flex justify-content-between align-items-center">
-                <p class="mb-0">總金額</p>
-                <p class="mb-0 fs-3 text-success">
-                  NT$
-                  {{ $filters.currency(Math.round(cart.final_total)) }}
-                </p>
-              </div> -->
               <p class="mb-0 text-end text-danger">(已套用優惠券)</p>
             </div>
             <!-- // cart.final_total 是整個購物車的總金額(折扣後) -->
             <div class="row gx-2">
-              <!-- <div class="d-flex justify-content-end"> -->
               <div class="col-4">
                 <router-link
                   to="/productsall"
@@ -383,8 +317,8 @@
         </div>
       </div>
     </div>
-    <div v-else style="margin-top: 150px; margin-bottom: 250px">
-      <div class="text-center my-5">
+    <div v-else>
+      <div class="text-center my-5" style="padding-top: 150px; padding-bottom: 250px">
         <p class="fs-4 ls">您的購物車目前是空的唷！</p>
         <router-link
           to="/productsall"
@@ -399,7 +333,6 @@
       </div>
     </div>
   </div>
-  <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar>
 </template>
 <script>
 export default {
@@ -408,7 +341,6 @@ export default {
       cart: {},
       carts: [],
       coupon_code: '',
-      // shipping: 250,
       status: {
         loadingItem: '' // 對應品項 id
       },
@@ -420,36 +352,30 @@ export default {
     // 取得購物車列表
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      // this.isLoading = true
       this.$http.get(url).then((response) => {
-        // console.log('getCart', response)
         this.cart = response.data.data
         this.carts = response.data.data.carts
-        // this.productsQty = response.data.data.carts.item.qty
-        // this.isLoading = false
-        // console.log('this.cart', this.cart)
-        // console.log('this.carts', this.carts)
-        // console.log('this.productsQty', response.data.data.carts.item.qty)
         this.emitter.emit('update-cart', this.carts)
       })
-      // console.log(typeof this.shipping)
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤')
+        })
     },
 
     // 更新購物車
     updateCart (item) {
       // 更新購物車
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
-      // this.isLoading = true
-      // this.status.loadingItem = item.id // 用於disabled狀態
       const cart = {
         product_id: item.product_id,
         qty: item.qty
       }
       this.$http.put(url, { data: cart }).then((res) => {
-        // console.log('updateCart', res)
-        // this.status.loadingItem = ''
         this.getCart()
       })
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤')
+        })
     },
 
     // 加減按鈕
@@ -469,38 +395,40 @@ export default {
         // 透過 "套用優惠券" API 告知後端要套用優惠卷，後端會驗證這個優惠卷是否有效，有效就會做個記錄
         this.$httpMessageState(response, '加入優惠券')
         this.getCart()
-        // this.isLoading = false
-        // console.log('addCouponCode', response)
       })
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤')
+        })
     },
 
     // 移除購物車中的商品
     removeCartItem (id) {
       this.status.loadingItem = id // 用於禁用按鈕
-      // this.isLoading = true // 開啟讀取效果
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`
       this.$http.delete(url).then((response) => {
         this.$httpMessageState(response, '移除購物車品項')
         this.status.loadingItem = '' // 解除禁用按鈕
         this.getCart()
-        // this.isLoading = false // 關閉讀取效果
-        // console.log('removeCartItem', response)
       })
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤')
+        })
     },
 
+    // 移除購物車中的所有商品
     removeCartItemAll () {
-      // this.isLoading = true
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`
       this.$http.delete(url).then((response) => {
         this.$httpMessageState(response, '移除所有購物車品項')
-        // this.emitter.emit('update-cart', this.carts)
         this.getCart()
-        // this.isLoading = false
       })
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤')
+        })
     },
 
+    // 取得某一商品id，並導到該商品獨立頁面
     getProductPage (id) {
-      // 取得某一商品id，並導到該商品獨立頁面
       this.$router.push(`/products/${id}`)
     }
   },
@@ -517,5 +445,3 @@ export default {
 <!-- :disabled="this.status.loadingItem === item.id"
 為避免用戶不知道自己已經加入了，但一直重複點擊按鈕，所以按鈕加入disabled狀態，無法再點擊，用意讓用戶知道已經點擊加入了
 當this.status.loadingItem（addCart函式裡的id） 等於 item.id（點擊時的id） 時，進入disabled跟讀取效果狀態 -->
-
-<!-- class="cartName text-decoration-none text-dark" -->
