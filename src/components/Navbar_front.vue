@@ -5,7 +5,7 @@
     </div>
     <nav class="navbar navbar-light navbar-expand-lg">
       <div class="container-fluid">
-        <a class="navbar-brand d-lg-none text-white mx-3" href="#">Logo</a>
+        <a class="navbar-brand d-lg-none text-white mx-3" href="#">GuanTony</a>
         <button
           class="navbar-toggler d-lg-none p-0 pe-2"
           type="button"
@@ -38,7 +38,7 @@
                   to="/aboutus"
                   class="nav-link text-white border-underline"
                   @click.prevent="closeOffcanvas"
-                  >關於GuanTony</router-link
+                  >關於我們</router-link
                 >
               </li>
               <li class="nav-item my-2 my-lg-0">
@@ -51,7 +51,7 @@
               </li>
               <li class="nav-item d-none d-lg-block">
                 <router-link to="/" class="nav-link text-white mx-4"
-                  >logo</router-link
+                  >GuanTony</router-link
                 >
               </li>
               <li class="nav-item my-2 my-lg-0">

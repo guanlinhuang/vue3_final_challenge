@@ -41,7 +41,7 @@
           </div>
           <div class="text-center mt-4">
             <button
-              class="btnHover btn btn-outline-dark"
+              class="btnHover btnHover6 btn btn-outline-dark"
               type="submit"
               @click="push"
             >

@@ -4,7 +4,7 @@
       <div class="row d-block d-lg-flex justify-content-around ms-3 ms-lg-0">
         <div class="col-5 col-lg-2 text-white mb-3">
           <router-link to="/aboutus" class="nav-link py-2"
-            >關於GuanTony</router-link
+            >關於我們</router-link
           >
           <router-link to="/productsall" class="nav-link py-2"
             >所有商品</router-link
