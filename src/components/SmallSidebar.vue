@@ -1,12 +1,12 @@
 <template>
   <div class="Smallsidebar d-none d-lg-block  d-flex flex-column align-items-center">
     <div class="followUs mb-2 me-2 position-relative rounded-circle">
-      <a href="https://www.facebook.com/share/18cBV1AWgK/?mibextid=wwXIfr" class="text-white d-block position-absolute top-50 start-50 translate-middle"
+      <a href="#" class="text-white d-block position-absolute top-50 start-50 translate-middle"
         ><i class="bi bi-facebook"></i
       ></a>
     </div>
     <div class="followUs mb-2 me-2 position-relative rounded-circle">
-      <a href="https://www.instagram.com/tony_5507?igsh=OHRobGxqMTVkb3Fo&utm_source=qr" class="text-white d-block position-absolute top-50 start-50 translate-middle"
+      <a href="#" class="text-white d-block position-absolute top-50 start-50 translate-middle"
         ><i class="bi bi-instagram"></i
       ></a>
     </div>

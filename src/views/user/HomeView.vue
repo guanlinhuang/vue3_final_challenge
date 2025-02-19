@@ -4,9 +4,10 @@
   <div class="about homeView_about">
     <div class="container-fluid about_box position-relative">
       <div class="about_text position-absolute">
-        <h3 class="text-center my-4">關於</h3>
+        <h3 class="text-center my-4">關於我們</h3>
         <p class="text-break mx-5">
-          &emsp;&emsp;文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
+          &emsp;&emsp;GuanTony，這個品牌名稱源自創辦人名字「冠」的羅馬拼音及英文名「Tony」，合併成一個活招牌，象徵著創辦人對於健康飲品的堅持與初心。這個初衷，就是捧著一杯新鮮榨製的健康果汁，為那些渴望天然、無負擔飲品的人們提供一個健康選擇，讓每一位顧客都能品嚐到純粹與自然的美味。
+          1994年，創辦人從一條繁忙的城市街道上的小店舖起步，在10多年間持續獲得周邊鄰居的好評，更是吸引各地遊客前來品嚐。
           </p>
           <div class="d-flex justify-content-center pt-4">
           <router-link to="/aboutUs" class="btnHover"
