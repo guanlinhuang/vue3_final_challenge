@@ -175,6 +175,7 @@ export default {
         this.orders = response.data.orders
         this.pagination = response.data.pagination
         this.isLoading = false
+        this.scrollTop() // 滑動到頂部
       }).catch((error) => {
         this.$httpMessageState(error, '連線錯誤')
       })
@@ -214,6 +215,12 @@ export default {
         this.getOrders(this.currentPage)
       }).catch((error) => {
         this.$httpMessageState(error, '連線錯誤')
+      })
+    },
+    scrollTop () { // 滑動到頂部
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
       })
     }
   },
