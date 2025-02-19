@@ -1,40 +1,39 @@
-.btnEmail {
+.btnEmail{
     --bs-btn-padding-x: 0;
     --bs-btn-padding-y: 0;
-    --bs-btn-border-color: 0;
+    --bs-btn-border-color:0;
 }
 
-.HomeView {
+.HomeView{
     margin-top: 86px;
-    /*移除預設樣式*/
-    -webkit-appearance: none;
-    /* Safari 和 Chrome，常用於 iOS 移除內建樣式 */
-    -moz-appearance: none;
-    /* FireFox */
-    appearance: none;
 }
 
 // 子元件 SwiperProducts.vue
-.onSale {
-    top: 10px;
-    left: 10px;
+.onSale{
+    top:10px;
+    left:10px;
     border-radius: 5px;
 }
 
-.about_box {
+.about_box{
     background-image: url(/images/daan-evers-tKN1WXrzQ3s-unsplash.jpg);
     width: 100%;
     height: 650px;
     background-size: cover;
+    // background-position: center;
+    // background-attachment: fixed;
+    background-repeat: no-repeat; 
     background-position: center;
-    background-attachment: fixed;
-
+    background-attachment: fixed;       
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     @include media-breakpoint-up(lg) {
         height: 500px;
     }
 }
 
-.about_text {
+.about_text{
     background-color: $eggshell;
     width: 90%;
     padding-bottom: 20px;
@@ -43,19 +42,18 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
-
     @include media-breakpoint-up(lg) {
         width: 800px;
     }
 }
 
-.line {
+.line{
     width: 150px;
     height: 150px;
     background-image: url(/images/line.jpg);
     background-size: cover;
 }
 
-.form-control {
+.form-control{
     border: $cambrige_blue solid 1px;
 }
