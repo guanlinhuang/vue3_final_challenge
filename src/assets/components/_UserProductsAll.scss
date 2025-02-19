@@ -7,26 +7,12 @@
     border-radius: 16px;
     height: 250px;
   }
-
-  //   @media(max-width: 1200px) {
-  //       height: 200px
-  //   }
-  //   @media(max-width: 991px) {
-  //     height: 250px
-  // }
 }
-
-// .products_card {
-//   width: 200px;
-// }
 
 .product_img img {
   width: 100%;
   height: 100% //320px
 }
-
-
-
 
 
 .product:hover {
@@ -39,43 +25,6 @@
     transition: all .2s ease-out; // 動態轉換時間，時間越快越好
   }
 }
-
-
-// .products_all button.active {
-//     background-color: antiquewhite;
-// }
-
-// .products_all button:hover {
-//     background-color: antiquewhite;
-//     // border-bottom: 2px solid #8600FF !important
-// }
-
-// .products_all button{
-//     position: relative;
-//     transition: 0.2s ease-in-out
-// }
-
-// .products_all button:hover{
-//     position: absolute;
-//     content: '';
-//     width: 10px;
-//     height: 2px;
-//     background: #000;
-//     top:12px;
-//     left: -10px;
-//     transform:translateX(3px)
-// }
-
-// .products_all button:hover::before {
-//     position: absolute;
-//     content: '';
-//     width: 10px;
-//     height: 2px;
-//     background: #000;
-//     top:12px;
-//     left: -10px;
-//     transform:translateX(3px)
-// }
 
 
 // 側邊menu（桌面） // 頂部menu(手機）
@@ -190,12 +139,6 @@
     opacity: 0; // 不透明度 // 0 -透明 // 1 -不透明
   }
 }
-
-// .products_all .row{
-//   padding-left: 0 !important;
-//   padding-right: 0 !important;
-// }
-
 
 
 // & 是省略寫法，原本是.hidePrevButton.disabled, .hideNextButton.disabled

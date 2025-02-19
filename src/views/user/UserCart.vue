@@ -85,7 +85,7 @@
                     </button>
                     <input
                       type="number"
-                      class="form-control text-center noline"
+                      class="form-control text-center"
                       @change="updateCart(item)"
                       v-model.number="item.qty"
                       min="1"
@@ -119,7 +119,7 @@
           </div>
         </div>
         <div class="col col-lg-4 d-none d-lg-block">
-          <div class="border px-3 pb-3 stickyTop">
+          <div class="border px-3 pb-3">
             <div class="d-flex justify-content-between align-items-center my-3">
               <p class="mb-0">商品總價</p>
               <p class="fs-5 mb-0">
@@ -248,7 +248,7 @@
           </table>
         </div>
         <div class="d-block d-lg-none">
-          <div class="px-2 pb-3 stickyTop">
+          <div class="px-2 pb-3">
             <div class="d-flex justify-content-between align-items-center my-3">
               <p class="mb-0">商品總價</p>
               <p class="fs-5 mb-0">
