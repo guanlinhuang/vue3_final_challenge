@@ -70,6 +70,19 @@
   height: 100% //320px
 }
 
+.product:hover {
+  // box-shadow: 0 .2rem .3rem .1rem rgba($black, .1);
+  // border-radius: 25px 25px 0 0;
+  cursor: pointer;
+
+  .swiper_img img {
+    transform: scale(1.3, 1.3); // 變形縮放效果
+    transition: all .2s ease-out; // 動態轉換時間，時間越快越好
+  }
+}
+
+
+
 // 首頁 - 熱銷商品 輪播
 // .swiper 原生css帶有 position-relative 和 overflow-hidden
 // .swiper-button-next 或 .swiper-button-prev，原生css帶有 position-absolute 樣式

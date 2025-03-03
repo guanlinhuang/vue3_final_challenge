@@ -1,39 +1,65 @@
-.btnEmail{
+.btnEmail {
     --bs-btn-padding-x: 0;
     --bs-btn-padding-y: 0;
-    --bs-btn-border-color:0;
+    --bs-btn-border-color: 0;
 }
 
-.HomeView{
+.HomeView {
     margin-top: 86px;
 }
 
 // 子元件 SwiperProducts.vue
-.onSale{
-    top:10px;
-    left:10px;
+.onSale {
+    top: 10px;
+    left: 10px;
     border-radius: 5px;
 }
 
-.about_box{
-    background-image: url(/images/daan-evers-tKN1WXrzQ3s-unsplash.jpg);
-    width: 100%;
-    height: 650px;
-    background-size: cover;
-    // background-position: center;
-    // background-attachment: fixed;
-    background-repeat: no-repeat; 
-    background-position: center;
-    background-attachment: fixed;       
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    @include media-breakpoint-up(lg) {
+// background-attachment: fixed;。它在 ios 的瀏覽器會被禁用，主要是為了降低固定背景在捲動時的渲染成本
+// 解決方法：使用 position:fixed 搭配 ::before 
+.about_box {
+    position: relative;
+    height: 600px;
+
+    @include media-breakpoint-up(sm) {
         height: 500px;
     }
 }
 
-.about_text{
+.about_box::before {
+    content: "";
+    background-image: url(/images/daan-evers-tKN1WXrzQ3s-unsplash.jpg);
+    width: 100vw;
+    height: 100vh;
+    top: 0%;
+    left: 0;
+    position: fixed;
+    background-size: cover;
+    background-position: center;
+    // background-attachment: fixed;
+    z-index: -1;
+
+    // @include media-breakpoint-up(lg) {
+    //     height: 500px;
+    // }
+}
+
+// 原始程式碼
+// .about_box {
+//     background-image: url(/images/daan-evers-tKN1WXrzQ3s-unsplash.jpg);
+//     width: 100%;
+//     height: 650px;
+//     background-size: cover;
+//     background-position: center;
+//     background-attachment: fixed;
+
+//     @include media-breakpoint-up(lg) {
+//         height: 500px;
+//     }
+// }
+
+
+.about_text {
     background-color: $eggshell;
     width: 90%;
     padding-bottom: 20px;
@@ -42,18 +68,20 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
+
     @include media-breakpoint-up(lg) {
         width: 800px;
     }
 }
 
-.line{
+
+.line {
     width: 150px;
     height: 150px;
     background-image: url(/images/line.jpg);
     background-size: cover;
 }
 
-.form-control{
+.form-control {
     border: $cambrige_blue solid 1px;
 }

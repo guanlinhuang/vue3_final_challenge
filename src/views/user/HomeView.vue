@@ -20,7 +20,7 @@
       </div>
     </div>
   </div>
-  <div class="line_news py-5">
+  <div class="line_news py-5 bg-white">
     <div class="container">
       <div class="row d-block d-lg-flex justify-content-center">
         <div class="addLine col col-lg-4">

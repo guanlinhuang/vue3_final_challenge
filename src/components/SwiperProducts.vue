@@ -1,65 +1,67 @@
 <template>
-  <div class="container py-5 SwiperProducts">
-    <h3 class="py-3 text-center">熱銷商品</h3>
-    <swiper
-      class="product-swiper"
-      :navigation="{
-        nextEl: '.swiper-button-next', // 下一則
-        prevEl: '.swiper-button-prev', // 上一則
-      }"
-      :modules="modules"
-      :loop="true"
-      :spaceBetween="3"
-      :slidesPerView="2"
-      :breakpoints="{
-        992: { slidesPerView: 6, spaceBetween: 30 },
-      }"
-    >
-      <swiper-slide v-for="item in products" :key="item.id">
-        <div class="position-relative text-center product h-100 mb-4 mb-lg-0">
-          <a @click="getProductPage(item.id)">
-            <div
-              v-if="item.origin_price !== item.price"
-              class="onSale position-absolute text-white bg-danger py-1 px-3 d-none d-lg-block"
-              style="z-index: 5"
-            >
-              特 價
-            </div>
-            <div class="swiper_img">
-              <img :src="`${item.imageUrl}`" class="object-fit-cover" />
-            </div>
-            <div>
-              <p class="my-1 fw-normal mx-2">{{ item.title }}</p>
-              <div class="price text-center">
-                <div v-if="item.origin_price !== item.price">
-                  <p class="mb-0 mb-lg-1 text-danger">NT$ {{ item.price }}</p>
-                </div>
-                <div v-if="item.origin_price === item.price">
-                  <p class="mb-0 mb-lg-1">NT$ {{ item.price }}</p>
-                </div>
-                <div v-if="item.origin_price !== item.price">
-                  <p
-                    class="product_origin_price mb-0 mb-lg-3 text-decoration-line-through"
-                    style="font-size: 13px"
-                  >
-                    NT$ {{ item.origin_price }}
-                  </p>
+  <div class="bg-white">
+    <div class="container py-5 SwiperProducts">
+      <h3 class="py-3 text-center">熱銷商品</h3>
+      <swiper
+        class="product-swiper"
+        :navigation="{
+          nextEl: '.swiper-button-next', // 下一則
+          prevEl: '.swiper-button-prev', // 上一則
+        }"
+        :modules="modules"
+        :loop="true"
+        :spaceBetween="3"
+        :slidesPerView="2"
+        :breakpoints="{
+          992: { slidesPerView: 6, spaceBetween: 30 },
+        }"
+      >
+        <swiper-slide v-for="item in products" :key="item.id">
+          <div class="position-relative text-center product h-100 mb-4 mb-lg-0">
+            <a @click="getProductPage(item.id)">
+              <div
+                v-if="item.origin_price !== item.price"
+                class="onSale position-absolute text-white bg-danger py-1 px-3 d-none d-lg-block"
+                style="z-index: 5"
+              >
+                特 價
+              </div>
+              <div class="swiper_img">
+                <img :src="`${item.imageUrl}`" class="object-fit-cover" />
+              </div>
+              <div>
+                <p class="my-1 fw-normal mx-2">{{ item.title }}</p>
+                <div class="price text-center">
+                  <div v-if="item.origin_price !== item.price">
+                    <p class="mb-0 mb-lg-1 text-danger">NT$ {{ item.price }}</p>
+                  </div>
+                  <div v-if="item.origin_price === item.price">
+                    <p class="mb-0 mb-lg-1">NT$ {{ item.price }}</p>
+                  </div>
+                  <div v-if="item.origin_price !== item.price">
+                    <p
+                      class="product_origin_price mb-0 mb-lg-3 text-decoration-line-through"
+                      style="font-size: 13px"
+                    >
+                      NT$ {{ item.origin_price }}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </a>
-        </div>
-      </swiper-slide>
-      <button class="swiper-button-next btn btn-light"></button>
-      <button class="swiper-button-prev btn btn-light"></button>
-    </swiper>
-    <div class="d-flex justify-content-center">
-      <router-link to="/productsall" class="btnHover"
-        ><div>
-          <span>more</span>
-          <span>more</span>
-        </div></router-link
-      >
+            </a>
+          </div>
+        </swiper-slide>
+        <button class="swiper-button-next btn btn-light"></button>
+        <button class="swiper-button-prev btn btn-light"></button>
+      </swiper>
+      <div class="d-flex justify-content-center">
+        <router-link to="/productsall" class="btnHover"
+          ><div>
+            <span>more</span>
+            <span>more</span>
+          </div></router-link
+        >
+      </div>
     </div>
   </div>
 </template>
