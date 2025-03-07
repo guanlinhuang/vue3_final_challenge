@@ -38,7 +38,19 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-vue": "^8.0.3",
-    "sass": "^1.32.7",
+    "sass": "^1.85.1",
     "sass-loader": "^12.0.0"
-  }
+  },
+  "description": "## Project setup ``` npm install ```",
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guanlinhuang/vue3_final_challenge.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guanlinhuang/vue3_final_challenge/issues"
+  },
+  "homepage": "https://github.com/guanlinhuang/vue3_final_challenge#readme"
 }

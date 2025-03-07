@@ -27,8 +27,7 @@
   </template>
 
 <script>
-// import Modal from 'bootstrap/js/dist/modal' // 與ProductModal.vue有相同程式碼，所以使用mixin.js整合相同程式碼
-import modalMixin from '@/mixins/modalMixin' // ../ 可替換成 @/ //載入自定義的js
+import modalMixin from '@/mixins/modalMixin'
 
 export default {
   props: {
@@ -39,6 +38,6 @@ export default {
       modal: ''
     }
   },
-  mixins: [modalMixin] // 使用 mixin 整合相同程式碼
+  mixins: [modalMixin]
 }
 </script>

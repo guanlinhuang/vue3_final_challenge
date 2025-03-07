@@ -50,13 +50,11 @@
 </template>
 
 <script>
-// 引入 swiper vue元件
 import SwiperBanner from '@/components/SwiperBanner.vue'
 import SwiperProducts from '@/components/SwiperProducts.vue'
 
 export default {
   components: {
-    // 註冊元件
     SwiperBanner,
     SwiperProducts
   },
@@ -66,7 +64,6 @@ export default {
     }
   },
   methods: {
-    // 取得購物車列表
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(url).then((response) => {
@@ -82,5 +79,3 @@ export default {
   }
 }
 </script>
-
-<!-- // swiper 必須設定顯示區域尺寸 -->

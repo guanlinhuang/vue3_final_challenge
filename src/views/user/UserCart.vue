@@ -61,7 +61,7 @@
                   <div style="width: 70px; height: 100px">
                     <img
                       :src="item.product.imageUrl"
-                      alt=""
+                      :alt="item.product.title"
                       class="w-100 h-100 object-fit-cover"
                     />
                   </div>
@@ -156,7 +156,6 @@
             <div v-if="cart.final_total !== cart.total">
               <p class="mb-0 text-end text-danger">(已套用優惠券)</p>
             </div>
-            <!-- // cart.final_total 是整個購物車的總金額(折扣後) -->
             <div>
               <router-link
                 to="/order"
@@ -195,7 +194,7 @@
                   <div style="width: 70px; height: 100px">
                     <img
                       :src="item.product.imageUrl"
-                      alt=""
+                      :alt="item.product.title"
                       class="w-100 h-100 object-fit-cover"
                     />
                   </div>
@@ -285,7 +284,6 @@
             <div v-if="cart.final_total !== cart.total">
               <p class="mb-0 text-end text-danger">(已套用優惠券)</p>
             </div>
-            <!-- // cart.final_total 是整個購物車的總金額(折扣後) -->
             <div class="row gx-2">
               <div class="col-4">
                 <router-link
@@ -342,14 +340,13 @@ export default {
       carts: [],
       coupon_code: '',
       status: {
-        loadingItem: '' // 對應品項 id
+        loadingItem: ''
       },
       productsQty: ''
     }
   },
-  inject: ['emitter'], // 內層使用inject // 可使用外層元件Userboard.vue的mitt套件功能
+  inject: ['emitter'],
   methods: {
-    // 取得購物車列表
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(url).then((response) => {
@@ -362,9 +359,7 @@ export default {
         })
     },
 
-    // 更新購物車
     updateCart (item) {
-      // 更新購物車
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
       const cart = {
         product_id: item.product_id,
@@ -378,21 +373,17 @@ export default {
         })
     },
 
-    // 加減按鈕
     changeQty (number, item) {
       item.qty += number
       this.updateCart(item)
     },
 
-    // 套用優惠券
     addCouponCode () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon` // 有包含計算公式，而計算公式是後端才會做的事，前端只需跟後端說設定打幾折
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`
       const coupon = {
         code: this.coupon_code
       }
-      // this.isLoading = true
       this.$http.post(url, { data: coupon }).then((response) => {
-        // 透過 "套用優惠券" API 告知後端要套用優惠卷，後端會驗證這個優惠卷是否有效，有效就會做個記錄
         this.$httpMessageState(response, '加入優惠券')
         this.getCart()
       })
@@ -401,13 +392,12 @@ export default {
         })
     },
 
-    // 移除購物車中的商品
     removeCartItem (id) {
-      this.status.loadingItem = id // 用於禁用按鈕
+      this.status.loadingItem = id
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`
       this.$http.delete(url).then((response) => {
         this.$httpMessageState(response, '移除購物車品項')
-        this.status.loadingItem = '' // 解除禁用按鈕
+        this.status.loadingItem = ''
         this.getCart()
       })
         .catch((error) => {
@@ -415,7 +405,6 @@ export default {
         })
     },
 
-    // 移除購物車中的所有商品
     removeCartItemAll () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`
       this.$http.delete(url).then((response) => {
@@ -427,7 +416,6 @@ export default {
         })
     },
 
-    // 取得某一商品id，並導到該商品獨立頁面
     getProductPage (id) {
       this.$router.push(`/products/${id}`)
     }
@@ -438,10 +426,3 @@ export default {
   }
 }
 </script>
-
-<!-- $filters.currency() 千分字號
-     Math.round() 四捨五入 -->
-
-<!-- :disabled="this.status.loadingItem === item.id"
-為避免用戶不知道自己已經加入了，但一直重複點擊按鈕，所以按鈕加入disabled狀態，無法再點擊，用意讓用戶知道已經點擊加入了
-當this.status.loadingItem（addCart函式裡的id） 等於 item.id（點擊時的id） 時，進入disabled跟讀取效果狀態 -->

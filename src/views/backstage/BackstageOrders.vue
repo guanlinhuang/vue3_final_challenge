@@ -153,12 +153,12 @@ import Pagination from '@/components/Pagination.vue'
 export default {
   data () {
     return {
-      orders: [], // 所有訂單列表
-      isNew: false, // 判斷是否"新增"或"修改"狀態 // 一般來說，通常會將預設值設為 0、""、false、{}、[]，雖然在這個地方設 true 不影響
-      pagination: {}, // 每個產品資料(分頁資訊)
-      isLoading: false, // 讀取狀態 // 預設還沒進入讀取狀態
-      tempOrder: {}, // 單一訂單資料
-      currentPage: 1 // 預設第一頁,
+      orders: [],
+      isNew: false,
+      pagination: {},
+      isLoading: false,
+      tempOrder: {},
+      currentPage: 1
     }
   },
   components: {
@@ -169,19 +169,19 @@ export default {
   methods: {
     getOrders (currentPage = 1) {
       this.currentPage = currentPage
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders?page=${currentPage}` // 取得訂單列表API
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders?page=${currentPage}`
       this.isLoading = true
       this.$http.get(url, this.tempProduct).then((response) => {
         this.orders = response.data.orders
         this.pagination = response.data.pagination
         this.isLoading = false
-        this.scrollTop() // 滑動到頂部
+        this.scrollTop()
       }).catch((error) => {
         this.$httpMessageState(error, '連線錯誤')
       })
     },
     openModal (isNew, item) {
-      this.tempOrder = { ...item } // 三個點是把當前的產品資料取出來
+      this.tempOrder = { ...item }
       this.isNew = false
       const orderComponent = this.$refs.orderModal
       orderComponent.showModal()
@@ -193,7 +193,7 @@ export default {
     },
     updatePaid (item) {
       this.isLoading = true
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${item.id}` // 修改訂單API
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${item.id}`
       const paid = {
         is_paid: item.is_paid
       }
@@ -207,7 +207,7 @@ export default {
       })
     },
     delOrder () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}` // 刪除訂單API
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
       this.isLoading = true
       this.$http.delete(url).then((response) => {
         const delComponent = this.$refs.delModal
@@ -217,7 +217,7 @@ export default {
         this.$httpMessageState(error, '連線錯誤')
       })
     },
-    scrollTop () { // 滑動到頂部
+    scrollTop () {
       window.scrollTo({
         top: 0,
         behavior: 'smooth'

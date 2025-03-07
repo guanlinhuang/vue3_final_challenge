@@ -337,7 +337,7 @@ export default {
   data () {
     return {
       name: '台中創始店',
-      isActive: 1 // 篩選資料按鈕用
+      isActive: 1
     }
   },
   methods: {

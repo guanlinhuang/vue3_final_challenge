@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="about_banner"></div> -->
   <div class="about">
     <div class="container py-5 mainContainer">
       <h3 class="text-center">關於我們</h3>

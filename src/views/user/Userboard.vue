@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import emitter from '@/methods/emitter' // mitt跨元件資料傳遞js
+import emitter from '@/methods/emitter'
 import ToastMessages from '@/components/ToastMessages.vue'
 import NavbarFront from '@/components/Navbar_front.vue'
 import FooterFront from '@/components/Footer_front.vue'
@@ -22,13 +22,12 @@ export default {
     FooterFront,
     SmallSidebar
   },
-  provide () { // 本外層元件加入provide // 可讓內層元件(加入inject)可以使用本外層元件的mitt套件功能
+  provide () {
     return {
       emitter
     }
   },
   created () {
-    // console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)// 檢查是否有把環境變數加到專案中
   }
 }
 

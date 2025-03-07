@@ -1,6 +1,5 @@
 // https://blog.tarswork.com/post/a-selection-of-cool-css-button-effects
 
-// 首頁 // 購物車 // 訂單填寫
 .btnHover {
     position: relative;
     background: transparent;
@@ -103,7 +102,6 @@
 .btnHover2 {
     position: relative;
     z-index: 1;
-    // min-width: 150px;
     background: #FFFFFF;
     border: 2px solid $cambrige_blue;
     border-radius: 4px;
@@ -223,7 +221,7 @@
 }
 
 .btnHover3:hover {
-    color: #FFFFFF //#111111;
+    color: #FFFFFF
 }
 
 .btnHover3:active {

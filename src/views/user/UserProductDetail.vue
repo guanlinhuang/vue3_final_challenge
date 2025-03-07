@@ -20,7 +20,7 @@
           </ol>
         </nav>
         <div class="product_img mb-3 rounded-0">
-          <img :src="product.imageUrl" alt="" class="object-fit-cover" />
+          <img :src="product.imageUrl" :alt="product.title" class="object-fit-cover" />
         </div>
       </div>
       <div class="col-lg-4 mt-lg-5 px-4 px-lg-0">
@@ -105,8 +105,8 @@
       <swiper
         class="product-swiper"
         :navigation="{
-          nextEl: '.swiper-button-next', // 下一則
-          prevEl: '.swiper-button-prev', // 上一則
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
         }"
         :modules="modules"
         :loop="true"
@@ -120,7 +120,7 @@
           <div class="position-relative text-center product h-100">
             <a @click="getProductPage(item.id)">
               <div class="swiper_img">
-                <img :src="`${item.imageUrl}`" class="object-fit-cover" />
+                <img :src="`${item.imageUrl}`" :alt="item.title" class="object-fit-cover" />
               </div>
             </a>
           </div>
@@ -133,14 +133,11 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'swiper/vue' // 載入Swiper Vue.js
-
-import { Navigation, Pagination, Autoplay } from 'swiper/modules' // 載入swiper 原生js
-// Autoplay（自動播放）、Pagination（頁碼）、Navigation（上下一則導航)
-
-import 'swiper/css' // 載入swiper 原生css // 必載入
-import 'swiper/css/pagination' // 載入頁碼樣式原生css // 可不載入
-import 'swiper/css/navigation' // 載入上下一則導航樣式原生css // 可不載入
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Navigation, Pagination, Autoplay } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
 import saveFavorite from '@/methods/saveFavorite'
 export default {
   data () {
@@ -149,21 +146,19 @@ export default {
       id: '',
       carts: [],
       productsQty: 1,
-      products: [], // swiper products
-      favorite: saveFavorite.getFavorite() || [], // import進來的saveFavorite // 預設為getFavorite() 或 回傳空陣列(如果localstorage沒東西)
+      products: [],
+      favorite: saveFavorite.getFavorite() || [],
       favoriteProduct: [],
       modules: [Autoplay, Pagination, Navigation]
     }
   },
-  inject: ['emitter'], // 內層使用inject // 可使用外層元件Userboard.vue的mitt套件功能
+  inject: ['emitter'],
   components: {
-    // 區域註冊
     Swiper,
     SwiperSlide
   },
   methods: {
     getProduct () {
-      // 撈出某一商品id
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`
       this.isLoading = true
       this.$http.get(api).then((response) => {
@@ -176,7 +171,6 @@ export default {
       })
     },
     getCart () {
-      // 取得購物車列表 // 用於側邊欄購物車標籤
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(url).then((response) => {
         this.carts = response.data.data.carts
@@ -185,8 +179,6 @@ export default {
         this.$httpMessageState(error, '連線錯誤')
       })
     },
-
-    // 立即購買按鈕
     nowBuy (id, qty = this.productsQty) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       const cart = {
@@ -203,8 +195,6 @@ export default {
         this.$httpMessageState(error, '連線錯誤')
       })
     },
-
-    // 加到購物車按鈕
     addToCart (id, qty = this.productsQty) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       const cart = {
@@ -221,10 +211,7 @@ export default {
           this.$httpMessageState(error, '連線錯誤')
         })
     },
-
-    // 更新購物車
     updateCart (item) {
-      // 更新購物車
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
       const cart = {
         product_id: item.product_id,
@@ -236,18 +223,15 @@ export default {
         this.$httpMessageState(error, '連線錯誤')
       })
     },
-    // 加減按鈕
     changeQty (number) {
       this.productsQty += number
     },
-    // 看更多商品
     getProductPage (id) {
-      this.$router.push(`/products/${id}`) // 網址改某一商品id
-      this.id = id // 換新商品 id
-      this.getProduct() // 渲染新商品畫面
-      this.getProducts() // swiper products 重整
+      this.$router.push(`/products/${id}`)
+      this.id = id
+      this.getProduct()
+      this.getProducts()
     },
-    // swiper products
     getProducts () {
       this.isLoading = true
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
@@ -256,8 +240,8 @@ export default {
         .then((res) => {
           if (res.data.success) {
             this.products = res.data.products
-              .filter((e) => e.id !== this.id) // 篩選主要id以外的商品
-              .sort(() => Math.random() - 0.5) // 亂數排序
+              .filter((e) => e.id !== this.id)
+              .sort(() => Math.random() - 0.5)
             this.isLoading = false
           }
         })
@@ -266,7 +250,7 @@ export default {
           this.isLoading = false
         })
     },
-    getFavoriteProduct () { // 從所有產品清單篩選localstorage裡收藏的產品，並儲存到this.favoriteProduct
+    getFavoriteProduct () {
       this.$http
         .get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`)
         .then((response) => {
@@ -277,9 +261,9 @@ export default {
           this.$httpMessageState(error, '連線錯誤')
         })
     },
-    toggleFavorite (product) { // 「 加入我的最愛 」按鈕 // 如果localstorage沒有該筆產品id，就加入收藏，如果已經存在，就移除收藏
+    toggleFavorite (product) {
       if (this.favorite.includes(product.id)) {
-        this.favorite.splice(this.favorite.indexOf(product.id), 1) // 如果該產品已經存在，就移除收藏
+        this.favorite.splice(this.favorite.indexOf(product.id), 1)
         this.$httpMessageState(
           {
             data: {
@@ -289,7 +273,7 @@ export default {
           '移除收藏'
         )
       } else {
-        this.favorite.push(product.id) // 如果沒有該筆產品，就加入收藏
+        this.favorite.push(product.id)
         this.$httpMessageState(
           {
             data: {
@@ -299,7 +283,7 @@ export default {
           '加入收藏'
         )
       }
-      saveFavorite.saveFavorite(this.favorite) // 觸發saveFavorite.js函式 //儲存或移除localstorage裡的產品
+      saveFavorite.saveFavorite(this.favorite)
       this.getFavoriteProduct()
     }
   },
@@ -311,6 +295,3 @@ export default {
   }
 }
 </script>
-
-<!-- // @click.stop="toggleFavorite(product)" .stop的作用就如同大家熟知的 event.stopPropagation()，用來阻擋事件冒泡
-// 事件冒泡：事件點擊後，會一直冒泡上去 -->

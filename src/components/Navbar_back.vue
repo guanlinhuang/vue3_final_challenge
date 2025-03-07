@@ -108,13 +108,12 @@ export default {
       const api = `${process.env.VUE_APP_API}logout`
       this.$http.post(api, this.user).then((res) => {
         if (res.data.success) {
-          this.$router.push('/login') // 登出後，跳轉到登入頁面
+          this.$router.push('/login')
         }
       })
     },
     closeOffcanvas () {
-      // 關閉 offcanvas
-      document.getElementById('closeOffcanvas').click() // getElementById :選取元素 // 選取close按鈕並觸發點擊事件
+      document.getElementById('closeOffcanvas').click()
     }
   }
 }

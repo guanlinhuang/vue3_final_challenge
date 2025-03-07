@@ -7,8 +7,5 @@ export function currency (num) {
 // 可轉換為日期
 export function date (time) {
   const localDate = new Date(time * 1000)
-  return localDate.toLocaleDateString() // Locale:語言
+  return localDate.toLocaleDateString()
 }
-// toLocaleDateString() 與 toISOString() 顯示不同
-// toLocaleDateString() 可顯示為 2023/10/13
-// toISOString() 可顯示為 2023-10-13T15:37:00.450Z

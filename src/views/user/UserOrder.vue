@@ -39,7 +39,7 @@
                 <div style="width: 70px; height: 100px">
                   <img
                     :src="item.product.imageUrl"
-                    alt=""
+                    :alt="item.product.title"
                     class="w-100 h-100 object-fit-cover"
                   />
                 </div>
@@ -91,7 +91,6 @@
                 </div>
               </td>
             </tr>
-            <!-- // cart.final_total 是整個購物車的總金額(折扣後) -->
           </tfoot>
         </table>
         <div class="d-flex justify-content-end">
@@ -310,7 +309,7 @@
                       <div style="width: 70px; height: 100px">
                         <img
                           :src="item.product.imageUrl"
-                          alt=""
+                          :alt="item.product.title"
                           class="w-100 h-100 object-fit-cover"
                         />
                       </div>
@@ -377,7 +376,6 @@
                       </div>
                     </td>
                   </tr>
-                  <!-- // cart.final_total 是整個購物車的總金額(折扣後) -->
                 </tfoot>
               </table>
               <div class="row px-2 gx-2 mb-2">
@@ -431,13 +429,13 @@ export default {
       carts: []
     }
   },
-  inject: ['emitter'], // 內層使用inject
+  inject: ['emitter'],
   methods: {
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(url).then((response) => {
         this.cart = response.data.data
-        this.carts = response.data.data.carts // 用於側邊欄購物車標籤
+        this.carts = response.data.data.carts
         this.emitter.emit('update-cart', this.carts)
       }).catch((error) => {
         this.$httpMessageState(error, '連線錯誤')
@@ -449,7 +447,7 @@ export default {
       this.$http.post(url, { data: order }).then((res) => {
         if (res.data.success) {
           const id = res.data.orderId
-          this.$router.push(`/pay/${id}`) // 導到付款頁面
+          this.$router.push(`/pay/${id}`)
           this.$httpMessageState(res, '建立訂單')
           this.getCart()
         }
@@ -458,7 +456,6 @@ export default {
       })
     },
     isPhoneNumber (value) {
-      // 表單電話號碼驗證
       const phoneNumber = /^(09)[0-9]{8}$/
       return phoneNumber.test(value) ? true : '手機號碼 為必填'
     },
@@ -466,7 +463,6 @@ export default {
       this.$router.go(-1)
     },
     getProductPage (id) {
-      // 取得某一商品id，並導到該商品獨立頁面
       this.$router.push(`/products/${id}`)
     }
   },
@@ -476,7 +472,3 @@ export default {
   }
 }
 </script>
-
-// VeeValidate 的驗證規則是以 | 來分隔的，也就是說如果你要使用多個驗證規則的話，就要使用 | 來分隔
-// name 為必填，是錯誤驗證的回饋欄位，會與多個項目進行匹配（errors, errors-message…）
-// :class 為 Vue 的內建指令

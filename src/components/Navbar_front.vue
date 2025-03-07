@@ -82,8 +82,8 @@
 <script>
 export default {
   methods: {
-    closeOffcanvas () { // 關閉 offcanvas
-      document.getElementById('closeOffcanvas').click() // getElementById :選取元素 // 選取close按鈕並觸發點擊事件
+    closeOffcanvas () {
+      document.getElementById('closeOffcanvas').click()
     }
   }
 }</script>

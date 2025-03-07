@@ -7,7 +7,6 @@
     aria-hidden="true"
     ref="modal"
   >
-    <!-- 透過ref方式存取這個DOM元素 -->
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content border-0">
         <div class="modal-header bg-cambridge-blue text-white">
@@ -15,8 +14,6 @@
             <span>新增產品</span>
           </h5>
         </div>
-        <!-- // 每個input需綁定v-model -->
-        <!-- tempProduct.imageUrl 會自動產生 -->
         <div class="modal-body">
           <div class="row">
             <div class="col-sm-6">
@@ -43,8 +40,7 @@
                   @change="uploadFile"
                 />
               </div>
-              <img class="img-fluid" :src="tempProduct.imageUrl" alt="" />
-              <!-- 延伸技巧，多圖 -->
+              <img class="img-fluid" :src="tempProduct.imageUrl" :alt="tempProduct.title" />
               <div class="mt-5" v-if="tempProduct.images">
                 <div
                   v-for="(image, key) in tempProduct.images"
@@ -202,17 +198,15 @@
 </template>
 
 <script>
-// import Modal from 'bootstrap/js/dist/modal' // 與DelModal.vue有相同程式碼，所以使用mixin.js整合相同程式碼
-import modalMixin from '@/mixins/modalMixin' // 載入自定義的js
+import modalMixin from '@/mixins/modalMixin'
 
 export default {
   props: {
-    // 設定內層所接收的props
     product: {
-      type: Object, // 預期傳進來的型別是物件，所以先定義類型為物件
+      type: Object,
       default () {
         return {}
-      } // 如外層沒有正確傳遞，給它一個預設值-空的物件
+      }
     }
   },
   watch: {
@@ -227,50 +221,20 @@ export default {
     }
   },
   methods: {
-    // showModal () { // 與DelModal.vue有相同程式碼，所以使用mixin.js整合相同程式碼
-    //   this.modal.show()
-    // },
-    // hideModal () { // 與DelModal.vue有相同程式碼，所以使用mixin.js整合相同程式碼
-    //   this.modal.hide()
-    // },
     uploadFile () {
-      const uploadedFile = this.$refs.fileInput.files[0] // 將DOM元素裡的上傳的圖片內容索引值取出
+      const uploadedFile = this.$refs.fileInput.files[0]
       console.dir(uploadedFile)
-      const formData = new FormData() // 建立的FormData物件讓前端利用 javaScritp 模擬表單來傳送資料給後端
-      formData.append('file-to-upl', uploadedFile) // 增加一個欄位到表單中 // file-to-upload 是 上傳表單 (前端測試使用) API 裡的的name屬性名稱
-
-      // 把formData圖片資料透過api發送到遠端
+      const formData = new FormData()
+      formData.append('file-to-upl', uploadedFile)
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
-      this.$http.post(url, formData).then((response) => { // 圖片檔案儲存到伺服器後所自動產生的路徑
+      this.$http.post(url, formData).then((response) => {
         if (response.data.success) {
-          // 如果上傳成功，圖片路徑儲存到本地端data裡
           this.tempProduct.imageUrl = response.data.imageUrl
         }
       })
     }
   },
-  // mounted () { // 與DelModal.vue有相同程式碼，所以使用mixin.js整合相同程式碼
-  //   this.modal = new Modal(this.$refs.modal)
-  //   // 透過refs方式將DOM元素指向外層元件的ref modal
-  // }
 
-  mixins: [modalMixin] // 新增屬性
+  mixins: [modalMixin]
 }
 </script>
-
-  <!-- 為什麼不在ProductModal.vue建空白的tempProduct？
-       因為除了新增用，還有編輯也會用到，所以在Products.vue建立空白的tempProduct
-       每次打開 modal 時，傳送進來的資料都不一樣，要去監聽product的內容有沒有做更動，如有做更動，就把傳進來的資料寫到tempProduct
-       舉例來說，
-       1.如果是新增產品，打開 modal 時傳的是一個空物件
-       2.如果是編輯產品，就會傳入該產品的資料 tempProduct{}
-       因為單向數據流，開發者不可移直接修改外層的資料，所以在內層再定義一個tempProduct，把這個資料給儲存起來
-       Products openModal () 的 (2)先清空tempProduct 連線到 watch: 的 product () 的 this.tempProduct = this.product，連帶著這裡的tempProduct也清空 -->
-
-  <!-- created:在模板渲染成html前調用，即通常初始化某些屬性值，然後再渲染成視圖。
-       mounted:在模板渲染成html後調用，通常是初始化頁面完成後，再對html的dom節點進行一些需要的操作。 -->
-
-  <!-- 1. FormData 是什麼？
-          一種Object，前端傳送給後端資料的一種形式。FromData 可以讓前端利用 javaScritp 模擬表單來傳送資料給後端。
-       2. FormData 與 檔案處理
-          FormData的一個特點是可以傳送二進制檔案（File、Blob)，因此可以應用在前端與後端的檔案傳輸。 -->

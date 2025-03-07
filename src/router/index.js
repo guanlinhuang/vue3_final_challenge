@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import UserBoard from '../views/user/UserBoard'
-// import { Comment } from 'vue'
 
 const routes = [
   {
@@ -28,8 +27,6 @@ const routes = [
         name: '所有商品列表',
         component: () => import('../views/user/UserProductsAll.vue')
       },
-      // 有加「 ? 」，/products、/products/:category都可選染
-      // 若沒加「 ? 」，只能渲染/products/:category
       {
         path: 'products/:productId',
         name: '單一產品介紹',
@@ -71,10 +68,10 @@ const routes = [
     path: '/dashboard',
     name: '後台儀表板',
     component: () => import('../views/backstage/BackstageDashboard.vue'),
-    children: [ // 新增子路徑
+    children: [
       {
-        path: 'products/:categoryName?', // 新增子路徑不需加「 / 」
-        name: '產品列表', // 不能隨意改 // 因為BackstageProducts.vue裡有用到此名稱
+        path: 'products/:categoryName?',
+        name: '產品列表',
         component: () => import('../views/backstage/BackstageProducts.vue')
       },
       {
@@ -87,24 +84,19 @@ const routes = [
         name: '優惠券列表',
         component: () => import('../views/backstage/BackstageCoupons.vue')
       }
-      // {
-      //   path: 'cart', // 購物車頁面
-      //   component: () => import('../views/user/UserCart.vue')
-      // }
     ]
   }
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  linkActiveClass: 'active', // 可以讓選項變成啟用中的樣式
+  linkActiveClass: 'active',
   routes,
-  scrollBehavior (to, from, savedPosition) { // 控制網頁畫面的滾動位置
-    // console.log('控制網頁畫面的滾動位置', to, from, savedPosition)
+  scrollBehavior (to, from, savedPosition) {
     return {
       top: 0
     }
   }
 })
 
-export default router // 匯出到main.js
+export default router

@@ -59,8 +59,8 @@
 </template>
 
 <script>
-import emitter from '@/methods/emitter' // mitt跨元件資料傳遞 // 在Dashboard.vue中僅需載入一次mitt，可讓所有元件都可以使用到mitt功能
-import ToastMessages from '@/components/ToastMessages.vue' // 吐司訊息
+import emitter from '@/methods/emitter'
+import ToastMessages from '@/components/ToastMessages.vue'
 export default {
   data () {
     return {
@@ -73,22 +73,22 @@ export default {
   components: {
     ToastMessages
   },
-  provide () { // 本外層元件加入provide // 可讓內層元件(加入inject)可以使用本外層元件的mitt套件功能
+  provide () {
     return {
       emitter
     }
   },
   methods: {
     signIn () {
-      const api = `${process.env.VUE_APP_API}admin/signin` // 登入頁面api
+      const api = `${process.env.VUE_APP_API}admin/signin`
       this.$http
         .post(api, this.user)
         .then((res) => {
           if (res.data.success) {
-            const { token, expired } = res.data // 建立變數跟值
-            document.cookie = `hexToken=${token};expires=${new Date(expired)}` // hexToken、expires名稱自定義 // token: 驗證碼 // new Date可把毫秒轉換為有效日期，過了這個日期驗證碼就會失效
+            const { token, expired } = res.data
+            document.cookie = `hexToken=${token};expires=${new Date(expired)}`
             this.$httpMessageState(res, '登入')
-            this.$router.push('/dashboard/products') // 登入成功後，跳轉到指定頁面
+            this.$router.push('/dashboard/products')
           } else {
             this.$httpMessageState(res, '登入')
           }
@@ -100,7 +100,3 @@ export default {
   }
 }
 </script>
-
-// <!-- 務必先安裝好axios套件，並將下載好的套件加入在main.js -->
-// <span class="border border-dark">&ensp;kuanlin830410@gmail.com&ensp;</span>
-// <span class="border border-dark">&ensp;test12345&ensp;</span>

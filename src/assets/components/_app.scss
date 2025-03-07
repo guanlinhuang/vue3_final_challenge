@@ -2,12 +2,11 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden; // 隱藏右側留白
-  // text-align: center;
+  overflow-x: hidden;
   color: #2c3e50;
 }
 
-.mainContainer { // 中間主要container高度100vh 減 navbar高度 減 footer高度 = 瀏覽器高度
+.mainContainer {
   @include media-breakpoint-up(md) {
     min-height: calc(100vh - 86px - 533px);
   }
@@ -15,9 +14,3 @@
     min-height: calc(100vh - 86px - 296px);
   }
 }
-
-// 100vh : 中間的container高度100%
-// 86px : 平板、電腦模式navbar高度
-// 533px : 平板模式footer高度
-// 296px : 電腦模式footer高度
-// calc : 此語法是可以讓我們使用數學運算進行加減

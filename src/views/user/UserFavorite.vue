@@ -25,7 +25,7 @@
                   特 價
                 </div>
                 <div class="product_img">
-                  <img :src="`${item.imageUrl}`" class="object-fit-cover" />
+                  <img :src="`${item.imageUrl}`" :alt="item.title" class="object-fit-cover" />
                 </div>
                 <p class="my-1 fw-normal">{{ item.title }}</p>
                 <div class="price text-center">
@@ -91,16 +91,15 @@ import saveFavorite from '@/methods/saveFavorite'
 export default {
   data () {
     return {
-      favorite: saveFavorite.getFavorite() || [], // import進來的saveFavorite // 取得getFavorite() 或 回傳空陣列(如果localstorage沒東西)
+      favorite: saveFavorite.getFavorite() || [],
       favoriteProduct: [],
       isLoading: false,
       carts: []
     }
   },
-  inject: ['emitter'], // 內層使用inject // 可使用外層元件Userboard.vue的mitt套件功能
+  inject: ['emitter'],
   methods: {
     getFavoriteProduct () {
-      // 從所有產品清單篩選localstorage裡收藏的產品，並儲存到this.favoriteProduct
       this.isLoading = true
       this.$http
         .get(
@@ -119,7 +118,6 @@ export default {
         })
     },
     getCart () {
-      // 取得購物車列表 // 用於側邊欄購物車標籤
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(url).then((response) => {
         this.carts = response.data.data.carts
@@ -129,7 +127,6 @@ export default {
       })
     },
     removeFavorite (item) {
-      // 移除收藏的產品
       this.isLoading = true
       this.favorite.splice(this.favorite.indexOf(item.id), 1)
       this.$httpMessageState(
@@ -142,7 +139,7 @@ export default {
       )
       saveFavorite.saveFavorite(this.favorite)
       this.isLoading = false
-      this.getFavoriteProduct() // 重新渲染畫面
+      this.getFavoriteProduct()
     },
     addToCart (id, qty = this.productsQty) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
@@ -166,7 +163,6 @@ export default {
         })
     },
     getProductPage (id) {
-      // 取得某一商品id，並導到該商品獨立頁面
       this.$router.push(`/products/${id}`)
     }
   },

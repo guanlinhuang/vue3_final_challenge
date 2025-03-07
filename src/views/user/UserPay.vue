@@ -86,7 +86,6 @@
                   >
                   <span v-else class="text-success">付款完成</span>
                 </td>
-                <!-- 因為要顯示文字-尚未付款，必須是true，所以要加上！，負負得正，!is_paid=true -->
               </tr>
             </tbody>
           </table>
@@ -111,7 +110,6 @@
                 </div>
               </button>
             </div>
-            <!-- is_paid 從false轉為true，即付款成功，則不符合等於false條件，將不顯示「確認付款去」按鈕 -->
           </div>
         </form>
       </div>
@@ -154,7 +152,7 @@
                         <div style="width: 70px; height: 100px">
                           <img
                             :src="item.product.imageUrl"
-                            alt=""
+                            :alt="item.product.title"
                             class="w-100 h-100 object-fit-cover"
                           />
                         </div>
@@ -211,7 +209,6 @@ export default {
   },
   methods: {
     getOrder () {
-      // 需把某一訂單內容帶出來，才能渲染頁面，否則欄位會是空白
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${this.orderId}`
       this.$http.get(url).then((res) => {
         if (res.data.success) {
@@ -220,31 +217,29 @@ export default {
       })
     },
     payOrder () {
-      // 按下「確認付款去」按鈕，付款狀態欄位會變化，is_paid 從false轉為true
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`
       this.$http.post(url).then((res) => {
         if (res.data.success) {
           this.getOrder()
-          this.scrollTop() // 滑動到頂部
+          this.scrollTop()
         }
       }).catch((error) => {
         this.$httpMessageState(error, '連線錯誤')
       })
     },
     getProductPage (id) {
-      // 取得某一商品id，並導到該商品獨立頁面
       this.$router.push(`/products/${id}`)
     },
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(url).then((response) => {
         this.cart = response.data.data
-        this.carts = response.data.data.carts // 用於側邊欄購物車標籤
+        this.carts = response.data.data.carts
       }).catch((error) => {
         this.$httpMessageState(error, '連線錯誤')
       })
     },
-    scrollTop () { // 滑動到頂部
+    scrollTop () {
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -252,7 +247,7 @@ export default {
     }
   },
   created () {
-    this.orderId = this.$route.params.orderId // 第一步驟：先取得網址id
+    this.orderId = this.$route.params.orderId
     this.getOrder()
   }
 }

@@ -136,7 +136,7 @@
 
 <script>
 import CouponModal from '@/components/CouponModal.vue'
-import DelModal from '@/components/DelModal.vue' // 多個主要元件共用刪除元件DelModal
+import DelModal from '@/components/DelModal.vue'
 export default {
   components: { CouponModal, DelModal },
   props: {
@@ -147,57 +147,48 @@ export default {
       coupons: {},
       tempCoupon: {
         title: '',
-        is_enabled: 0, // 0 = false 1 = true
+        is_enabled: 0,
         percent: 100,
         code: ''
       },
-      isLoading: false, // 沒有進入讀取狀態
-      isNew: false // 判斷是否"新增"或"修改"狀態
+      isLoading: false,
+      isNew: false
     }
   },
   methods: {
-    // 建立新的優惠券視窗 // 編輯視窗
     openCouponModal (isNew, item) {
       this.isNew = isNew
       if (this.isNew) {
         this.tempCoupon = {
-          due_date: new Date().getTime() / 1000 // 轉換毫秒 // 為Unix Timestamp 格式
+          due_date: new Date().getTime() / 1000
         }
       } else {
         this.tempCoupon = { ...item }
       }
       this.$refs.couponModal.showModal()
-      // 連到couponModal，再連到modalMixin，呼叫showModal()
     },
-    // 刪除視窗
     openDelCouponModal (item) {
       this.tempCoupon = { ...item }
       const delComponent = this.$refs.delModal
       delComponent.showModal()
-      // 連到DelModal，再連到modalMixin，呼叫showModal()
     },
-    // 從遠端資料庫撈資料 // 方法:get
     getCoupons () {
-      this.isLoading = true // 取得遠端資料時，進入讀取狀態
+      this.isLoading = true
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupons`
       this.$http.get(url, this.tempProduct).then((response) => {
-        // *****
         this.coupons = response.data.coupons
-        this.isLoading = false // 遠端資料已取得完畢，關閉讀取效果
+        this.isLoading = false
       })
     },
-    // 編輯(新增)優惠券 // 儲存優惠券到遠端資料庫 // 方法:post/put
     updateCoupon (tempCoupon) {
       if (this.isNew) {
-        // 新增的 API
         const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon`
         this.$http.post(url, { data: tempCoupon }).then((response) => {
           this.$httpMessageState(response, '新增優惠券')
-          this.getCoupons() // 儲存後重新渲染畫面
-          this.$refs.couponModal.hideModal() // 儲存後關閉視窗
+          this.getCoupons()
+          this.$refs.couponModal.hideModal()
         })
       } else {
-        // 編輯的 API
         const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
         this.$http.put(url, { data: this.tempCoupon }).then((response) => {
           // console.log(response)
@@ -207,7 +198,6 @@ export default {
         })
       }
     },
-    // 刪除優惠券 // 從遠端資料庫移除優惠券 // 方法:delete
     delCoupon () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
       this.isLoading = true

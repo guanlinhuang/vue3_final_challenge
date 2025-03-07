@@ -168,7 +168,7 @@ export default {
       pagination: {},
       search: '',
       filterOrder: {},
-      searchState: false, // 預設v-if不顯示<thead>標題
+      searchState: false,
       isLoading: false,
       email: '',
       carts: []
@@ -219,6 +219,3 @@ export default {
   }
 }
 </script>
-
-<!-- this.$router.resolve 可開新視窗 -->
-<!-- this.$router.push 不會開新視窗 -->
