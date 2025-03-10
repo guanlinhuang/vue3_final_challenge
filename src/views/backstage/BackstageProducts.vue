@@ -227,7 +227,6 @@
 import ProductModal from '@/components/ProductModal.vue'
 import DelModal from '@/components/DelModal.vue'
 import Pagination from '@/components/Pagination.vue'
-import { FALSE } from 'sass'
 
 export default {
   data () {
@@ -257,7 +256,7 @@ export default {
         .get(url)
         .then((response) => {
           if (!response.data.success) {
-            this.isLoading = FALSE
+            this.isLoading = false
             return
           }
           this.products = Object.values(response.data.products)
