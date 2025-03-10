@@ -223,7 +223,6 @@ export default {
   methods: {
     uploadFile () {
       const uploadedFile = this.$refs.fileInput.files[0]
-      console.dir(uploadedFile)
       const formData = new FormData()
       formData.append('file-to-upl', uploadedFile)
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`

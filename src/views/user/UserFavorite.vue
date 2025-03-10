@@ -168,7 +168,6 @@ export default {
   },
   created () {
     this.getFavoriteProduct()
-    console.log(this.favorite.length)
   }
 }
 </script>

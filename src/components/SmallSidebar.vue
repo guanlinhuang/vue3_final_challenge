@@ -90,7 +90,7 @@ export default {
       this.$http.get(url).then((response) => {
         this.carts = response.data.data.carts
       }).catch((error) => {
-        console.error('購物車加載失敗', error)
+        this.$httpMessageState(error, '連線錯誤')
       })
     },
     getFavoriteProduct () {
