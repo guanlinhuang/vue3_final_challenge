@@ -1,18 +1,18 @@
 <template>
-  <NavbarFront></NavbarFront>
+  <NavbarFront />
   <div class="HomeView">
-    <router-view></router-view>
-    <ToastMessages></ToastMessages>
-    <SmallSidebar></SmallSidebar>
+    <RouterView />
+    <ToastMessages />
+    <SmallSidebar />
   </div>
-  <FooterFront></FooterFront>
+  <FooterFront />
 </template>
 
 <script>
 import emitter from '@/methods/emitter'
 import ToastMessages from '@/components/ToastMessages.vue'
-import NavbarFront from '@/components/Navbar_front.vue'
-import FooterFront from '@/components/Footer_front.vue'
+import NavbarFront from '@/components/NavbarFront.vue'
+import FooterFront from '@/components/FooterFront.vue'
 import SmallSidebar from '@/components/SmallSidebar'
 
 export default {

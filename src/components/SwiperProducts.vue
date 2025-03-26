@@ -2,7 +2,7 @@
   <div class="bg-white">
     <div class="container py-5 SwiperProducts">
       <h3 class="py-3 text-center">熱銷商品</h3>
-      <swiper
+      <Swiper
         class="product-swiper"
         :navigation="{
           nextEl: '.swiper-button-next',
@@ -16,7 +16,7 @@
           992: { slidesPerView: 6, spaceBetween: 30 },
         }"
       >
-        <swiper-slide v-for="item in products" :key="item.id">
+        <SwiperSlide v-for="item in products" :key="item.id">
           <div class="position-relative text-center product h-100 mb-4 mb-lg-0">
             <a @click="getProductPage(item.id)">
               <div
@@ -50,10 +50,10 @@
               </div>
             </a>
           </div>
-        </swiper-slide>
+        </SwiperSlide>
         <button class="swiper-button-next btn btn-light"></button>
         <button class="swiper-button-prev btn btn-light"></button>
-      </swiper>
+      </Swiper>
       <div class="d-flex justify-content-center">
         <router-link to="/productsall" class="btnHover"
           ><div>

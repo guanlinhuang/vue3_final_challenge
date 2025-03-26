@@ -1,6 +1,6 @@
 <template>
-  <SwiperBanner></SwiperBanner>
-  <SwiperProducts></SwiperProducts>
+  <SwiperBanner />
+  <SwiperProducts />
   <div class="about homeView_about">
     <div class="container-fluid about_box position-relative">
       <div class="about_text position-absolute">

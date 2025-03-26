@@ -102,7 +102,7 @@
     </div>
     <div class="my-5">
       <h4 class="py-lg-3 fw-normal ms-3 ms-lg-0">看更多商品</h4>
-      <swiper
+      <Swiper
         class="product-swiper"
         :navigation="{
           nextEl: '.swiper-button-next',
@@ -116,7 +116,7 @@
           992: { slidesPerView: 6, spaceBetween: 30 },
         }"
       >
-        <swiper-slide v-for="item in products" :key="item.id">
+        <SwiperSlide v-for="item in products" :key="item.id">
           <div class="position-relative text-center product h-100">
             <a @click="getProductPage(item.id)">
               <div class="swiper_img">
@@ -124,10 +124,10 @@
               </div>
             </a>
           </div>
-        </swiper-slide>
+        </SwiperSlide>
         <button class="swiper-button-next btn btn-light"></button>
         <button class="swiper-button-prev btn btn-light"></button>
-      </swiper>
+      </Swiper>
     </div>
   </div>
 </template>

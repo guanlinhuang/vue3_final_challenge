@@ -54,7 +54,7 @@
         </div>
       </Form>
     </div>
-    <ToastMessages></ToastMessages>
+    <ToastMessages />
   </div>
 </template>
 

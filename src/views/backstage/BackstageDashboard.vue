@@ -1,15 +1,15 @@
 <template>
-    <NavbarBack></NavbarBack>
+  <NavbarBack />
     <div class="backstage">
-        <ToastMessages></ToastMessages>
-        <router-view></router-view>
+        <ToastMessages />
+        <RouterView />
     </div>
 </template>
 
 <script>
 import emitter from '@/methods/emitter'
 import ToastMessages from '@/components/ToastMessages.vue'
-import NavbarBack from '@/components/Navbar_back.vue'
+import NavbarBack from '@/components/NavbarBack.vue'
 
 export default {
   components: {
@@ -36,5 +36,4 @@ export default {
       })
   }
 }
-
 </script>

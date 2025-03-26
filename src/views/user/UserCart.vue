@@ -290,7 +290,7 @@
                   to="/productsall"
                   type="button"
                   class="mt-3 py-2 btnHover w-100 d-block"
-                  style="min-width: 0px;"
+                  style="min-width: 0px"
                 >
                   <div>
                     <span>繼續選購</span>
@@ -316,7 +316,10 @@
       </div>
     </div>
     <div v-else>
-      <div class="text-center my-5" style="padding-top: 150px; padding-bottom: 250px">
+      <div
+        class="text-center my-5"
+        style="padding-top: 150px; padding-bottom: 250px"
+      >
         <p class="fs-4 ls">您的購物車目前是空的唷！</p>
         <router-link
           to="/productsall"
@@ -332,6 +335,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data () {
@@ -349,11 +353,13 @@ export default {
   methods: {
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.$http.get(url).then((response) => {
-        this.cart = response.data.data
-        this.carts = response.data.data.carts
-        this.emitter.emit('update-cart', this.carts)
-      })
+      this.$http
+        .get(url)
+        .then((response) => {
+          this.cart = response.data.data
+          this.carts = response.data.data.carts
+          this.emitter.emit('update-cart', this.carts)
+        })
         .catch((error) => {
           this.$httpMessageState(error, '連線錯誤')
         })
@@ -365,9 +371,11 @@ export default {
         product_id: item.product_id,
         qty: item.qty
       }
-      this.$http.put(url, { data: cart }).then((res) => {
-        this.getCart()
-      })
+      this.$http
+        .put(url, { data: cart })
+        .then((res) => {
+          this.getCart()
+        })
         .catch((error) => {
           this.$httpMessageState(error, '連線錯誤')
         })
@@ -383,10 +391,12 @@ export default {
       const coupon = {
         code: this.coupon_code
       }
-      this.$http.post(url, { data: coupon }).then((response) => {
-        this.$httpMessageState(response, '加入優惠券')
-        this.getCart()
-      })
+      this.$http
+        .post(url, { data: coupon })
+        .then((response) => {
+          this.$httpMessageState(response, '加入優惠券')
+          this.getCart()
+        })
         .catch((error) => {
           this.$httpMessageState(error, '連線錯誤')
         })
@@ -395,11 +405,13 @@ export default {
     removeCartItem (id) {
       this.status.loadingItem = id
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`
-      this.$http.delete(url).then((response) => {
-        this.$httpMessageState(response, '移除購物車品項')
-        this.status.loadingItem = ''
-        this.getCart()
-      })
+      this.$http
+        .delete(url)
+        .then((response) => {
+          this.$httpMessageState(response, '移除購物車品項')
+          this.status.loadingItem = ''
+          this.getCart()
+        })
         .catch((error) => {
           this.$httpMessageState(error, '連線錯誤')
         })
@@ -407,10 +419,12 @@ export default {
 
     removeCartItemAll () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`
-      this.$http.delete(url).then((response) => {
-        this.$httpMessageState(response, '移除所有購物車品項')
-        this.getCart()
-      })
+      this.$http
+        .delete(url)
+        .then((response) => {
+          this.$httpMessageState(response, '移除所有購物車品項')
+          this.getCart()
+        })
         .catch((error) => {
           this.$httpMessageState(error, '連線錯誤')
         })

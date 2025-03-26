@@ -1,14 +1,14 @@
 <template>
   <div class="container-fluid">
-    <swiper :pagination="{
+    <Swiper :pagination="{
       dynamicBullets: true,
       clickable: true,
     }"
      :autoplay="{delay: 2500,disableOnInteraction: false}" :modules="modules" :loop="true" class="swiperBanner">
-      <swiper-slide class="slideBanner"></swiper-slide>
-      <swiper-slide class="slideBanner2"></swiper-slide>
-      <swiper-slide class="slideBanner3"></swiper-slide>
-    </swiper>
+      <SwiperSlide class="slideBanner"></SwiperSlide>
+      <SwiperSlide class="slideBanner2"></SwiperSlide>
+      <SwiperSlide class="slideBanner3"></SwiperSlide>
+    </Swiper>
   </div>
 </template>
 

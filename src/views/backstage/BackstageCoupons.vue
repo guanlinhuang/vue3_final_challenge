@@ -125,7 +125,7 @@
         </div>
       </div>
     </div>
-    <couponModal
+    <CouponModal
       :coupon="tempCoupon"
       ref="couponModal"
       @update-coupon="updateCoupon"
