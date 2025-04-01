@@ -45,3 +45,14 @@ $banner-height: 264px;
     white-space:nowrap;
   }
 }
+
+.btn_cart{
+  color: $cambrige_blue;
+  border: $cambrige_blue 1.5px solid
+}
+
+.btn_cart:hover {
+  color: white;
+  background-color: $viridian;
+  border-color: $viridian;
+}

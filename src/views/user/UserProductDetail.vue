@@ -76,10 +76,10 @@
             </button>
           </div>
         </div>
-        <div class="row gx-lg-0">
+        <div class="row gx-lg-0 mx-0">
           <button
             type="button"
-            class="btnHover col mx-1 mx-lg-0 me-lg-3"
+            class="btnHover col me-1 me-lg-3"
             @click="nowBuy(product.id)"
           >
             <div>
@@ -89,7 +89,7 @@
           </button>
           <button
             type="button"
-            class="btnHover btnHover5 col me-1"
+            class="btnHover btnHover5 col ms-1 ms-lg-0 me-lg-1"
             @click="addToCart(product.id)"
           >
             <div>

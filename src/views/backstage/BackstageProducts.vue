@@ -321,13 +321,17 @@ export default {
 
     updateProduct (item) {
       this.tempProduct = item
+      // 新增狀態
       let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
       let httpMethod = 'post'
+
+      // 編輯狀態
       if (!this.isNew) {
         api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${item.id}`
         httpMethod = 'put'
       }
 
+      // 依據新增或編輯狀態執行相對應的方法
       const productComponent = this.$refs.productModal
       this.$http[httpMethod](api, { data: this.tempProduct }).then(
         (response) => {
@@ -337,6 +341,7 @@ export default {
               style: 'success',
               title: '更新成功'
             })
+            console.log('hihihi', this.tempProduct)
             this.getProducts()
           } else {
             this.emitter.emit('push-message', {
@@ -354,6 +359,7 @@ export default {
       this.tempProduct = { ...item }
       const delComponent = this.$refs.delModal
       delComponent.showModal()
+      console.log(this.tempProduct)
     },
     delProduct () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`

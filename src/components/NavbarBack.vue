@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-light navbar-expand-lg fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand d-lg-none text-white mx-3" href="#">GuanTony</a>
+      <router-link class="navbar-brand d-lg-none text-white mx-3" to="/dashboard/products">GuanTony</router-link>
       <p class="fs-4 text-danger border border-danger p-1 mb-0 d-lg-none">
               管理員後台
             </p>
@@ -49,7 +49,7 @@
                 >
               </li>
               <li class="nav-item d-none d-lg-block">
-                <router-link to="/" class="nav-link text-white mx-4"
+                <router-link to="/dashboard/products" class="nav-link text-white mx-4"
                   >GuanTony</router-link
                 >
               </li>

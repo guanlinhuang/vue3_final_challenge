@@ -2,27 +2,39 @@
   <div class="container userCart mainContainer">
     <div class="pt-3" v-if="cart.total !== 0">
       <div
-        class="shopping_process d-flex justify-content-center align-items-center"
+        class="shopping_process d-flex justify-content-center align-items-center mx-4"
       >
-        <span class="text-center mx-3"
-          ><i class="bi bi-cart-check fs-3"></i>
-          <p>商品確認</p></span
-        >
-        <span class="process_gray_line"></span>
-        <span class="process_gray text-center mx-3"
-          ><i class="bi bi-pen fs-3"></i>
-          <p>資料填寫</p></span
-        >
-        <span class="process_gray_line"></span>
-        <span class="process_gray text-center mx-3"
-          ><i class="bi bi-cash-coin fs-3"></i>
-          <p>訂單確認</p></span
-        >
-        <span class="process_gray_line"></span>
-        <span class="process_gray text-center mx-3"
-          ><i class="bi bi-cart-check-fill fs-3"></i>
-          <p>訂單完成</p></span
-        >
+        <div class="text-center mx-3">
+          <i class="bi bi-cart-check fs-3"></i>
+          <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col px-0"><p class="mb-0">商品</p></div>
+            <div class="col px-0"><p class="mb-0">確認</p></div>
+          </div>
+        </div>
+        <div class="process_gray_line"></div>
+        <div class="process_gray text-center mx-3">
+          <i class="bi bi-pen fs-3"></i>
+          <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col px-0"><p class="mb-0">資料</p></div>
+            <div class="col px-0"><p class="mb-0">填寫</p></div>
+          </div>
+        </div>
+        <div class="process_gray_line"></div>
+        <div class="process_gray text-center mx-3">
+          <i class="bi bi-cash-coin fs-3"></i>
+          <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col px-0"><p class="mb-0">資料</p></div>
+            <div class="col px-0"><p class="mb-0">確認</p></div>
+          </div>
+        </div>
+        <div class="process_gray_line"></div>
+        <div class="process_gray text-center mx-3">
+          <i class="bi bi-cart-check-fill fs-3"></i>
+          <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col px-0"><p class="mb-0">訂單</p></div>
+            <div class="col px-0"><p class="mb-0">完成</p></div>
+          </div>
+        </div>
       </div>
       <div class="row justify-content-center mt-lg-5">
         <div class="col col-lg-7 me-4 d-none d-lg-block">
@@ -33,7 +45,7 @@
                   <button
                     type="button"
                     class="btn btn-outline-danger btn-sm"
-                    @click="removeCartItemAll()"
+                    @click="openDelProductModalAll()"
                   >
                     <i class="bi bi-x-lg"></i>
                   </button>
@@ -51,8 +63,7 @@
                   <button
                     type="button"
                     class="btn btn-outline-danger btn-sm"
-                    :disabled="status.loadingItem === item.id"
-                    @click="removeCartItem(item.id)"
+                    @click="openDelProductModal(item)"
                   >
                     <i class="bi bi-x-lg"></i>
                   </button>
@@ -235,8 +246,7 @@
                     <button
                       type="button"
                       class="btn btn-outline-danger btn-sm ms-auto"
-                      :disabled="status.loadingItem === item.id"
-                      @click="removeCartItem(item.id)"
+                      @click="openDelProductModal(item)"
                     >
                       <i class="bi bi-x-lg"></i>
                     </button>
@@ -333,21 +343,25 @@
         </router-link>
       </div>
     </div>
+    <DelModal :item="product" ref="delModal" @del-item="delProduct" />
   </div>
 </template>
 
 <script>
+import DelModal from '@/components/DelModal.vue'
 export default {
   data () {
     return {
       cart: {},
       carts: [],
       coupon_code: '',
-      status: {
-        loadingItem: ''
-      },
-      productsQty: ''
+      productsQty: '',
+      tempProduct: {},
+      product: {}
     }
+  },
+  components: {
+    DelModal
   },
   inject: ['emitter'],
   methods: {
@@ -402,32 +416,45 @@ export default {
         })
     },
 
-    removeCartItem (id) {
-      this.status.loadingItem = id
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`
-      this.$http
-        .delete(url)
-        .then((response) => {
-          this.$httpMessageState(response, '移除購物車品項')
-          this.status.loadingItem = ''
-          this.getCart()
-        })
-        .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
+    openDelProductModal (item) {
+      this.tempProduct = { ...item }
+      this.product = this.tempProduct.product
+      const delComponent = this.$refs.delModal
+      delComponent.showModal()
     },
-
-    removeCartItemAll () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`
-      this.$http
-        .delete(url)
-        .then((response) => {
-          this.$httpMessageState(response, '移除所有購物車品項')
-          this.getCart()
-        })
-        .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
+    openDelProductModalAll () {
+      this.product.title = '所有商品'
+      const delComponent = this.$refs.delModal
+      delComponent.showModal()
+    },
+    delProduct () {
+      if (this.product.title !== '所有商品') {
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${this.tempProduct.id}`
+        this.$http
+          .delete(url)
+          .then((response) => {
+            const delComponent = this.$refs.delModal
+            delComponent.hideModal()
+            // this.$httpMessageState(response, '移除購物車品項')
+            this.getCart()
+          })
+          .catch((error) => {
+            this.$httpMessageState(error, '連線錯誤')
+          })
+      } else {
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`
+        this.$http
+          .delete(url)
+          .then((response) => {
+            const delComponent = this.$refs.delModal
+            delComponent.hideModal()
+            // this.$httpMessageState(response, '移除所有購物車品項')
+            this.getCart()
+          })
+          .catch((error) => {
+            this.$httpMessageState(error, '連線錯誤')
+          })
+      }
     },
 
     getProductPage (id) {
@@ -437,6 +464,7 @@ export default {
 
   created () {
     this.getCart()
+    console.log(this.tempProduct)
   }
 }
 </script>

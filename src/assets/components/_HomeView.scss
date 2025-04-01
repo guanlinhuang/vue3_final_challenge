@@ -8,21 +8,18 @@
     margin-top: 86px;
 }
 
-// 子元件 SwiperProducts.vue
 .onSale {
     top: 10px;
     left: 10px;
     border-radius: 5px;
 }
 
-// background-attachment: fixed;。它在 ios 的瀏覽器會被禁用，主要是為了降低固定背景在捲動時的渲染成本
-// 解決方法：使用 position:fixed 搭配 ::before 
 .about_box {
     position: relative;
-    height: 600px;
+    height: 500px;
 
     @include media-breakpoint-up(sm) {
-        height: 500px;
+        height: 400px;
     }
 }
 
@@ -40,20 +37,20 @@
 }
 
 .about_text {
-    background-color: $eggshell;
     width: 90%;
-    padding-bottom: 20px;
-    opacity: 0.8;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 10px;
-
     @include media-breakpoint-up(lg) {
         width: 800px;
     }
 }
 
+.about_text_opacity{
+    background-color: $eggshell;
+    opacity: 0.9;
+    border-radius: 10px;
+}
 
 .line {
     width: 150px;
@@ -63,5 +60,5 @@
 }
 
 .form-control {
-    border: $cambrige_blue solid 1px;
+    border: $viridian solid 1px;
 }

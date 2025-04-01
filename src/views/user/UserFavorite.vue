@@ -7,7 +7,7 @@
     <h3 class="text-center">收藏清單</h3>
     <div class="row justify-content-center">
       <div class="col col-lg-9 mt-lg-5" style="margin-top: 45px">
-        <div class="row row-cols-2 row-cols-lg-5 gx-1 gx-lg-4 p-1 p-lg-0">
+        <div class="row row-cols-2 row-cols-lg-5 gx-2 gx-lg-4 p-1 p-lg-0">
           <div
             class="col mb-4 mb-lg-5"
             v-for="item in favoriteProduct"
@@ -48,8 +48,7 @@
               <div class="mt-auto">
                 <button
                   type="button"
-                  class="btn btn-sm px-3 me-3 fs-5"
-                  style="color: #8fc0a9; border: #8fc0a9 1px solid"
+                  class="btn btn-sm btn_cart px-3 me-3 fs-5"
                   @click="addToCart(item.id, 1)"
                 >
                   <i class="bi bi-cart-plus"></i>

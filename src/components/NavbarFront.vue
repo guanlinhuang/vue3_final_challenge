@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <a class="navbar-brand d-lg-none text-white mx-3" href="#">GuanTony</a>
         <button
-          class="navbar-toggler d-lg-none p-0 pe-2"
+          class="navbar-toggler d-lg-none p-0 pe-2 text-white"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasNavbar"
@@ -16,19 +16,19 @@
           <i class="bi bi-filter-right"></i>
         </button>
         <div
-          class="offcanvas offcanvas-end justify-content-center"
+          class="offcanvas offcanvas-end justify-content-center text-white"
           tabindex="-1"
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
         >
-          <div class="offcanvas-header">
+          <div class="offcanvas-header d-flex justify-content-end d-lg-none">
             <button
               type="button"
-              class="btn-close text-reset"
+              class="text-reset border-0 text_bg"
               data-bs-dismiss="offcanvas"
               aria-label="Close"
               id="closeOffcanvas"
-            ></button>
+            ><i class="bi bi-x-lg fs-3"></i></button>
           </div>
           <div class="offcanvas-body justify-content-center">
             <div>

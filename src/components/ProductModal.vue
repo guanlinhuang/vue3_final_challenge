@@ -9,7 +9,7 @@
   >
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content border-0">
-        <div class="modal-header bg-cambridge-blue text-white">
+        <div class="modal-header modal_bg text-white">
           <h5 class="modal-title" id="exampleModalLabel">
             <span>新增產品</span>
           </h5>
@@ -29,7 +29,7 @@
               </div>
               <div class="mb-3">
                 <label for="customFile" class="form-label"
-                  >或 上傳圖片
+                  >或 上傳主要圖片
                   <i class="fas fa-spinner fa-spin"></i>
                 </label>
                 <input
@@ -40,7 +40,30 @@
                   @change="uploadFile"
                 />
               </div>
-              <img class="img-fluid" :src="tempProduct.imageUrl" :alt="tempProduct.title" />
+              <img
+                class="img-fluid"
+                :src="tempProduct.imageUrl"
+                :alt="tempProduct.title"
+              />
+              <div class="mb-3 imgs-upload-box">
+                <label for="customFile_1" class="form-label"
+                  >上傳其他圖片<i class="fas fa-spinner fa-spin"></i
+                ></label>
+                <div class="mb-3 input-group">
+                  <input
+                    type="file"
+                    id="customFile_1"
+                    class="form-control"
+                    multiple
+                    @change="uploadFiles"
+                    ref="filesInput_1"
+                  />
+                  <button type="button" class="btn btn-outline-danger">
+                    移除
+                  </button>
+                </div>
+              </div>
+              <!-- 延伸技巧，多圖 -->
               <div class="mt-5" v-if="tempProduct.images">
                 <div
                   v-for="(image, key) in tempProduct.images"
@@ -217,7 +240,10 @@ export default {
   data () {
     return {
       modal: {},
-      tempProduct: {}
+      tempProduct: {
+        imageUrl: '',
+        imagesUrl: []
+      }
     }
   },
   methods: {
@@ -228,12 +254,99 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
       this.$http.post(url, formData).then((response) => {
         if (response.data.success) {
-          this.tempProduct.imageUrl = response.data.imageUrl
+          this.tempProduct.imageUrl = response.data.imageUrl // 儲存主要圖片imageUrl
         }
       })
+    },
+
+    // uploadFiles1 () {
+    //   const uploadedFile = this.$refs.fileInput_1.files[0]
+    //   const formData = new FormData()
+    //   formData.append('file-to-upl', uploadedFile)
+    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
+    //   this.$http.post(url, formData).then((response) => {
+    //     if (response.data.success) {
+    //       this.tempProduct.imagesUrl = response.data.imageUrl // 儲存多圖圖片imagesUrl
+    //     }
+    //   })
+    // },
+
+    // 將圖片上傳並儲存至imagesUrl(多圖用)
+    uploadPost (files) {
+      // if (!files) {
+      //   return
+      // }
+      const formData = new FormData()
+      formData.append('file-to-upload', files)
+
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
+      this.$http.post(api, formData)
+        .then((res) => {
+          if (res.data.success) {
+            if (Array.isArray(this.tempProduct.imagesUrl)) {
+              this.tempProduct.imagesUrl.push(res.data.imageUrl)
+              console.log(this.tempProduct.imagesUrl)
+              console.log(this.tempProduct.imagesUrl.length)
+              console.log('是陣列')
+            } else {
+              console.log('不是陣列')
+            }
+          } else {
+            console.log('不是陣列')
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+
+    // 等待所有圖上傳完後再回傳訊息
+    uploadFiles () {
+      const files = this.$refs.filesInput_1.files
+      Array.from(files).forEach((files) => {
+        this.uploadPost(files) // 呼叫 uploadPost 方法來處理單個文件
+      })
+      // const uploadPromises = Array.from(files).map(file => {
+      //   return this.uploadPost(file) // 呼叫 uploadPost 來處理單個檔案
+      // })
+
+      // 等待所有檔案上傳完畢
+      Promise.all(files)
+        .then(() => {
+          this.uploadInProgress = false // 上傳完成
+          console.log('所有檔案已上傳完畢')
+        })
+        .catch((error) => {
+          this.uploadInProgress = false // 上傳失敗
+          console.log('某些檔案上傳失敗:', error)
+        })
+      // if (!file1 && !file2) {
+      //   alert('請選擇檔案')
+      //   return
+      // }
+      // ↓即使其中一個內容不存在，也回報成功，使then可運行
+      // const upload1 = file1 ? this.uploadPost(file1) : Promise.resolve('not file1')
+      // const upload2 = file2 ? this.uploadPost(file2) : Promise.resolve('not file2')
+
+    //   Promise.all([
+    //     upload1,
+    //     upload2
+    //   ])
+    //     .then((res) => {
+    //       alert('上傳成功')
+    //       this.clearInput(this.$refs.filesInput1)
+    //       this.clearInput(this.$refs.filesInput2)
+    //     })
+    //     .catch((error) => {
+    //       console.log(error)
+    //     })
     }
   },
 
   mixins: [modalMixin]
 }
 </script>
+
+<!-- 根據錯誤信息 this.tempProduct.imagesUrl.push is not a function，可以推測 this.tempProduct.imagesUrl 可能沒有被初始化為一個陣列或被覆蓋為其他類型。
+
+要解決這個問題，首先確保 this.tempProduct.imagesUrl 是一個陣列，並且在使用 .push() 方法之前，它的類型確實是陣列。 -->

@@ -1,25 +1,25 @@
 <template>
   <div class="container mainContainer userOrder">
     <div class="pt-3 process d-flex justify-content-center align-items-center">
-      <span class="text-center mx-3"
-        ><i class="bi bi-cart-check fs-3"></i>
-        <p>商品確認</p></span
-      >
+      <div class="text-center mx-3"
+          ><i class="bi bi-cart-check fs-3"></i>
+          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">商品</p></div><div class="col px-0"><p class="mb-0">確認</p></div></div></div
+        >
       <span class="process_dark_line"></span>
-      <span class="process_dark text-center mx-3"
-        ><i class="bi bi-pen fs-3"></i>
-        <p>資料填寫</p></span
-      >
-      <span class="process_gray_line"></span>
-      <span class="process_gray text-center mx-3"
-        ><i class="bi bi-cash-coin fs-3"></i>
-        <p>訂單確認</p></span
-      >
-      <span class="process_gray_line"></span>
-      <span class="process_gray text-center mx-3"
-        ><i class="bi bi-cart-check-fill fs-3"></i>
-        <p>訂單完成</p></span
-      >
+      <div class="process_dark text-center mx-3"
+          ><i class="bi bi-pen fs-3"></i>
+          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">資料</p></div><div class="col px-0"><p class="mb-0">填寫</p></div></div></div
+        >
+        <div class="process_gray_line"></div>
+        <div class="process_gray text-center mx-3"
+          ><i class="bi bi-cash-coin fs-3"></i>
+          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">資料</p></div><div class="col px-0"><p class="mb-0">確認</p></div></div></div
+        >
+        <div class="process_gray_line"></div>
+        <div class="process_gray text-center mx-3"
+          ><i class="bi bi-cart-check-fill fs-3"></i>
+          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">訂單</p></div><div class="col px-0"><p class="mb-0">完成</p></div></div></div
+        >
     </div>
     <div class="my-lg-5 row justify-content-center">
       <div class="col col-lg-6 me-4 d-none d-lg-block">
@@ -74,7 +74,7 @@
               <td colspan="3">
                 <div style="padding-right: 5px">
                   <p class="mb-0 text-end">
-                    總金額
+                    總金額&emsp;
                     <span class="fs-3 text-success">
                       NT$
                       {{
@@ -116,7 +116,7 @@
         <Form class="border p-3" v-slot="{ errors }" @submit="createOrder">
           <h2 class="text-center">顧客資訊</h2>
           <div class="mb-3">
-            <label for="name" class="form-label">姓名</label>
+            <label for="name" class="form-label">姓名<span class="text-danger">*</span></label>
             <br />
             <Field
               id="name"
@@ -131,7 +131,7 @@
             <ErrorMessage name="姓名" class="invalid-feedback" />
           </div>
           <div class="mb-3">
-            <label for="tel" class="form-label">手機號碼</label>
+            <label for="tel" class="form-label">手機號碼<span class="text-danger">*</span></label>
             <Field
               id="tel"
               name="手機號碼"
@@ -148,7 +148,7 @@
             ></ErrorMessage>
           </div>
           <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
+            <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
             <Field
               id="email"
               name="email"
@@ -163,7 +163,7 @@
             <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
           </div>
           <div class="mb-3">
-            <label for="address" class="form-label">地址</label>
+            <label for="address" class="form-label">地址<span class="text-danger">*</span></label>
             <Field
               id="address"
               name="地址"
@@ -200,7 +200,7 @@
       <Form class="p-2" v-slot="{ errors }" @submit="createOrder">
         <h2 class="text-center">顧客資訊</h2>
         <div class="mb-3">
-          <label for="name" class="form-label ms-1">姓名</label>
+          <label for="name" class="form-label ms-1">姓名<span class="text-danger">*</span></label>
           <br />
           <Field
             id="name"
@@ -215,7 +215,7 @@
           <ErrorMessage name="姓名" class="invalid-feedback" />
         </div>
         <div class="mb-3">
-          <label for="tel" class="form-label ms-1">手機號碼</label>
+          <label for="tel" class="form-label ms-1">手機號碼<span class="text-danger">*</span></label>
           <Field
             id="tel"
             name="手機號碼"
@@ -229,7 +229,7 @@
           <ErrorMessage name="手機號碼" class="invalid-feedback"></ErrorMessage>
         </div>
         <div class="mb-3">
-          <label for="email" class="form-label ms-1">Email</label>
+          <label for="email" class="form-label ms-1">Email<span class="text-danger">*</span></label>
           <Field
             id="email"
             name="email"
@@ -240,11 +240,10 @@
             rules="email|required"
             v-model="form.user.email"
           ></Field>
-
           <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
         </div>
         <div class="mb-3">
-          <label for="address" class="form-label ms-1">地址</label>
+          <label for="address" class="form-label ms-1">地址<span class="text-danger">*</span></label>
           <Field
             id="address"
             name="地址"
@@ -348,7 +347,7 @@
                     <td>
                       <div class="me-2">
                         <p class="mb-0 text-end">
-                          總金額
+                          總金額&emsp;
                           <span class="fs-3 text-success">
                             NT$
                             {{
@@ -362,7 +361,7 @@
                         style="padding-right: 5px"
                       >
                         <!-- <p class="mb-0 text-end">
-                    總金額
+                    總金額&emsp;
                     <span class="fs-3 text-success">
                       NT$
                       {{

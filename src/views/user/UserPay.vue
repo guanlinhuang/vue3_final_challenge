@@ -2,52 +2,62 @@
   <div class="container mainContainer userPay">
     <div v-if="!order.is_paid" class="row justify-content-center pt-3">
       <div class="process d-flex justify-content-center align-items-center">
-        <span class="text-center mx-3"
+        <div class="text-center mx-3"
           ><i class="bi bi-cart-check fs-3"></i>
-          <p>商品確認</p></span
+          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">商品</p></div><div class="col px-0"><p class="mb-0">確認</p></div></div></div
         >
-        <span class="process_dark_line"></span>
-        <span class="process_dark text-center mx-3"
+      <span class="process_dark_line"></span>
+      <div class="process_dark text-center mx-3"
           ><i class="bi bi-pen fs-3"></i>
-          <p>資料填寫</p></span
+          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">資料</p></div><div class="col px-0"><p class="mb-0">填寫</p></div></div></div
         >
-        <span class="process_dark_line"></span>
-        <span class="process_dark text-center mx-3"
+        <div class="process_dark_line"></div>
+        <div class="process_dark text-center mx-3"
           ><i class="bi bi-cash-coin fs-3"></i>
-          <p>訂單確認</p></span
+          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">資料</p></div><div class="col px-0"><p class="mb-0">確認</p></div></div></div
         >
-        <span class="process_gray_line"></span>
-        <span class="process_gray text-center mx-3"
+        <div class="process_gray_line"></div>
+        <div class="process_gray text-center mx-3"
           ><i class="bi bi-cart-check-fill fs-3"></i>
-          <p>訂單完成</p></span
+          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">訂單</p></div><div class="col px-0"><p class="mb-0">完成</p></div></div></div
         >
       </div>
     </div>
     <div v-else class="row justify-content-center pt-3">
       <div class="process d-flex justify-content-center align-items-center">
-        <span class="text-center mx-3"
+        <div class="text-center mx-3"
           ><i class="bi bi-cart-check fs-3"></i>
-          <p>商品確認</p></span
+          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">商品</p></div><div class="col px-0"><p class="mb-0">確認</p></div></div></div
         >
-        <span class="process_dark_line"></span>
-        <span class="process_dark text-center mx-3"
+      <span class="process_dark_line"></span>
+      <div class="process_dark text-center mx-3"
           ><i class="bi bi-pen fs-3"></i>
-          <p>資料填寫</p></span
+          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">資料</p></div><div class="col px-0"><p class="mb-0">填寫</p></div></div></div
         >
-        <span class="process_dark_line"></span>
-        <span class="process_dark text-center mx-3"
+        <div class="process_dark_line"></div>
+        <div class="process_dark text-center mx-3"
           ><i class="bi bi-cash-coin fs-3"></i>
-          <p>訂單確認</p></span
+          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">資料</p></div><div class="col px-0"><p class="mb-0">確認</p></div></div></div
         >
-        <span class="process_dark_line"></span>
-        <span class="process_dark text-center mx-3"
+        <div class="process_dark_line"></div>
+        <div class="process_dark text-center mx-3"
           ><i class="bi bi-cart-check-fill fs-3"></i>
-          <p>訂單完成</p></span
+          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">訂單</p></div><div class="col px-0"><p class="mb-0">完成</p></div></div></div
         >
       </div>
-      <h5 class="text-center my-5">感謝您的訂購</h5>
+      <h5 class="text-center mt-5 text-success">付款完成，感謝您的訂購</h5>
+        <router-link
+          to="/productsall"
+          type="button"
+          class="btnHover btn-lg rounded-0 mt-2 d-block w-25 mx-auto"
+        >
+          <div>
+            <span>繼續逛逛 <i class="bi bi-arrow-right" /></span>
+            <span>繼續逛逛 <i class="bi bi-arrow-right" /></span>
+          </div>
+        </router-link>
     </div>
-    <div class="mt-3 mt-lg-5 row justify-content-center">
+    <div class="mt-4 mt-lg-5 row justify-content-center">
       <div class="col col-lg-7">
         <form class="border m-1 m-lg-0 p-2 p-lg-3" @submit.prevent="payOrder">
           <h2 class="text-center mt-3 mb-5">訂單資訊</h2>
@@ -174,7 +184,7 @@
                       <td></td>
                       <td colspan="4" class="text-end">
                         <p class="mb-0 text-end" style="padding-right: 10px">
-                          總金額
+                          總金額&emsp;
                           <span class="fs-3 text-success">
                             NT$
                             {{

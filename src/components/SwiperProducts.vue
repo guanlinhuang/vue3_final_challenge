@@ -57,8 +57,8 @@
       <div class="d-flex justify-content-center">
         <router-link to="/productsall" class="btnHover"
           ><div>
-            <span>more</span>
-            <span>more</span>
+            <span>看更多</span>
+            <span>看更多</span>
           </div></router-link
         >
       </div>

@@ -10,7 +10,7 @@
   >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header bg-cambridge-blue text-white">
+        <div class="modal-header modal_bg text-white">
           <h5 class="modal-title" id="exampleModalLabel">優惠券</h5>
         </div>
         <div class="modal-body">

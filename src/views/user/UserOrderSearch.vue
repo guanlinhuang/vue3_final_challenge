@@ -3,32 +3,34 @@
     ><section><span class="loader-18"></span></section
   ></Loading>
   <div class="order_search">
-    <div class="container mainContainer" style="padding-top: 100px; padding-bottom: 100px">
+    <div
+      class="container mainContainer"
+      style="padding-top: 100px; padding-bottom: 100px"
+    >
       <h3 class="text-center">訂單查詢</h3>
       <div class="py-4 py-lg-5">
         <Form
-          class="d-flex justify-content-center align-items-center"
           @submit="searchOrder"
         >
-          <div>
-            <Field
-              id="orderId"
-              class="form-control"
-              style="width: 250px"
-              name="search"
-              type="text"
-              placeholder="請輸入Email or 電話"
-              v-model="search"
-            ></Field>
-          </div>
-          <div style="height: 30px">
-            <button class="btnHover3 ms-3" @click="push">
-              <span class="ps-1">查詢</span>
-              <svg width="13px" height="10px" viewBox="0 0 13 10">
-                <path d="M1,5 L11,5"></path>
-                <polyline points="8 1 12 5 8 9"></polyline>
-              </svg>
-            </button>
+          <div class="row row-cols-1 justify-content-center align-items-center">
+            <div class="col-10 col-lg-3 px-0 mb-3 mb-lg-0">
+              <Field
+                id="orderId"
+                class="form-control w-100"
+                name="search"
+                type="text"
+                placeholder="請輸入Email or 電話"
+                v-model="search"
+              ></Field>
+            </div>
+            <div class="col col-lg-2 px-0 d-flex justify-content-center">
+              <button class="btnHover ms-3" @click="push">
+                <div>
+                  <span>查詢</span>
+                  <span>查詢</span>
+                </div>
+              </button>
+            </div>
           </div>
         </Form>
         <div
@@ -130,7 +132,9 @@
                     ${{ $filters.currency(Math.round(item.total)) }}
                   </p>
                 </div>
-                <div class="col-7 d-flex justify-content-end align-items-center">
+                <div
+                  class="col-7 d-flex justify-content-end align-items-center"
+                >
                   <p v-if="!item.is_paid" class="text-danger me-3 mb-0">
                     尚未付款
                   </p>
@@ -177,14 +181,17 @@ export default {
   methods: {
     getOrder (page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/orders?page=${page}`
-      this.$http.get(api).then((res) => {
-        if (res.data.success) {
-          this.OrderList = res.data.orders
-          this.pagination = res.data.pagination
-        }
-      }).catch((error) => {
-        this.$httpMessageState(error, '連線錯誤')
-      })
+      this.$http
+        .get(api)
+        .then((res) => {
+          if (res.data.success) {
+            this.OrderList = res.data.orders
+            this.pagination = res.data.pagination
+          }
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤')
+        })
     },
     searchOrder () {
       this.isLoading = true
@@ -207,11 +214,14 @@ export default {
     },
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.$http.get(url).then((response) => {
-        this.carts = response.data.data.carts
-      }).catch((error) => {
-        this.$httpMessageState(error, '連線錯誤')
-      })
+      this.$http
+        .get(url)
+        .then((response) => {
+          this.carts = response.data.data.carts
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤')
+        })
     }
   },
   created () {

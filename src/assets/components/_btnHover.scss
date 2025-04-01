@@ -3,7 +3,7 @@
 .btnHover {
     position: relative;
     background: transparent;
-    border: 2px solid $cambrige_blue;
+    border: 2px solid $viridian;
     transform: translate3d(0px, 0%, 0px);
     font-size: 1rem;
     font-weight: bold;
@@ -29,7 +29,7 @@
 }
 
 .btnHover:before {
-    background: $cambrige_blue;
+    background: $viridian;
     border-radius: 50% 50% 0 0;
     transform: translateY(100%) scaleY(0.5);
 }
@@ -66,12 +66,12 @@
 }
 
 .btnHover span:last-child {
-    color: $cambrige_blue;
+    color: $viridian;
     transform: translateY(0);
 }
 
 .btnHover:hover {
-    background: $viridian;
+    background: $cambrige_blue;
     transition: background 0.2s linear;
     transition-delay: 0.6s;
     color: #FFFFFF;
@@ -103,9 +103,9 @@
     position: relative;
     z-index: 1;
     background: #FFFFFF;
-    border: 2px solid $cambrige_blue;
+    border: 2px solid $viridian;
     border-radius: 4px;
-    color: $cambrige_blue;
+    color: $viridian;
     font-size: 1rem;
     font-weight: bold;
     text-align: center;
@@ -118,7 +118,7 @@
     position: absolute;
     width: 25%;
     height: 100%;
-    background-color: $viridian;
+    background-color: $cambrige_blue;
     transform: translateY(150%);
     border-radius: 50%;
     left: calc((var(--n) - 1) * 25%);
@@ -131,11 +131,11 @@
 .btnHover2:focus,
 .btnHover2.active {
     color: #FFFFFF;
-    background-color: $cambrige_blue;
+    background-color: $viridian;
 }
 
 .btnHover2.active {
-    border: 2px solid $cambrige_blue;
+    border: 2px solid $viridian;
 }
 
 .btnHover2:hover span {
@@ -158,79 +158,9 @@
     --n: 4;
 }
 
-// 訂單查詢
-.btnHover3 {
-    position: relative;
-    color: #111111;
-    font-size: 1rem;
-    text-transform: uppercase;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    border: 0;
-    background: transparent;
-}
-
-.btnHover3:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    border-radius: 28px;
-    background: $cambrige_blue;
-    width: 30px;
-    height: 30px;
-    transition: all 0.3s ease;
-}
-
-.btnHover3 span {
-    position: relative;
-    z-index: 1;
-    padding-top: 3px;
-    padding-bottom: 3px
-}
-
-.btnHover3 svg {
-    position: relative;
-    top: 0;
-    margin-left: 10px;
-    margin-right: 4px;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke: #111111;
-    stroke-width: 2;
-    transform: translateX(-5px);
-    transition: all 0.3s ease;
-}
-
-.btnHover3:hover:before {
-    width: 100%;
-    background: $cambrige_blue;
-}
-
-.btnHover3:hover svg {
-    transform: translateX(0);
-    stroke: #FFFFFF;
-}
-
-.btnHover3:hover {
-    color: #FFFFFF
-}
-
-.btnHover3:active {
-    transform: scale(0.96);
-}
-
 // 按鈕背景套用$cambrige_blue: #8fc0a9
 .btnHover5:after {
-    background: $cambrige_blue ;
+    background: $viridian ;
 }
 
 .btnHover5 span:last-child {

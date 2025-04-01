@@ -40,7 +40,7 @@
 
 // 分頁器顏色
 .swiper-pagination-bullet-active {
-  background: $cambrige_blue !important;
+  background: $viridian !important;
 }
 
 
@@ -91,7 +91,7 @@
   background-color: transparent;
 
   @include media-breakpoint-up(lg) {
-    background-color: $cambrige_blue;
+    background-color: $viridian;
   }
 }
 
@@ -100,8 +100,8 @@
   background-color: transparent;
   color: transparent;
   @include media-breakpoint-up(lg) {
-    background-color: $cambrige_blue;
-    color: $viridian !important;
+    background-color: $viridian;
+    color: $cambrige_blue !important;
   }
 }
 
@@ -120,7 +120,7 @@
   background-color: transparent;
 
   @include media-breakpoint-up(lg) {
-    background-color: $cambrige_blue;
+    background-color: $viridian;
   }
 }
 

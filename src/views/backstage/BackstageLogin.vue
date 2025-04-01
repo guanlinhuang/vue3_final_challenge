@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-cambridge-blue vh-100 pt-5">
-    <div class="container">
+  <div class="backstage_bg">
+    <div class="container pt-5 vh-100">
       <Form
         class="row justify-content-center"
         v-slot="{ errors }"
