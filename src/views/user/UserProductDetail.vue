@@ -20,10 +20,38 @@
           </ol>
         </nav>
         <div class="product_img mb-3 rounded-0">
-          <img :src="product.imageUrl" :alt="product.title" class="object-fit-cover" />
+          <img
+            :src="selectedImageUrl || product.imageUrl"
+            :alt="product.title"
+            class="object-fit-cover"
+          />
+        </div>
+        <div>
+          <Swiper
+            class="product-swiper mx-0 px-0"
+            :modules="modules"
+            :loop="false"
+            :spaceBetween="3"
+            :slidesPerView="3"
+            :breakpoints="{
+              992: { slidesPerView: 3, spaceBetween: 5 },
+            }"
+          >
+            <SwiperSlide v-for="(item, key) in product.imagesUrl" :key="key">
+              <a @click="changeImage(item)">
+                <div class="swiper_img rounded-0" style="height: 160px">
+                  <img
+                    :src="item"
+                    :alt="product.title"
+                    class="object-fit-cover"
+                  />
+                </div>
+              </a>
+            </SwiperSlide>
+          </Swiper>
         </div>
       </div>
-      <div class="col-lg-4 mt-lg-5 px-4 px-lg-0">
+      <div class="col-lg-4 mt-3 mt-lg-5 px-4 px-lg-0">
         <h2>{{ product.title }}</h2>
         <div class="mb-3">{{ product.description }}</div>
         <div v-if="product.origin_price !== product.price">
@@ -71,7 +99,8 @@
                 class="bi"
                 :class="
                   favorite.includes(product.id) ? 'bi-heart-fill' : 'bi-heart'
-                " style="color:#8fc0a9"
+                "
+                style="color: #8fc0a9"
               ></i>
             </button>
           </div>
@@ -118,9 +147,13 @@
       >
         <SwiperSlide v-for="item in products" :key="item.id">
           <div class="position-relative text-center product h-100">
-            <a @click="getProductPage(item.id)">
+            <a @click="getProductPage(item.id, item)">
               <div class="swiper_img">
-                <img :src="`${item.imageUrl}`" :alt="item.title" class="object-fit-cover" />
+                <img
+                  :src="`${item.imageUrl}`"
+                  :alt="item.title"
+                  class="object-fit-cover"
+                />
               </div>
             </a>
           </div>
@@ -149,7 +182,8 @@ export default {
       products: [],
       favorite: saveFavorite.getFavorite() || [],
       favoriteProduct: [],
-      modules: [Autoplay, Pagination, Navigation]
+      modules: [Autoplay, Pagination, Navigation],
+      selectedImageUrl: '' // 用來存儲被選中的大圖 URL
     }
   },
   inject: ['emitter'],
@@ -161,23 +195,30 @@ export default {
     getProduct () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`
       this.isLoading = true
-      this.$http.get(api).then((response) => {
-        this.isLoading = false
-        if (response.data.success) {
-          this.product = response.data.product
-        }
-      }).catch((error) => {
-        this.$httpMessageState(error, '連線錯誤')
-      })
+      this.$http
+        .get(api)
+        .then((response) => {
+          this.isLoading = false
+          if (response.data.success) {
+            this.product = response.data.product
+            this.product.imagesUrl.push(response.data.product.imageUrl)
+          }
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤')
+        })
     },
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.$http.get(url).then((response) => {
-        this.carts = response.data.data.carts
-        this.emitter.emit('update-cart', this.carts)
-      }).catch((error) => {
-        this.$httpMessageState(error, '連線錯誤')
-      })
+      this.$http
+        .get(url)
+        .then((response) => {
+          this.carts = response.data.data.carts
+          this.emitter.emit('update-cart', this.carts)
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤')
+        })
     },
     nowBuy (id, qty = this.productsQty) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
@@ -186,14 +227,17 @@ export default {
         qty
       }
       this.isLoading = true
-      this.$http.post(url, { data: cart }).then((response) => {
-        this.isLoading = false
-        this.$httpMessageState(response, '加入購物車')
-        this.getCart()
-        this.$router.push('/cart')
-      }).catch((error) => {
-        this.$httpMessageState(error, '連線錯誤')
-      })
+      this.$http
+        .post(url, { data: cart })
+        .then((response) => {
+          this.isLoading = false
+          this.$httpMessageState(response, '加入購物車')
+          this.getCart()
+          this.$router.push('/cart')
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤')
+        })
     },
     addToCart (id, qty = this.productsQty) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
@@ -202,11 +246,13 @@ export default {
         qty
       }
       this.isLoading = true
-      this.$http.post(url, { data: cart }).then((response) => {
-        this.isLoading = false
-        this.$httpMessageState(response, '加入購物車')
-        this.getCart()
-      })
+      this.$http
+        .post(url, { data: cart })
+        .then((response) => {
+          this.isLoading = false
+          this.$httpMessageState(response, '加入購物車')
+          this.getCart()
+        })
         .catch((error) => {
           this.$httpMessageState(error, '連線錯誤')
         })
@@ -217,16 +263,20 @@ export default {
         product_id: item.product_id,
         qty: item.qty
       }
-      this.$http.put(url, { data: cart }).then((res) => {
-        this.getCart()
-      }).catch((error) => {
-        this.$httpMessageState(error, '連線錯誤')
-      })
+      this.$http
+        .put(url, { data: cart })
+        .then((res) => {
+          this.getCart()
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤')
+        })
     },
     changeQty (number) {
       this.productsQty += number
     },
-    getProductPage (id) {
+    getProductPage (id, item) {
+      this.selectedImageUrl = item.imageUrl
       this.$router.push(`/products/${id}`)
       this.id = id
       this.getProduct()
@@ -252,9 +302,13 @@ export default {
     },
     getFavoriteProduct () {
       this.$http
-        .get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`)
+        .get(
+          `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
+        )
         .then((response) => {
-          this.favoriteProduct = response.data.products.filter((product) => this.favorite.includes(product.id))
+          this.favoriteProduct = response.data.products.filter((product) =>
+            this.favorite.includes(product.id)
+          )
           this.emitter.emit('update-favorite', this.favoriteProduct)
         })
         .catch((error) => {
@@ -285,6 +339,9 @@ export default {
       }
       saveFavorite.saveFavorite(this.favorite)
       this.getFavoriteProduct()
+    },
+    changeImage (imageUrl) {
+      this.selectedImageUrl = imageUrl
     }
   },
   created () {
@@ -295,3 +352,5 @@ export default {
   }
 }
 </script>
+
+<!-- products[0].imageUrl" 默認顯示第一個產品的圖像 -->

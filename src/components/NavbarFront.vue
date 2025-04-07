@@ -5,7 +5,7 @@
     </div>
     <nav class="navbar navbar-light navbar-expand-lg">
       <div class="container-fluid">
-        <a class="navbar-brand d-lg-none text-white mx-3" href="#">GuanTony</a>
+        <a class="navbar-brand d-lg-none mx-2 p-0" href="#"><img src="https://i.imgur.com/L5VIrdW.png" alt="logo" style="height: 40px;"></a>
         <button
           class="navbar-toggler d-lg-none p-0 pe-2 text-white"
           type="button"
@@ -50,8 +50,8 @@
                 >
               </li>
               <li class="nav-item d-none d-lg-block">
-                <router-link to="/" class="nav-link text-white mx-4"
-                  >GuanTony</router-link
+                <router-link to="/" class="nav-link mx-4 p-0"
+                  ><img src="https://i.imgur.com/L5VIrdW.png" alt="logo" style="height: 40px;"></router-link
                 >
               </li>
               <li class="nav-item my-2 my-lg-0">

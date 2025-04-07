@@ -17,6 +17,7 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-sm-6">
+              <div class="imageUrl">
               <div class="mb-3">
                 <label for="image" class="form-label">輸入圖片網址</label>
                 <input
@@ -30,7 +31,6 @@
               <div class="mb-3">
                 <label for="customFile" class="form-label"
                   >或 上傳主要圖片
-                  <i class="fas fa-spinner fa-spin"></i>
                 </label>
                 <input
                   type="file"
@@ -40,16 +40,17 @@
                   @change="uploadFile"
                 />
               </div>
+              <div class="mb-5" style="width: 100%;height: 500px;">
               <img
-                class="img-fluid"
+                class="w-100 h-100 object-fit-cover"
                 :src="tempProduct.imageUrl"
                 :alt="tempProduct.title"
-              />
-              <div class="mb-3 imgs-upload-box">
+              /></div></div>
+              <div class="imagesUrl">
+              <div class="mb-3">
                 <label for="customFile_1" class="form-label"
                   >上傳其他圖片<i class="fas fa-spinner fa-spin"></i
                 ></label>
-                <div class="mb-3 input-group">
                   <input
                     type="file"
                     id="customFile_1"
@@ -58,48 +59,20 @@
                     @change="uploadFiles"
                     ref="filesInput_1"
                   />
-                  <button type="button" class="btn btn-outline-danger">
-                    移除
-                  </button>
-                </div>
+                  </div>
+                  <div class="row my-1" v-for="(item, key) in tempProduct.imagesUrl" :key="key">
+                    <div class="col-2 d-flex align-items-center">
+                    <button
+                      type="button"
+                      class="btn btn-outline-danger"
+                      @click="tempProduct.imagesUrl.splice(key, 1)"
+                    >
+                    <i class="bi bi-x-lg"></i>
+                    </button></div><div class="col-10 ps-0">
+                    <img class="img-fluid" :src="item" :alt="item" /></div>
               </div>
-              <!-- 延伸技巧，多圖 -->
-              <div class="mt-5" v-if="tempProduct.images">
-                <div
-                  v-for="(image, key) in tempProduct.images"
-                  class="mb-3 input-group"
-                  :key="key"
-                >
-                  <input
-                    type="url"
-                    class="form-control form-control"
-                    v-model="tempProduct.images[key]"
-                    placeholder="請輸入連結"
-                  />
-                  <button
-                    type="button"
-                    class="btn btn-outline-danger"
-                    @click="tempProduct.images.splice(key, 1)"
-                  >
-                    移除
-                  </button>
-                </div>
-                <div
-                  v-if="
-                    tempProduct.images[tempProduct.images.length - 1] ||
-                    !tempProduct.images.length
-                  "
-                >
-                  <button
-                    class="btn btn-outline-primary btn-sm d-block w-100"
-                    @click="tempProduct.images.push('')"
-                  >
-                    新增圖片
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
+            </div></div>
+            <div class="col-sm-6 mt-4 mt-lg-0">
               <div class="mb-3">
                 <label for="title" class="form-label">標題</label>
                 <input
@@ -166,6 +139,7 @@
                   class="form-control"
                   id="description"
                   v-model="tempProduct.description"
+                  rows="6"
                   placeholder="請輸入產品描述"
                 ></textarea>
               </div>
@@ -176,6 +150,7 @@
                   class="form-control"
                   id="content"
                   v-model="tempProduct.content"
+                  rows="6"
                   placeholder="請輸入產品說明內容"
                 ></textarea>
               </div>
@@ -197,23 +172,25 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btnHover me-1" data-bs-dismiss="modal">
+        <div class="modal-footer row">
+          <div class="col col-lg-3 pe-0">
+          <button type="button" class="btnHover me-lg-1 w-100" data-bs-dismiss="modal">
             <div>
               <span>取消編輯</span>
               <span>取消編輯</span>
             </div>
-          </button>
+          </button></div>
+          <div class="col col-lg-3 ps-0">
           <button
             type="button"
-            class="btnHover me-1"
+            class="btnHover btnHover5 me-lg-1 w-100"
             @click="$emit('update-product', tempProduct)"
           >
             <div>
               <span>儲存</span>
               <span>儲存</span>
             </div>
-          </button>
+          </button></div>
         </div>
       </div>
     </div>
@@ -233,17 +210,17 @@ export default {
     }
   },
   watch: {
-    product () {
-      this.tempProduct = this.product
+    product (value) {
+      this.tempProduct = {
+        imagesUrl: [], // => 當 value 沒有 imagesUrl，使用  imagesUrl: []
+        ...value // 當  value 有 imagesUrl ，value 的 imagesUrl 會覆蓋掉前面的   imagesUrl: []
+      }
     }
   },
   data () {
     return {
       modal: {},
-      tempProduct: {
-        imageUrl: '',
-        imagesUrl: []
-      }
+      tempProduct: {}
     }
   },
   methods: {
@@ -259,87 +236,26 @@ export default {
       })
     },
 
-    // uploadFiles1 () {
-    //   const uploadedFile = this.$refs.fileInput_1.files[0]
-    //   const formData = new FormData()
-    //   formData.append('file-to-upl', uploadedFile)
-    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
-    //   this.$http.post(url, formData).then((response) => {
-    //     if (response.data.success) {
-    //       this.tempProduct.imagesUrl = response.data.imageUrl // 儲存多圖圖片imagesUrl
-    //     }
-    //   })
-    // },
-
-    // 將圖片上傳並儲存至imagesUrl(多圖用)
-    uploadPost (files) {
-      // if (!files) {
-      //   return
-      // }
-      const formData = new FormData()
-      formData.append('file-to-upload', files)
-
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
-      this.$http.post(api, formData)
-        .then((res) => {
-          if (res.data.success) {
-            if (Array.isArray(this.tempProduct.imagesUrl)) {
-              this.tempProduct.imagesUrl.push(res.data.imageUrl)
-              console.log(this.tempProduct.imagesUrl)
-              console.log(this.tempProduct.imagesUrl.length)
-              console.log('是陣列')
-            } else {
-              console.log('不是陣列')
-            }
-          } else {
-            console.log('不是陣列')
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    },
-
-    // 等待所有圖上傳完後再回傳訊息
+    // 將多張圖片一次上傳並儲存至imagesUrl
     uploadFiles () {
       const files = this.$refs.filesInput_1.files
       Array.from(files).forEach((files) => {
-        this.uploadPost(files) // 呼叫 uploadPost 方法來處理單個文件
+        const formData = new FormData()
+        formData.append('file-to-upload', files)
+
+        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
+        this.$http
+          .post(api, formData)
+          .then((res) => {
+            if (res.data.success) {
+              this.tempProduct.imagesUrl.push(res.data.imageUrl)
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+            alert('上傳失敗，請稍後再試')
+          })
       })
-      // const uploadPromises = Array.from(files).map(file => {
-      //   return this.uploadPost(file) // 呼叫 uploadPost 來處理單個檔案
-      // })
-
-      // 等待所有檔案上傳完畢
-      Promise.all(files)
-        .then(() => {
-          this.uploadInProgress = false // 上傳完成
-          console.log('所有檔案已上傳完畢')
-        })
-        .catch((error) => {
-          this.uploadInProgress = false // 上傳失敗
-          console.log('某些檔案上傳失敗:', error)
-        })
-      // if (!file1 && !file2) {
-      //   alert('請選擇檔案')
-      //   return
-      // }
-      // ↓即使其中一個內容不存在，也回報成功，使then可運行
-      // const upload1 = file1 ? this.uploadPost(file1) : Promise.resolve('not file1')
-      // const upload2 = file2 ? this.uploadPost(file2) : Promise.resolve('not file2')
-
-    //   Promise.all([
-    //     upload1,
-    //     upload2
-    //   ])
-    //     .then((res) => {
-    //       alert('上傳成功')
-    //       this.clearInput(this.$refs.filesInput1)
-    //       this.clearInput(this.$refs.filesInput2)
-    //     })
-    //     .catch((error) => {
-    //       console.log(error)
-    //     })
     }
   },
 

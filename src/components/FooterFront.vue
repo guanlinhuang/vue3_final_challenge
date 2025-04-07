@@ -2,11 +2,11 @@
   <footer class="footer">
     <div class="container py-4">
       <div
-        class="row d-block d-lg-flex justify-content-around ms-3 ms-lg-0 mt-lg-5"
+        class="row mt-lg-5 d-lg-flex justify-content-around"
       >
-        <div class="col-lg-4">logo</div>
-        <div class="col-lg-8 row justify-content-end pe-lg-5">
-          <div class="col-lg-6 text-end text-white mb-5 mb-lg-0">
+        <div class="col-3 col-lg-1"><img src="https://i.imgur.com/L5VIrdW.png" alt="logo" style="height: 100px;"></div>
+        <div class="col-8 col-lg-6 row justify-content-end">
+          <div class="col-lg-7 text-end text-white mb-5 mb-lg-0">
             <ul class="list-unstyled">
               <li class="py-2">
                 <a

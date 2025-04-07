@@ -192,7 +192,7 @@
                   <button
                     type="button"
                     class="btn btn-outline-danger btn-sm"
-                    @click="removeCartItemAll()"
+                    @click="openDelProductModalAll()"
                   >
                     <i class="bi bi-x-lg"></i>
                   </button>

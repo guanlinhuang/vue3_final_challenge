@@ -39,7 +39,7 @@
     <div class="addCart mb-2 me-2 position-relative rounded-circle">
       <router-link
         to="/cart"
-        class="nav-link text-white position-relative position-absolute top-50 start-50 translate-middle"
+        class="nav-link text-white position-relative position-absolute start-50 translate-middle" style="top:28px"
         ><i class="bi bi-cart3"></i
         ><span v-if="carts.length!==0"
           class="position-absolute start-100 translate-middle badge rounded-pill bg-danger"
@@ -50,10 +50,9 @@
       >
     </div>
     <div class="addFavorite mb-2 me-2 position-relative rounded-circle">
-      <router-link to="/favorite" class="nav-link text-white position-relative position-absolute top-50 start-50 translate-middle"
+      <router-link to="/favorite" class="text-white position-absolute start-50 translate-middle" style="top:28px"
         ><i class="bi bi-suit-heart-fill"></i
-          >
-        </router-link
+        ></router-link
       >
     </div>
   </div>

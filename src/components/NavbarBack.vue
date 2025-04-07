@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-light navbar-expand-lg fixed-top">
     <div class="container-fluid">
-      <router-link class="navbar-brand d-lg-none text-white mx-3" to="/dashboard/products">GuanTony</router-link>
+      <router-link class="navbar-brand d-lg-none mx-2 p-0" to="/dashboard/products"><img src="https://i.imgur.com/L5VIrdW.png" alt="logo" style="height: 40px;"></router-link>
       <p class="fs-4 text-danger border border-danger p-1 mb-0 d-lg-none">
               管理員後台
             </p>
@@ -49,8 +49,8 @@
                 >
               </li>
               <li class="nav-item d-none d-lg-block">
-                <router-link to="/dashboard/products" class="nav-link text-white mx-4"
-                  >GuanTony</router-link
+                <router-link to="/dashboard/products" class="nav-link mx-4 p-0"
+                  ><img src="https://i.imgur.com/L5VIrdW.png" alt="logo" style="height: 40px;"></router-link
                 >
               </li>
               <li class="nav-item my-2 my-lg-0">

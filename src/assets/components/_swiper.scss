@@ -17,12 +17,6 @@
 }
 
 .slideBanner {
-  background-image: url(/images/jakub-dziubak-XtUd5SiX464-unsplash.jpg);
-  background-position: center;
-  background-size: cover;
-}
-
-.slideBanner2 {
   background-image: url(/images/michal-parzuchowski-ItaV89TNkks-unsplash.jpg);
   background-position: right;
   background-size: cover;
@@ -30,6 +24,53 @@
   @include media-breakpoint-up(lg) {
     background-position: center;
   }
+}
+
+.slideBanner_text{
+  bottom: 6%;
+
+  @include media-breakpoint-up(sm) {
+    left: 7%;
+    bottom: 10%;
+}
+  
+}
+
+.slideBanner_text_link{
+  background-color: #FF5809;
+  color: #fff;
+}
+
+.slideBanner_text_link:hover{
+  background-color: #fff;
+  color:#FF5809;
+}
+
+.slideBanner_text_link2{
+  background-color: #FF5809;
+  color: #fff;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%);
+  width: 60%;
+  @include media-breakpoint-up(sm) {
+    bottom: 8%;
+    width: 33%;
+  }
+  @include media-breakpoint-up(lg) {
+  width: 20%;
+  }
+}
+
+.slideBanner_text_link2:hover{
+  background-color: #fff;
+  color:#FF5809;
+}
+
+.slideBanner2 {
+  background-image: url(/images/jakub-dziubak-XtUd5SiX464-unsplash.jpg);
+  background-position: center;
+  background-size: cover;
 }
 
 .slideBanner3 {

@@ -311,7 +311,7 @@ export default {
       if (isNew) {
         this.tempProduct = {}
       } else {
-        this.tempProduct = { ...item }
+        this.tempProduct = JSON.parse(JSON.stringify(item))
       }
       this.isNew = isNew
 
