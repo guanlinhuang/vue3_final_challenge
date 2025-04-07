@@ -5,7 +5,7 @@
         dynamicBullets: true,
         clickable: true,
       }"
-      :autoplayy="{ delay: 2500, disableOnInteraction: false }"
+      :autoplay="{ delay: 2500, disableOnInteraction: false }"
       :modules="modules"
       :loop="true"
       class="swiperBanner"
