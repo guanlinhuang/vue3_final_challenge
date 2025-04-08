@@ -1,12 +1,19 @@
 <template>
   <nav class="navbar navbar-light navbar-expand-lg fixed-top">
     <div class="container-fluid">
-      <router-link class="navbar-brand d-lg-none mx-2 p-0" to="/dashboard/products"><img src="https://i.imgur.com/L5VIrdW.png" alt="logo" style="height: 40px;"></router-link>
+      <router-link
+        class="navbar-brand d-lg-none mx-2 p-0"
+        to="/dashboard/products"
+        ><img
+          src="https://i.imgur.com/L5VIrdW.png"
+          alt="logo"
+          style="height: 40px"
+      /></router-link>
       <p class="fs-4 text-danger border border-danger p-1 mb-0 d-lg-none">
-              管理員後台
-            </p>
+        管理員後台
+      </p>
       <button
-        class="navbar-toggler d-lg-none p-0 pe-2"
+        class="navbar-toggler d-lg-none p-0 pe-2 text-white"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasNavbar"
@@ -15,19 +22,21 @@
         <i class="bi bi-filter-right"></i>
       </button>
       <div
-        class="offcanvas offcanvas-end justify-content-center"
-        tabindex="-1"
-        id="offcanvasNavbar"
-        aria-labelledby="offcanvasNavbarLabel"
-      >
-        <div class="offcanvas-header">
+          class="offcanvas offcanvas-end justify-content-center text-white"
+          tabindex="-1"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+        >
+        <div class="offcanvas-header d-flex justify-content-end d-lg-none">
           <button
             type="button"
-            class="btn-close text-reset"
+            class="text-reset border-0 text_bg"
             data-bs-dismiss="offcanvas"
             aria-label="Close"
             id="closeOffcanvas"
-          ></button>
+          >
+            <i class="bi bi-x-lg fs-3"></i>
+          </button>
         </div>
         <div class="offcanvas-body justify-content-center">
           <div>
@@ -50,8 +59,11 @@
               </li>
               <li class="nav-item d-none d-lg-block">
                 <router-link to="/dashboard/products" class="nav-link mx-4 p-0"
-                  ><img src="https://i.imgur.com/L5VIrdW.png" alt="logo" style="height: 40px;"></router-link
-                >
+                  ><img
+                    src="https://i.imgur.com/L5VIrdW.png"
+                    alt="logo"
+                    style="height: 40px"
+                /></router-link>
               </li>
               <li class="nav-item my-2 my-lg-0">
                 <router-link
