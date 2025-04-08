@@ -28,8 +28,8 @@
         </div></SwiperSlide
       >
       <SwiperSlide class="slideBanner2"
-        ><div class="mt-5">
-          <p class="fw-bold fs-4 text-center">不只是飲品，是生活的儀式感。</p>
+        ><div class="mt-5 mt-xxl-2">
+          <p class="fw-bold fs-4 mb-xxl-0">不只是飲品，是生活的儀式感。</p>
           <p class="fw-bold fs-4">讓平凡日常，多一點甜的驚喜。</p>
         </div>
         <router-link

@@ -4,7 +4,9 @@
       <div
         class="row mt-lg-5 d-lg-flex justify-content-around"
       >
-        <div class="col-3 col-lg-1"><img src="https://i.imgur.com/L5VIrdW.png" alt="logo" style="height: 100px;"></div>
+        <div class="col-3 col-lg-1"><router-link to="/"
+          ><img src="https://i.imgur.com/L5VIrdW.png" alt="logo" style="height: 100px;"></router-link
+          ></div>
         <div class="col-8 col-lg-6 row justify-content-end">
           <div class="col-lg-7 text-end text-white mb-5 mb-lg-0">
             <ul class="list-unstyled">
@@ -30,7 +32,7 @@
                 >
               </li>
             </ul>
-            <router-link
+            <router-link target="_blank"
               to="/dashboard/products"
               class="text-white text-decoration-none"
               >管理員後台</router-link

@@ -58,8 +58,11 @@
     width: 33%;
   }
   @include media-breakpoint-up(lg) {
-  width: 20%;
+  width: 22%;
   }
+  @include media-breakpoint-up(xxl) {
+    width: 16%;
+    }
 }
 
 .slideBanner_text_link2:hover{
