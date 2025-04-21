@@ -62,7 +62,7 @@
                   <button
                     type="button"
                     class="btnHover btnHover5 col ms-1 ms-lg-0 me-lg-1"
-                    @click="addToCart(product.id)"
+                    @click="addToCart(item.id)"
                   >
                     <div>
                       <span>加到購物車</span>
@@ -103,7 +103,9 @@ export default {
       favorite: saveFavorite.getFavorite() || [],
       favoriteProduct: [],
       isLoading: false,
-      carts: []
+      carts: [],
+      product: {},
+      productsQty: 1
     }
   },
   inject: ['emitter'],
@@ -164,10 +166,7 @@ export default {
         .post(url, { data: cart })
         .then((response) => {
           this.isLoading = false
-          this.$httpMessageState(
-            response,
-            ` ${response.data.data.product.title} 加入購物車 `
-          )
+          this.$httpMessageState(response, '加入購物車')
           this.getCart()
         })
         .catch((error) => {
