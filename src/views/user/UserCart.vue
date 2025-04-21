@@ -464,7 +464,6 @@ export default {
 
   created () {
     this.getCart()
-    console.log(this.tempProduct)
   }
 }
 </script>

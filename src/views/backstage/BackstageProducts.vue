@@ -226,7 +226,7 @@
 <script>
 import ProductModal from '@/components/ProductModal.vue'
 import DelModal from '@/components/DelModal.vue'
-import Pagination from '@/components/Pagination.vue'
+import Pagination from '@/components/PagePagination.vue'
 
 export default {
   data () {
@@ -341,7 +341,6 @@ export default {
               style: 'success',
               title: '更新成功'
             })
-            console.log('hihihi', this.tempProduct)
             this.getProducts()
           } else {
             this.emitter.emit('push-message', {
@@ -359,7 +358,6 @@ export default {
       this.tempProduct = { ...item }
       const delComponent = this.$refs.delModal
       delComponent.showModal()
-      console.log(this.tempProduct)
     },
     delProduct () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`

@@ -251,8 +251,7 @@ export default {
               this.tempProduct.imagesUrl.push(res.data.imageUrl)
             }
           })
-          .catch((error) => {
-            console.log(error)
+          .catch(() => {
             alert('上傳失敗，請稍後再試')
           })
       })

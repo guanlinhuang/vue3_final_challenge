@@ -13,7 +13,8 @@
         :spaceBetween="3"
         :slidesPerView="2"
         :breakpoints="{
-          992: { slidesPerView: 6, spaceBetween: 30 },
+          992: { slidesPerView: 5, spaceBetween: 30 },
+          1400: { slidesPerView: 6, spaceBetween: 30 },
         }"
       >
         <SwiperSlide v-for="item in products" :key="item.id">

@@ -4,68 +4,78 @@
   ></Loading>
   <div class="container products_all mainContainer">
     <div v-if="favorite.length !== 0" class="py-5">
-    <h3 class="text-center">收藏清單</h3>
-    <div class="row justify-content-center">
-      <div class="col col-lg-9 mt-lg-5" style="margin-top: 45px">
-        <div class="row row-cols-2 row-cols-lg-5 gx-2 gx-lg-4 p-1 p-lg-0">
-          <div
-            class="col mb-4 mb-lg-5"
-            v-for="item in favoriteProduct"
-            :key="item.id"
-          >
+      <h3 class="text-center">收藏清單</h3>
+      <div class="row justify-content-center">
+        <div class="col col-lg-9 mt-lg-5" style="margin-top: 45px">
+          <div class="row row-cols-2 row-cols-lg-4 row-cols-xxl-5 gx-2 gx-lg-4 p-1 p-lg-0">
             <div
-              class="position-relative text-center product d-flex flex-column h-100"
+              class="col mb-4 mb-lg-5"
+              v-for="item in favoriteProduct"
+              :key="item.id"
             >
-              <a @click="getProductPage(item.id)">
-                <div
-                  v-if="item.origin_price !== item.price"
-                  class="onSale position-absolute text-white bg-danger py-1 px-3"
-                  style="z-index: 5"
-                >
-                  特 價
+              <div
+                class="position-relative text-center product d-flex flex-column h-100"
+              >
+                <div class="mb-2">
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger btn-sm"
+                    @click="removeFavorite(item)"
+                  >
+                    <i class="bi bi-x-lg"></i>
+                  </button>
                 </div>
-                <div class="product_img">
-                  <img :src="`${item.imageUrl}`" :alt="item.title" class="object-fit-cover" />
+                <a @click="getProductPage(item.id)">
+                  <div
+                    v-if="item.origin_price !== item.price"
+                    class="onSale_favorite position-absolute text-white bg-danger py-1 px-3"
+                    style="z-index: 5"
+                  >
+                    特 價
+                  </div>
+                  <div class="product_img">
+                    <img
+                      :src="`${item.imageUrl}`"
+                      :alt="item.title"
+                      class="object-fit-cover"
+                    />
+                  </div>
+                  <p class="my-1 fw-normal">{{ item.title }}</p>
+                  <div class="price text-center">
+                    <div v-if="item.origin_price !== item.price">
+                      <p class="mb-1 text-danger">NT$ {{ item.price }}</p>
+                    </div>
+                    <div v-if="item.origin_price === item.price">
+                      <p class="mb-1">NT$ {{ item.price }}</p>
+                    </div>
+                    <div v-if="item.origin_price !== item.price">
+                      <p
+                        class="product_origin_price mb-1 text-decoration-line-through"
+                        style="font-size: 13px"
+                      >
+                        NT$ {{ item.origin_price }}
+                      </p>
+                    </div>
+                  </div>
+                </a>
+                <div class="mt-auto">
+                  <button
+                    type="button"
+                    class="btnHover btnHover5 col ms-1 ms-lg-0 me-lg-1"
+                    @click="addToCart(product.id)"
+                  >
+                    <div>
+                      <span>加到購物車</span>
+                      <span>加到購物車</span>
+                    </div>
+                  </button>
                 </div>
-                <p class="my-1 fw-normal">{{ item.title }}</p>
-                <div class="price text-center">
-                  <div v-if="item.origin_price !== item.price">
-                    <p class="mb-1 text-danger">NT$ {{ item.price }}</p>
-                  </div>
-                  <div v-if="item.origin_price === item.price">
-                    <p class="mb-1">NT$ {{ item.price }}</p>
-                  </div>
-                  <div v-if="item.origin_price !== item.price">
-                    <p
-                      class="product_origin_price mb-1 text-decoration-line-through"
-                      style="font-size: 13px"
-                    >
-                      NT$ {{ item.origin_price }}
-                    </p>
-                  </div>
-                </div>
-              </a>
-              <div class="mt-auto">
-                <button
-                  type="button"
-                  class="btn btn-sm btn_cart px-3 me-3 fs-5"
-                  @click="addToCart(item.id, 1)"
-                >
-                  <i class="bi bi-cart-plus"></i>
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-outline-danger btn-sm"
-                  @click="removeFavorite(item)"
-                >
-                  <i class="bi bi-x-lg"></i>
-                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div></div>
+    </div>
     <div v-else style="padding-top: 180px; padding-bottom: 250px">
       <div class="text-center my-5">
         <p class="fs-4 ls">您的收藏清單目前是空的唷！</p>
@@ -118,12 +128,15 @@ export default {
     },
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.$http.get(url).then((response) => {
-        this.carts = response.data.data.carts
-        this.emitter.emit('update-cart', this.carts)
-      }).catch((error) => {
-        this.$httpMessageState(error, '連線錯誤')
-      })
+      this.$http
+        .get(url)
+        .then((response) => {
+          this.carts = response.data.data.carts
+          this.emitter.emit('update-cart', this.carts)
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤')
+        })
     },
     removeFavorite (item) {
       this.isLoading = true

@@ -22,11 +22,11 @@
         <i class="bi bi-filter-right"></i>
       </button>
       <div
-          class="offcanvas offcanvas-end justify-content-center text-white"
-          tabindex="-1"
-          id="offcanvasNavbar"
-          aria-labelledby="offcanvasNavbarLabel"
-        >
+        class="offcanvas offcanvas-end justify-content-center text-white"
+        tabindex="-1"
+        id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel"
+      >
         <div class="offcanvas-header d-flex justify-content-end d-lg-none">
           <button
             type="button"

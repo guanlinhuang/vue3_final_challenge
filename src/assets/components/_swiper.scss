@@ -37,17 +37,17 @@
 }
 
 .slideBanner_text_link{
-  background-color: #FF5809;
+  background-color: $viridian;
   color: #fff;
 }
 
 .slideBanner_text_link:hover{
   background-color: #fff;
-  color:#FF5809;
+  color:$viridian;
 }
 
 .slideBanner_text_link2{
-  background-color: #FF5809;
+  background-color: $viridian;
   color: #fff;
   bottom: 5%;
   left: 50%;
@@ -67,7 +67,7 @@
 
 .slideBanner_text_link2:hover{
   background-color: #fff;
-  color:#FF5809;
+  color:$viridian;
 }
 
 .slideBanner2 {
