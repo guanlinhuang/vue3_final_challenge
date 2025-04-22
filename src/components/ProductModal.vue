@@ -18,39 +18,41 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="imageUrl">
-              <div class="mb-3">
-                <label for="image" class="form-label">輸入圖片網址</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="image"
-                  v-model="tempProduct.imageUrl"
-                  placeholder="請輸入圖片連結"
-                />
+                <div class="mb-3">
+                  <label for="image" class="form-label">輸入圖片網址</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="image"
+                    v-model="tempProduct.imageUrl"
+                    placeholder="請輸入圖片連結"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="customFile" class="form-label"
+                    >或 上傳主要圖片
+                  </label>
+                  <input
+                    type="file"
+                    id="customFile"
+                    class="form-control"
+                    ref="fileInput"
+                    @change="uploadFile"
+                  />
+                </div>
+                <div class="mb-5" style="width: 100%; height: 500px">
+                  <img
+                    class="w-100 h-100 object-fit-cover"
+                    :src="tempProduct.imageUrl"
+                    :alt="tempProduct.title"
+                  />
+                </div>
               </div>
-              <div class="mb-3">
-                <label for="customFile" class="form-label"
-                  >或 上傳主要圖片
-                </label>
-                <input
-                  type="file"
-                  id="customFile"
-                  class="form-control"
-                  ref="fileInput"
-                  @change="uploadFile"
-                />
-              </div>
-              <div class="mb-5" style="width: 100%;height: 500px;">
-              <img
-                class="w-100 h-100 object-fit-cover"
-                :src="tempProduct.imageUrl"
-                :alt="tempProduct.title"
-              /></div></div>
               <div class="imagesUrl">
-              <div class="mb-3">
-                <label for="customFile_1" class="form-label"
-                  >上傳其他圖片<i class="fas fa-spinner fa-spin"></i
-                ></label>
+                <div class="mb-3">
+                  <label for="customFile_1" class="form-label"
+                    >上傳其他圖片<i class="fas fa-spinner fa-spin"></i
+                  ></label>
                   <input
                     type="file"
                     id="customFile_1"
@@ -59,19 +61,27 @@
                     @change="uploadFiles"
                     ref="filesInput_1"
                   />
-                  </div>
-                  <div class="row my-1" v-for="(item, key) in tempProduct.imagesUrl" :key="key">
-                    <div class="col-2 d-flex align-items-center">
+                </div>
+                <div
+                  class="row my-1"
+                  v-for="(item, key) in tempProduct.imagesUrl"
+                  :key="key"
+                >
+                  <div class="col-2 d-flex align-items-center">
                     <button
                       type="button"
                       class="btn btn-outline-danger"
                       @click="tempProduct.imagesUrl.splice(key, 1)"
                     >
-                    <i class="bi bi-x-lg"></i>
-                    </button></div><div class="col-10 ps-0">
-                    <img class="img-fluid" :src="item" :alt="item" /></div>
+                      <i class="bi bi-x-lg"></i>
+                    </button>
+                  </div>
+                  <div class="col-10 ps-0">
+                    <img class="img-fluid" :src="item" :alt="item" />
+                  </div>
+                </div>
               </div>
-            </div></div>
+            </div>
             <div class="col-sm-6 mt-4 mt-lg-0">
               <div class="mb-3">
                 <label for="title" class="form-label">標題</label>
@@ -174,23 +184,29 @@
         </div>
         <div class="modal-footer row">
           <div class="col col-lg-3 pe-0">
-          <button type="button" class="btnHover me-lg-1 w-100" data-bs-dismiss="modal">
-            <div>
-              <span>取消編輯</span>
-              <span>取消編輯</span>
-            </div>
-          </button></div>
+            <button
+              type="button"
+              class="btnHover me-lg-1 w-100"
+              data-bs-dismiss="modal"
+            >
+              <div>
+                <span>取消編輯</span>
+                <span>取消編輯</span>
+              </div>
+            </button>
+          </div>
           <div class="col col-lg-3 ps-0">
-          <button
-            type="button"
-            class="btnHover btnHover5 me-lg-1 w-100"
-            @click="$emit('update-product', tempProduct)"
-          >
-            <div>
-              <span>儲存</span>
-              <span>儲存</span>
-            </div>
-          </button></div>
+            <button
+              type="button"
+              class="btnHover btnHover5 me-lg-1 w-100"
+              @click="$emit('update-product', tempProduct)"
+            >
+              <div>
+                <span>儲存</span>
+                <span>儲存</span>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -198,68 +214,68 @@
 </template>
 
 <script>
-import modalMixin from '@/mixins/modalMixin'
+import modalMixin from "@/mixins/modalMixin";
 
 export default {
   props: {
     product: {
       type: Object,
-      default () {
-        return {}
-      }
-    }
+      default() {
+        return {};
+      },
+    },
   },
   watch: {
-    product (value) {
+    product(value) {
       this.tempProduct = {
         imagesUrl: [], // => 當 value 沒有 imagesUrl，使用  imagesUrl: []
-        ...value // 當  value 有 imagesUrl ，value 的 imagesUrl 會覆蓋掉前面的   imagesUrl: []
-      }
-    }
+        ...value, // 當  value 有 imagesUrl ，value 的 imagesUrl 會覆蓋掉前面的   imagesUrl: []
+      };
+    },
   },
-  data () {
+  data() {
     return {
       modal: {},
-      tempProduct: {}
-    }
+      tempProduct: {},
+    };
   },
   methods: {
-    uploadFile () {
-      const uploadedFile = this.$refs.fileInput.files[0]
-      const formData = new FormData()
-      formData.append('file-to-upl', uploadedFile)
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
+    uploadFile() {
+      const uploadedFile = this.$refs.fileInput.files[0];
+      const formData = new FormData();
+      formData.append("file-to-upl", uploadedFile);
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`;
       this.$http.post(url, formData).then((response) => {
         if (response.data.success) {
-          this.tempProduct.imageUrl = response.data.imageUrl // 儲存主要圖片imageUrl
+          this.tempProduct.imageUrl = response.data.imageUrl; // 儲存主要圖片imageUrl
         }
-      })
+      });
     },
 
     // 將多張圖片一次上傳並儲存至imagesUrl
-    uploadFiles () {
-      const files = this.$refs.filesInput_1.files
+    uploadFiles() {
+      const files = this.$refs.filesInput_1.files;
       Array.from(files).forEach((files) => {
-        const formData = new FormData()
-        formData.append('file-to-upload', files)
+        const formData = new FormData();
+        formData.append("file-to-upload", files);
 
-        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
+        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`;
         this.$http
           .post(api, formData)
           .then((res) => {
             if (res.data.success) {
-              this.tempProduct.imagesUrl.push(res.data.imageUrl)
+              this.tempProduct.imagesUrl.push(res.data.imageUrl);
             }
           })
           .catch(() => {
-            alert('上傳失敗，請稍後再試')
-          })
-      })
-    }
+            alert("上傳失敗，請稍後再試");
+          });
+      });
+    },
   },
 
-  mixins: [modalMixin]
-}
+  mixins: [modalMixin],
+};
 </script>
 
 <!-- 根據錯誤信息 this.tempProduct.imagesUrl.push is not a function，可以推測 this.tempProduct.imagesUrl 可能沒有被初始化為一個陣列或被覆蓋為其他類型。

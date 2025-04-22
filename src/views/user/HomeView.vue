@@ -75,39 +75,39 @@
 </template>
 
 <script>
-import SwiperBanner from '@/components/SwiperBanner.vue'
-import SwiperProducts from '@/components/SwiperProducts.vue'
+import SwiperBanner from "@/components/SwiperBanner.vue";
+import SwiperProducts from "@/components/SwiperProducts.vue";
 
 export default {
   components: {
     SwiperBanner,
-    SwiperProducts
+    SwiperProducts,
   },
-  data () {
+  data() {
     return {
       carts: [],
       formSuccess: false,
-      search: ''
-    }
+      search: "",
+    };
   },
   methods: {
-    getCart () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+    getCart() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       this.$http
         .get(url)
         .then((response) => {
-          this.carts = response.data.data.carts
+          this.carts = response.data.data.carts;
         })
         .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    sendEmail () {
-      this.formSuccess = true
-    }
+    sendEmail() {
+      this.formSuccess = true;
+    },
   },
-  created () {
-    this.getCart()
-  }
-}
+  created() {
+    this.getCart();
+  },
+};
 </script>

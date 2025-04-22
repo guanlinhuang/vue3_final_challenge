@@ -26,7 +26,9 @@
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
         >
-          <div class="offcanvas-header offcanvas-header_fornt d-flex justify-content-end d-lg-none">
+          <div
+            class="offcanvas-header offcanvas-header_fornt d-flex justify-content-end d-lg-none"
+          >
             <button
               type="button"
               class="text-reset border-0 text_bg"
@@ -92,9 +94,9 @@
 <script>
 export default {
   methods: {
-    closeOffcanvas () {
-      document.getElementById('closeOffcanvas').click()
-    }
-  }
-}
+    closeOffcanvas() {
+      document.getElementById("closeOffcanvas").click();
+    },
+  },
+};
 </script>

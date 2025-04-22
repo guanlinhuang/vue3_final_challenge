@@ -55,7 +55,9 @@
                   </tr>
                   <tr>
                     <th>下單時間</th>
-                    <td>{{ new Date(order.create_at * 1000).toLocaleString() }}</td>
+                    <td>
+                      {{ new Date(order.create_at * 1000).toLocaleString() }}
+                    </td>
                   </tr>
                   <tr>
                     <th>付款時間</th>
@@ -104,11 +106,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btnHover"
-            data-bs-dismiss="modal"
-          >
+          <button type="button" class="btnHover" data-bs-dismiss="modal">
             <div>
               <span>關閉視窗</span>
               <span>關閉視窗</span>
@@ -121,33 +119,33 @@
 </template>
 
 <script>
-import modalMixin from '@/mixins/modalMixin'
+import modalMixin from "@/mixins/modalMixin";
 export default {
-  name: 'orderModal',
+  name: "orderModal",
   props: {
     order: {
       type: Object,
-      default () {
-        return {}
-      }
-    }
+      default() {
+        return {};
+      },
+    },
   },
-  data () {
+  data() {
     return {
       status: {},
-      modal: '',
+      modal: "",
       tempOrder: {},
-      isPaid: false
-    }
+      isPaid: false,
+    };
   },
-  emits: ['update-paid'],
+  emits: ["update-paid"],
   mixins: [modalMixin],
-  inject: ['emitter'],
+  inject: ["emitter"],
   watch: {
-    order () {
-      this.tempOrder = this.order
-      this.isPaid = this.tempOrder.is_paid
-    }
-  }
-}
+    order() {
+      this.tempOrder = this.order;
+      this.isPaid = this.tempOrder.is_paid;
+    },
+  },
+};
 </script>

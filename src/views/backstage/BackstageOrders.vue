@@ -74,7 +74,8 @@
     <div class="d-lg-none">
       <div
         class="mx-2 my-3 px-2 border rounded-3"
-        v-for="(item, key) in orders" :key="key"
+        v-for="(item, key) in orders"
+        :key="key"
       >
         <div class="row mt-3">
           <div class="col-3">
@@ -86,13 +87,14 @@
             <p class="mb-0">{{ item.id }}</p>
           </div>
           <div class="col-2 d-flex justify-content-end align-items-start">
-          <button
-                type="button"
-                class="btn btn-outline-danger btn-sm"
-                @click="openDelOrderModal(item)"
-              >
-                <i class="bi bi-x-lg"></i>
-              </button></div>
+            <button
+              type="button"
+              class="btn btn-outline-danger btn-sm"
+              @click="openDelOrderModal(item)"
+            >
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
         </div>
         <div class="py-3 border-top border-bottom mt-3">
           <h6 class="mb-0">商品明細</h6>
@@ -119,19 +121,19 @@
               檢視
             </button>
             <div class="form-check form-switch ps-0">
-                <label class="form-check-label" :for="`paidSwitch${item.id}`">
-                  <span v-if="item.is_paid" class="text-success">付款完成</span>
-                  <span v-else class="text-danger">尚未付款</span>
-                </label>
-                <br />
-                <input
-                  class="form-check-input mx-auto"
-                  type="checkbox"
-                  :id="`paidSwitch${item.id}`"
-                  v-model="item.is_paid"
-                  @change="updatePaid(item)"
-                />
-              </div>
+              <label class="form-check-label" :for="`paidSwitch${item.id}`">
+                <span v-if="item.is_paid" class="text-success">付款完成</span>
+                <span v-else class="text-danger">尚未付款</span>
+              </label>
+              <br />
+              <input
+                class="form-check-input mx-auto"
+                type="checkbox"
+                :id="`paidSwitch${item.id}`"
+                v-model="item.is_paid"
+                @change="updatePaid(item)"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -147,85 +149,94 @@
 </template>
 
 <script>
-import DelModal from '@/components/DelModal.vue'
-import OrderModal from '@/components/OrderModal.vue'
-import Pagination from '@/components/PagePagination.vue'
+import DelModal from "@/components/DelModal.vue";
+import OrderModal from "@/components/OrderModal.vue";
+import Pagination from "@/components/PagePagination.vue";
 export default {
-  data () {
+  data() {
     return {
       orders: [],
       isNew: false,
       pagination: {},
       isLoading: false,
       tempOrder: {},
-      currentPage: 1
-    }
+      currentPage: 1,
+    };
   },
   components: {
     Pagination,
     DelModal,
-    OrderModal
+    OrderModal,
   },
   methods: {
-    getOrders (currentPage = 1) {
-      this.currentPage = currentPage
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders?page=${currentPage}`
-      this.isLoading = true
-      this.$http.get(url, this.tempProduct).then((response) => {
-        this.orders = response.data.orders
-        this.pagination = response.data.pagination
-        this.isLoading = false
-        this.scrollTop()
-      }).catch((error) => {
-        this.$httpMessageState(error, '連線錯誤')
-      })
+    getOrders(currentPage = 1) {
+      this.currentPage = currentPage;
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders?page=${currentPage}`;
+      this.isLoading = true;
+      this.$http
+        .get(url, this.tempProduct)
+        .then((response) => {
+          this.orders = response.data.orders;
+          this.pagination = response.data.pagination;
+          this.isLoading = false;
+          this.scrollTop();
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    openModal (isNew, item) {
-      this.tempOrder = { ...item }
-      this.isNew = false
-      const orderComponent = this.$refs.orderModal
-      orderComponent.showModal()
+    openModal(isNew, item) {
+      this.tempOrder = { ...item };
+      this.isNew = false;
+      const orderComponent = this.$refs.orderModal;
+      orderComponent.showModal();
     },
-    openDelOrderModal (item) {
-      this.tempOrder = { ...item }
-      const delComponent = this.$refs.delModal
-      delComponent.showModal()
+    openDelOrderModal(item) {
+      this.tempOrder = { ...item };
+      const delComponent = this.$refs.delModal;
+      delComponent.showModal();
     },
-    updatePaid (item) {
-      this.isLoading = true
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${item.id}`
+    updatePaid(item) {
+      this.isLoading = true;
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${item.id}`;
       const paid = {
-        is_paid: item.is_paid
-      }
-      this.$http.put(api, { data: paid }).then((response) => {
-        this.isLoading = false
-        this.$httpMessageState(response, '更新付款狀態')
-        this.getOrders(this.currentPage)
-        this.$refs.orderModal.hideModal()
-      }).catch((error) => {
-        this.$httpMessageState(error, '連線錯誤')
-      })
+        is_paid: item.is_paid,
+      };
+      this.$http
+        .put(api, { data: paid })
+        .then((response) => {
+          this.isLoading = false;
+          this.$httpMessageState(response, "更新付款狀態");
+          this.getOrders(this.currentPage);
+          this.$refs.orderModal.hideModal();
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    delOrder () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
-      this.isLoading = true
-      this.$http.delete(url).then((response) => {
-        const delComponent = this.$refs.delModal
-        delComponent.hideModal()
-        this.getOrders(this.currentPage)
-      }).catch((error) => {
-        this.$httpMessageState(error, '連線錯誤')
-      })
+    delOrder() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`;
+      this.isLoading = true;
+      this.$http
+        .delete(url)
+        .then((response) => {
+          const delComponent = this.$refs.delModal;
+          delComponent.hideModal();
+          this.getOrders(this.currentPage);
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    scrollTop () {
+    scrollTop() {
       window.scrollTo({
         top: 0,
-        behavior: 'smooth'
-      })
-    }
+        behavior: "smooth",
+      });
+    },
   },
-  created () {
-    this.getOrders()
-  }
-}
+  created() {
+    this.getOrders();
+  },
+};
 </script>

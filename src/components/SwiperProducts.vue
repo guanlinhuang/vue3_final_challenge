@@ -28,7 +28,11 @@
                 特 價
               </div>
               <div class="swiper_img">
-                <img :src="`${item.imageUrl}`" :alt="item.title" class="object-fit-cover" />
+                <img
+                  :src="`${item.imageUrl}`"
+                  :alt="item.title"
+                  class="object-fit-cover"
+                />
               </div>
               <div>
                 <p class="my-1 fw-normal mx-2">{{ item.title }}</p>
@@ -68,52 +72,52 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Swiper, SwiperSlide } from "swiper/vue";
 
-import { Navigation, Pagination, Autoplay } from 'swiper/modules'
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 export default {
-  data () {
+  data() {
     return {
       modules: [Autoplay, Pagination, Navigation],
-      products: []
-    }
+      products: [],
+    };
   },
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
   },
   methods: {
-    getProducts () {
-      this.isLoading = true
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
+    getProducts() {
+      this.isLoading = true;
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
       this.$http
         .get(api)
         .then((res) => {
           if (res.data.success) {
             this.products = res.data.products
               .filter((e) => e.id !== this.id)
-              .sort(() => Math.random() - 0.5)
-            this.isLoading = false
+              .sort(() => Math.random() - 0.5);
+            this.isLoading = false;
           }
         })
         .catch((err) => {
-          this.$httpMessageState(err, '連線錯誤，請再試一次')
-          this.isLoading = false
-        })
+          this.$httpMessageState(err, "連線錯誤，請再試一次");
+          this.isLoading = false;
+        });
     },
-    getProductPage (id) {
-      this.$router.push(`/products/${id}`)
-      this.id = id
-      this.getProducts()
-    }
+    getProductPage(id) {
+      this.$router.push(`/products/${id}`);
+      this.id = id;
+      this.getProducts();
+    },
   },
-  created () {
-    this.getProducts()
-  }
-}
+  created() {
+    this.getProducts();
+  },
+};
 </script>

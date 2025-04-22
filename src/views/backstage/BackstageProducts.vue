@@ -173,41 +173,51 @@
           v-for="item in productsFilter"
           :key="item.id"
         >
-        <div class="col-3 p-0 pe-1">
-          <div style="width: 100%;height: 140px">
-            <img
-              :src="item.imageUrl"
-              :alt="item.title"
-              class="w-100 h-100 object-fit-cover rounded-start"
-            />
-          </div></div>
+          <div class="col-3 p-0 pe-1">
+            <div style="width: 100%; height: 140px">
+              <img
+                :src="item.imageUrl"
+                :alt="item.title"
+                class="w-100 h-100 object-fit-cover rounded-start"
+              />
+            </div>
+          </div>
           <div class="col-9 p-0 ps-1">
             <div class="d-flex align-items-center mb-2">
               <p class="border border-dark p-1 mb-0">
                 {{ item.category }}
+              </p>
+              <p class="mb-0 mx-2">{{ item.title }}</p>
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm ms-auto"
+                @click="openDelProductModal(item)"
+              >
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </div>
+            <p class="mb-0">
+              原價 ${{ $filters.currency(item.origin_price)
+              }}<span class="ms-4"
+                >售價 ${{ $filters.currency(item.price) }}</span
+              >
             </p>
-            <p class="mb-0 mx-2">{{ item.title }}</p>
-            <button
-                  type="button"
-                  class="btn btn-outline-danger btn-sm ms-auto"
-                  @click="openDelProductModal(item)"
-                >
-                  <i class="bi bi-x-lg"></i>
-                </button></div>
-            <p class="mb-0">原價 ${{ $filters.currency(item.origin_price) }}<span class="ms-4">售價 ${{ $filters.currency(item.price) }}</span></p>
             <div class="d-flex mt-4">
-            <p><span class="text-success" v-if="item.is_enabled">啟用</span>
-              <span class="text-danger" v-else>未啟用</span></p>
-                  <button
-                    type="button"
-                    class="btnHover p-0  ms-auto" style="min-width: 100px;"
-                    @click="openModal(false, item)"
-                  >
-                    <div>
-                      <span>編輯</span>
-                      <span>編輯</span>
-                    </div>
-                  </button>
+              <p>
+                <span class="text-success" v-if="item.is_enabled">啟用</span>
+                <span class="text-danger" v-else>未啟用</span>
+              </p>
+              <button
+                type="button"
+                class="btnHover p-0 ms-auto"
+                style="min-width: 100px"
+                @click="openModal(false, item)"
+              >
+                <div>
+                  <span>編輯</span>
+                  <span>編輯</span>
+                </div>
+              </button>
             </div>
           </div>
         </div>
@@ -224,168 +234,171 @@
 </template>
 
 <script>
-import ProductModal from '@/components/ProductModal.vue'
-import DelModal from '@/components/DelModal.vue'
-import Pagination from '@/components/PagePagination.vue'
+import ProductModal from "@/components/ProductModal.vue";
+import DelModal from "@/components/DelModal.vue";
+import Pagination from "@/components/PagePagination.vue";
 
 export default {
-  data () {
+  data() {
     return {
       products: [],
       pagination: {},
       tempProduct: {},
       isNew: false,
       isLoading: false,
-      categoryName: '',
+      categoryName: "",
       isActive: 1,
-      currentPage: '',
-      category: {}
-    }
+      currentPage: "",
+      category: {},
+    };
   },
   components: {
     ProductModal,
     DelModal,
-    Pagination
+    Pagination,
   },
-  inject: ['emitter'],
+  inject: ["emitter"],
   methods: {
-    getProducts (page = 1) {
-      this.isLoading = true
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/all`
+    getProducts(page = 1) {
+      this.isLoading = true;
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/all`;
       this.$http
         .get(url)
         .then((response) => {
           if (!response.data.success) {
-            this.isLoading = false
-            return
+            this.isLoading = false;
+            return;
           }
-          this.products = Object.values(response.data.products)
-          this.isLoading = false
-          const { categoryName } = this.$route.params
+          this.products = Object.values(response.data.products);
+          this.isLoading = false;
+          const { categoryName } = this.$route.params;
           if (categoryName) {
-            this.categoryName = categoryName
+            this.categoryName = categoryName;
           }
-          if (this.categoryName !== '') {
-            this.pagination = {}
+          if (this.categoryName !== "") {
+            this.pagination = {};
           } else {
-            this.setPagination(page)
-            this.updateCategory()
+            this.setPagination(page);
+            this.updateCategory();
           }
-          this.isLoading = false
+          this.isLoading = false;
         })
         .catch((err) => {
-          this.$httpMessageState(err, '連線錯誤，請再試一次')
-          this.isLoading = false
-        })
+          this.$httpMessageState(err, "連線錯誤，請再試一次");
+          this.isLoading = false;
+        });
     },
-    setPagination (page = 1) {
-      const perPage = 10
+    setPagination(page = 1) {
+      const perPage = 10;
       this.pagination = {
         total_pages: Math.ceil(this.products.length / perPage),
         current_page: page,
         has_pre: page !== 1,
         has_next: false,
-        category: null
-      }
+        category: null,
+      };
       if (this.pagination.current_page >= this.pagination.total_pages) {
-        this.pagination.current_page = this.pagination.total_pages
-        this.pagination.has_next = false
+        this.pagination.current_page = this.pagination.total_pages;
+        this.pagination.has_next = false;
       } else {
-        this.pagination.has_next = true
+        this.pagination.has_next = true;
       }
-      const minPage = this.pagination.current_page * perPage - perPage
-      const maxPage = this.pagination.current_page * perPage
-      this.products = this.products.slice(minPage, maxPage)
+      const minPage = this.pagination.current_page * perPage - perPage;
+      const maxPage = this.pagination.current_page * perPage;
+      this.products = this.products.slice(minPage, maxPage);
     },
-    updateCategory (category) {
+    updateCategory(category) {
       this.$router.push({
-        name: '產品列表',
-        params: { categoryName: category }
-      })
+        name: "產品列表",
+        params: { categoryName: category },
+      });
     },
-    changeClass (index) {
-      this.isActive = index
+    changeClass(index) {
+      this.isActive = index;
     },
 
-    openModal (isNew, item) {
+    openModal(isNew, item) {
       if (isNew) {
-        this.tempProduct = {}
+        this.tempProduct = {};
       } else {
-        this.tempProduct = JSON.parse(JSON.stringify(item))
+        this.tempProduct = JSON.parse(JSON.stringify(item));
       }
-      this.isNew = isNew
+      this.isNew = isNew;
 
-      const productComponent = this.$refs.productModal
-      productComponent.showModal()
+      const productComponent = this.$refs.productModal;
+      productComponent.showModal();
     },
 
-    updateProduct (item) {
-      this.tempProduct = item
+    updateProduct(item) {
+      this.tempProduct = item;
       // 新增狀態
-      let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
-      let httpMethod = 'post'
+      let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`;
+      let httpMethod = "post";
 
       // 編輯狀態
       if (!this.isNew) {
-        api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${item.id}`
-        httpMethod = 'put'
+        api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${item.id}`;
+        httpMethod = "put";
       }
 
       // 依據新增或編輯狀態執行相對應的方法
-      const productComponent = this.$refs.productModal
-      this.$http[httpMethod](api, { data: this.tempProduct }).then(
-        (response) => {
-          productComponent.hideModal()
+      const productComponent = this.$refs.productModal;
+      this.$http[httpMethod](api, { data: this.tempProduct })
+        .then((response) => {
+          productComponent.hideModal();
           if (response.data.success) {
-            this.emitter.emit('push-message', {
-              style: 'success',
-              title: '更新成功'
-            })
-            this.getProducts()
+            this.emitter.emit("push-message", {
+              style: "success",
+              title: "更新成功",
+            });
+            this.getProducts();
           } else {
-            this.emitter.emit('push-message', {
-              style: 'danger',
-              title: '更新失敗',
-              content: response.data.message.join('、')
-            })
+            this.emitter.emit("push-message", {
+              style: "danger",
+              title: "更新失敗",
+              content: response.data.message.join("、"),
+            });
           }
-        }
-      ).catch((error) => {
-        this.$httpMessageState(error, '連線錯誤')
-      })
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    openDelProductModal (item) {
-      this.tempProduct = { ...item }
-      const delComponent = this.$refs.delModal
-      delComponent.showModal()
+    openDelProductModal(item) {
+      this.tempProduct = { ...item };
+      const delComponent = this.$refs.delModal;
+      delComponent.showModal();
     },
-    delProduct () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`
-      this.$http.delete(url).then((response) => {
-        const delComponent = this.$refs.delModal
-        delComponent.hideModal()
-        this.getProducts()
-      }).catch((error) => {
-        this.$httpMessageState(error, '連線錯誤')
-      })
-    }
+    delProduct() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`;
+      this.$http
+        .delete(url)
+        .then((response) => {
+          const delComponent = this.$refs.delModal;
+          delComponent.hideModal();
+          this.getProducts();
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, "連線錯誤");
+        });
+    },
   },
   watch: {
-    categoryName (n, o) {
-      if (n === '' || o === '') {
-        this.getProducts()
+    categoryName(n, o) {
+      if (n === "" || o === "") {
+        this.getProducts();
       }
-    }
+    },
   },
   computed: {
-    productsFilter () {
+    productsFilter() {
       return this.products.filter((item) => {
-        return item.category.match(this.categoryName)
-      })
-    }
+        return item.category.match(this.categoryName);
+      });
+    },
   },
-  created () {
-    this.getProducts()
-  }
-}
+  created() {
+    this.getProducts();
+  },
+};
 </script>

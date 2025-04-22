@@ -348,122 +348,122 @@
 </template>
 
 <script>
-import DelModal from '@/components/DelModal.vue'
+import DelModal from "@/components/DelModal.vue";
 export default {
-  data () {
+  data() {
     return {
       cart: {},
       carts: [],
-      coupon_code: '',
-      productsQty: '',
+      coupon_code: "",
+      productsQty: "",
       tempProduct: {},
-      product: {}
-    }
+      product: {},
+    };
   },
   components: {
-    DelModal
+    DelModal,
   },
-  inject: ['emitter'],
+  inject: ["emitter"],
   methods: {
-    getCart () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+    getCart() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       this.$http
         .get(url)
         .then((response) => {
-          this.cart = response.data.data
-          this.carts = response.data.data.carts
-          this.emitter.emit('update-cart', this.carts)
+          this.cart = response.data.data;
+          this.carts = response.data.data.carts;
+          this.emitter.emit("update-cart", this.carts);
         })
         .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
 
-    updateCart (item) {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
+    updateCart(item) {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
       const cart = {
         product_id: item.product_id,
-        qty: item.qty
-      }
+        qty: item.qty,
+      };
       this.$http
         .put(url, { data: cart })
         .then((res) => {
-          this.getCart()
+          this.getCart();
         })
         .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
 
-    changeQty (number, item) {
-      item.qty += number
-      this.updateCart(item)
+    changeQty(number, item) {
+      item.qty += number;
+      this.updateCart(item);
     },
 
-    addCouponCode () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`
+    addCouponCode() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`;
       const coupon = {
-        code: this.coupon_code
-      }
+        code: this.coupon_code,
+      };
       this.$http
         .post(url, { data: coupon })
         .then((response) => {
-          this.$httpMessageState(response, '加入優惠券')
-          this.getCart()
+          this.$httpMessageState(response, "加入優惠券");
+          this.getCart();
         })
         .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
 
-    openDelProductModal (item) {
-      this.tempProduct = { ...item }
-      this.product = this.tempProduct.product
-      const delComponent = this.$refs.delModal
-      delComponent.showModal()
+    openDelProductModal(item) {
+      this.tempProduct = { ...item };
+      this.product = this.tempProduct.product;
+      const delComponent = this.$refs.delModal;
+      delComponent.showModal();
     },
-    openDelProductModalAll () {
-      this.product.title = '所有商品'
-      const delComponent = this.$refs.delModal
-      delComponent.showModal()
+    openDelProductModalAll() {
+      this.product.title = "所有商品";
+      const delComponent = this.$refs.delModal;
+      delComponent.showModal();
     },
-    delProduct () {
-      if (this.product.title !== '所有商品') {
-        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${this.tempProduct.id}`
+    delProduct() {
+      if (this.product.title !== "所有商品") {
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${this.tempProduct.id}`;
         this.$http
           .delete(url)
           .then((response) => {
-            const delComponent = this.$refs.delModal
-            delComponent.hideModal()
+            const delComponent = this.$refs.delModal;
+            delComponent.hideModal();
             // this.$httpMessageState(response, '移除購物車品項')
-            this.getCart()
+            this.getCart();
           })
           .catch((error) => {
-            this.$httpMessageState(error, '連線錯誤')
-          })
+            this.$httpMessageState(error, "連線錯誤");
+          });
       } else {
-        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`;
         this.$http
           .delete(url)
           .then((response) => {
-            const delComponent = this.$refs.delModal
-            delComponent.hideModal()
+            const delComponent = this.$refs.delModal;
+            delComponent.hideModal();
             // this.$httpMessageState(response, '移除所有購物車品項')
-            this.getCart()
+            this.getCart();
           })
           .catch((error) => {
-            this.$httpMessageState(error, '連線錯誤')
-          })
+            this.$httpMessageState(error, "連線錯誤");
+          });
       }
     },
 
-    getProductPage (id) {
-      this.$router.push(`/products/${id}`)
-    }
+    getProductPage(id) {
+      this.$router.push(`/products/${id}`);
+    },
   },
 
-  created () {
-    this.getCart()
-  }
-}
+  created() {
+    this.getCart();
+  },
+};
 </script>

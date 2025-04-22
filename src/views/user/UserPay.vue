@@ -2,60 +2,84 @@
   <div class="container mainContainer userPay">
     <div v-if="!order.is_paid" class="row justify-content-center pt-3">
       <div class="process d-flex justify-content-center align-items-center">
-        <div class="text-center mx-3"
-          ><i class="bi bi-cart-check fs-3"></i>
-          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">商品</p></div><div class="col px-0"><p class="mb-0">確認</p></div></div></div
-        >
-      <span class="process_dark_line"></span>
-      <div class="process_dark text-center mx-3"
-          ><i class="bi bi-pen fs-3"></i>
-          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">資料</p></div><div class="col px-0"><p class="mb-0">填寫</p></div></div></div
-        >
+        <div class="text-center mx-3">
+          <i class="bi bi-cart-check fs-3"></i>
+          <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col px-0"><p class="mb-0">商品</p></div>
+            <div class="col px-0"><p class="mb-0">確認</p></div>
+          </div>
+        </div>
+        <span class="process_dark_line"></span>
+        <div class="process_dark text-center mx-3">
+          <i class="bi bi-pen fs-3"></i>
+          <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col px-0"><p class="mb-0">資料</p></div>
+            <div class="col px-0"><p class="mb-0">填寫</p></div>
+          </div>
+        </div>
         <div class="process_dark_line"></div>
-        <div class="process_dark text-center mx-3"
-          ><i class="bi bi-cash-coin fs-3"></i>
-          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">資料</p></div><div class="col px-0"><p class="mb-0">確認</p></div></div></div
-        >
+        <div class="process_dark text-center mx-3">
+          <i class="bi bi-cash-coin fs-3"></i>
+          <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col px-0"><p class="mb-0">資料</p></div>
+            <div class="col px-0"><p class="mb-0">確認</p></div>
+          </div>
+        </div>
         <div class="process_gray_line"></div>
-        <div class="process_gray text-center mx-3"
-          ><i class="bi bi-cart-check-fill fs-3"></i>
-          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">訂單</p></div><div class="col px-0"><p class="mb-0">完成</p></div></div></div
-        >
+        <div class="process_gray text-center mx-3">
+          <i class="bi bi-cart-check-fill fs-3"></i>
+          <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col px-0"><p class="mb-0">訂單</p></div>
+            <div class="col px-0"><p class="mb-0">完成</p></div>
+          </div>
+        </div>
       </div>
     </div>
     <div v-else class="row justify-content-center pt-3">
       <div class="process d-flex justify-content-center align-items-center">
-        <div class="text-center mx-3"
-          ><i class="bi bi-cart-check fs-3"></i>
-          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">商品</p></div><div class="col px-0"><p class="mb-0">確認</p></div></div></div
-        >
-      <span class="process_dark_line"></span>
-      <div class="process_dark text-center mx-3"
-          ><i class="bi bi-pen fs-3"></i>
-          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">資料</p></div><div class="col px-0"><p class="mb-0">填寫</p></div></div></div
-        >
+        <div class="text-center mx-3">
+          <i class="bi bi-cart-check fs-3"></i>
+          <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col px-0"><p class="mb-0">商品</p></div>
+            <div class="col px-0"><p class="mb-0">確認</p></div>
+          </div>
+        </div>
+        <span class="process_dark_line"></span>
+        <div class="process_dark text-center mx-3">
+          <i class="bi bi-pen fs-3"></i>
+          <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col px-0"><p class="mb-0">資料</p></div>
+            <div class="col px-0"><p class="mb-0">填寫</p></div>
+          </div>
+        </div>
         <div class="process_dark_line"></div>
-        <div class="process_dark text-center mx-3"
-          ><i class="bi bi-cash-coin fs-3"></i>
-          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">資料</p></div><div class="col px-0"><p class="mb-0">確認</p></div></div></div
-        >
+        <div class="process_dark text-center mx-3">
+          <i class="bi bi-cash-coin fs-3"></i>
+          <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col px-0"><p class="mb-0">資料</p></div>
+            <div class="col px-0"><p class="mb-0">確認</p></div>
+          </div>
+        </div>
         <div class="process_dark_line"></div>
-        <div class="process_dark text-center mx-3"
-          ><i class="bi bi-cart-check-fill fs-3"></i>
-          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">訂單</p></div><div class="col px-0"><p class="mb-0">完成</p></div></div></div
-        >
+        <div class="process_dark text-center mx-3">
+          <i class="bi bi-cart-check-fill fs-3"></i>
+          <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col px-0"><p class="mb-0">訂單</p></div>
+            <div class="col px-0"><p class="mb-0">完成</p></div>
+          </div>
+        </div>
       </div>
       <h5 class="text-center mt-5 text-success">付款完成，感謝您的訂購</h5>
-        <router-link
-          to="/productsall"
-          type="button"
-          class="btnHover btn-lg rounded-0 mt-2 d-block w-25 mx-auto"
-        >
-          <div>
-            <span>繼續逛逛 <i class="bi bi-arrow-right" /></span>
-            <span>繼續逛逛 <i class="bi bi-arrow-right" /></span>
-          </div>
-        </router-link>
+      <router-link
+        to="/productsall"
+        type="button"
+        class="btnHover btn-lg rounded-0 mt-2 d-block w-25 mx-auto"
+      >
+        <div>
+          <span>繼續逛逛 <i class="bi bi-arrow-right" /></span>
+          <span>繼續逛逛 <i class="bi bi-arrow-right" /></span>
+        </div>
+      </router-link>
     </div>
     <div class="mt-4 mt-lg-5 row justify-content-center">
       <div class="col col-lg-7">
@@ -104,7 +128,8 @@
               <router-link
                 to="/"
                 type="button"
-                class="btnHover w-100 d-block" style="min-width: 0px;"
+                class="btnHover w-100 d-block"
+                style="min-width: 0px"
               >
                 <div>
                   <span>延後付款</span>
@@ -207,58 +232,64 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       order: {
-        user: {}
+        user: {},
       },
-      orderId: '',
+      orderId: "",
       isLoading: false,
-      carts: []
-    }
+      carts: [],
+    };
   },
   methods: {
-    getOrder () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${this.orderId}`
+    getOrder() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${this.orderId}`;
       this.$http.get(url).then((res) => {
         if (res.data.success) {
-          this.order = res.data.order
+          this.order = res.data.order;
         }
-      })
+      });
     },
-    payOrder () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`
-      this.$http.post(url).then((res) => {
-        if (res.data.success) {
-          this.getOrder()
-          this.scrollTop()
-        }
-      }).catch((error) => {
-        this.$httpMessageState(error, '連線錯誤')
-      })
+    payOrder() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`;
+      this.$http
+        .post(url)
+        .then((res) => {
+          if (res.data.success) {
+            this.getOrder();
+            this.scrollTop();
+          }
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    getProductPage (id) {
-      this.$router.push(`/products/${id}`)
+    getProductPage(id) {
+      this.$router.push(`/products/${id}`);
     },
-    getCart () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.$http.get(url).then((response) => {
-        this.cart = response.data.data
-        this.carts = response.data.data.carts
-      }).catch((error) => {
-        this.$httpMessageState(error, '連線錯誤')
-      })
+    getCart() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
+      this.$http
+        .get(url)
+        .then((response) => {
+          this.cart = response.data.data;
+          this.carts = response.data.data.carts;
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    scrollTop () {
+    scrollTop() {
       window.scrollTo({
         top: 0,
-        behavior: 'smooth'
-      })
-    }
+        behavior: "smooth",
+      });
+    },
   },
-  created () {
-    this.orderId = this.$route.params.orderId
-    this.getOrder()
-  }
-}
+  created() {
+    this.orderId = this.$route.params.orderId;
+    this.getOrder();
+  },
+};
 </script>

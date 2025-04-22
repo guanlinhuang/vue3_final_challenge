@@ -2,64 +2,75 @@
   <div class="store">
     <div class="container py-5 mainContainer">
       <h3 class="text-center">門市資訊</h3>
-      <div class="store_btn my-4 my-lg-5 row row-cols-2 row-cols-lg-6 gx-1 gx-lg-3 mx-1 mx-lg-0">
+      <div
+        class="store_btn my-4 my-lg-5 row row-cols-2 row-cols-lg-6 gx-1 gx-lg-3 mx-1 mx-lg-0"
+      >
         <div class="col">
-        <button
-          type="button"
-          class="btnHover2 w-100 mb-1 mb-lg-0"
-          @click.prevent="storeFilter('台中創始店'), changeClass(1)"
-          :class="{ active: isActive === 1 }"
-          value="台中創始店"
-        >
-          台中創始店<span></span><span></span><span></span><span></span>
-        </button></div>
+          <button
+            type="button"
+            class="btnHover2 w-100 mb-1 mb-lg-0"
+            @click.prevent="storeFilter('台中創始店'), changeClass(1)"
+            :class="{ active: isActive === 1 }"
+            value="台中創始店"
+          >
+            台中創始店<span></span><span></span><span></span><span></span>
+          </button>
+        </div>
         <div class="col">
-        <button
-          type="button"
-          class="btnHover2 w-100 mb-1 mb-lg-0"
-          @click.prevent="storeFilter('台北門市'), changeClass(2)"
-          :class="{ active: isActive === 2 }"
-          value="台北門市"
-        >
-          台北門市<span></span><span></span><span></span><span></span>
-        </button></div>
-        <div class="col"><button
-          type="button"
-          class="btnHover2 w-100 mb-1 mb-lg-0"
-          @click.prevent="storeFilter('新北門市'), changeClass(3)"
-          :class="{ active: isActive === 3 }"
-          value="新北門市"
-        >
-          新北門市<span></span><span></span><span></span><span></span>
-        </button></div>
-        <div class="col"><button
-          type="button"
-          class="btnHover2 w-100 mb-1 mb-lg-0"
-          @click.prevent="storeFilter('桃園門市'), changeClass(4)"
-          :class="{ active: isActive === 4 }"
-          value="桃園門市"
-        >
-          桃園門市<span></span><span></span><span></span><span></span>
-        </button></div>
-        <div class="col"><button
-          type="button"
-          class="btnHover2 w-100 mb-1 mb-lg-0"
-          @click.prevent="storeFilter('台中旗艦門市'), changeClass(5)"
-          :class="{ active: isActive === 5 }"
-          value="台中旗艦門市"
-        >
-          台中旗艦門市<span></span><span></span><span></span><span></span>
-        </button></div>
-        <div class="col"><button
-          type="button"
-          class="btnHover2 w-100 mb-1 mb-lg-0"
-          @click.prevent="storeFilter('高雄門市'), changeClass(6)"
-          :class="{ active: isActive === 6 }"
-          value="高雄門市"
-        >
-          高雄門市<span></span><span></span><span></span><span></span>
-        </button>
-      </div>
+          <button
+            type="button"
+            class="btnHover2 w-100 mb-1 mb-lg-0"
+            @click.prevent="storeFilter('台北門市'), changeClass(2)"
+            :class="{ active: isActive === 2 }"
+            value="台北門市"
+          >
+            台北門市<span></span><span></span><span></span><span></span>
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btnHover2 w-100 mb-1 mb-lg-0"
+            @click.prevent="storeFilter('新北門市'), changeClass(3)"
+            :class="{ active: isActive === 3 }"
+            value="新北門市"
+          >
+            新北門市<span></span><span></span><span></span><span></span>
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btnHover2 w-100 mb-1 mb-lg-0"
+            @click.prevent="storeFilter('桃園門市'), changeClass(4)"
+            :class="{ active: isActive === 4 }"
+            value="桃園門市"
+          >
+            桃園門市<span></span><span></span><span></span><span></span>
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btnHover2 w-100 mb-1 mb-lg-0"
+            @click.prevent="storeFilter('台中旗艦門市'), changeClass(5)"
+            :class="{ active: isActive === 5 }"
+            value="台中旗艦門市"
+          >
+            台中旗艦門市<span></span><span></span><span></span><span></span>
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btnHover2 w-100 mb-1 mb-lg-0"
+            @click.prevent="storeFilter('高雄門市'), changeClass(6)"
+            :class="{ active: isActive === 6 }"
+            value="高雄門市"
+          >
+            高雄門市<span></span><span></span><span></span><span></span>
+          </button>
+        </div>
       </div>
       <div class="store_info mb-5 mx-2">
         <div v-if="name === '台中創始店'">
@@ -333,19 +344,19 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      name: '台中創始店',
-      isActive: 1
-    }
+      name: "台中創始店",
+      isActive: 1,
+    };
   },
   methods: {
-    storeFilter (name) {
-      this.name = name
+    storeFilter(name) {
+      this.name = name;
     },
-    changeClass (index) {
-      this.isActive = index
-    }
-  }
-}
+    changeClass(index) {
+      this.isActive = index;
+    },
+  },
+};
 </script>

@@ -166,141 +166,141 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Navigation, Pagination, Autoplay } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-import saveFavorite from '@/methods/saveFavorite'
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import saveFavorite from "@/methods/saveFavorite";
 export default {
-  data () {
+  data() {
     return {
       product: {},
-      id: '',
+      id: "",
       carts: [],
       productsQty: 1,
       products: [],
       favorite: saveFavorite.getFavorite() || [],
       favoriteProduct: [],
       modules: [Autoplay, Pagination, Navigation],
-      selectedImageUrl: '' // 用來存儲被選中的大圖 URL
-    }
+      selectedImageUrl: "", // 用來存儲被選中的大圖 URL
+    };
   },
-  inject: ['emitter'],
+  inject: ["emitter"],
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
   },
   methods: {
-    getProduct () {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`
-      this.isLoading = true
+    getProduct() {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`;
+      this.isLoading = true;
       this.$http
         .get(api)
         .then((response) => {
-          this.isLoading = false
+          this.isLoading = false;
           if (response.data.success) {
-            this.product = response.data.product
-            this.product.imagesUrl.push(response.data.product.imageUrl)
+            this.product = response.data.product;
+            this.product.imagesUrl.push(response.data.product.imageUrl);
           }
         })
         .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    getCart () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+    getCart() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       this.$http
         .get(url)
         .then((response) => {
-          this.carts = response.data.data.carts
-          this.emitter.emit('update-cart', this.carts)
+          this.carts = response.data.data.carts;
+          this.emitter.emit("update-cart", this.carts);
         })
         .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    nowBuy (id, qty = this.productsQty) {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+    nowBuy(id, qty = this.productsQty) {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       const cart = {
         product_id: id,
-        qty
-      }
-      this.isLoading = true
+        qty,
+      };
+      this.isLoading = true;
       this.$http
         .post(url, { data: cart })
         .then((response) => {
-          this.isLoading = false
-          this.$httpMessageState(response, '加入購物車')
-          this.getCart()
-          this.$router.push('/cart')
+          this.isLoading = false;
+          this.$httpMessageState(response, "加入購物車");
+          this.getCart();
+          this.$router.push("/cart");
         })
         .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    addToCart (id, qty = this.productsQty) {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+    addToCart(id, qty = this.productsQty) {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       const cart = {
         product_id: id,
-        qty
-      }
-      this.isLoading = true
+        qty,
+      };
+      this.isLoading = true;
       this.$http
         .post(url, { data: cart })
         .then((response) => {
-          this.isLoading = false
-          this.$httpMessageState(response, '加入購物車')
-          this.getCart()
+          this.isLoading = false;
+          this.$httpMessageState(response, "加入購物車");
+          this.getCart();
         })
         .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    updateCart (item) {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
+    updateCart(item) {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
       const cart = {
         product_id: item.product_id,
-        qty: item.qty
-      }
+        qty: item.qty,
+      };
       this.$http
         .put(url, { data: cart })
         .then((res) => {
-          this.getCart()
+          this.getCart();
         })
         .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    changeQty (number) {
-      this.productsQty += number
+    changeQty(number) {
+      this.productsQty += number;
     },
-    getProductPage (id, item) {
-      this.selectedImageUrl = item.imageUrl
-      this.$router.push(`/products/${id}`)
-      this.id = id
-      this.getProduct()
-      this.getProducts()
+    getProductPage(id, item) {
+      this.selectedImageUrl = item.imageUrl;
+      this.$router.push(`/products/${id}`);
+      this.id = id;
+      this.getProduct();
+      this.getProducts();
     },
-    getProducts () {
-      this.isLoading = true
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
+    getProducts() {
+      this.isLoading = true;
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
       this.$http
         .get(api)
         .then((res) => {
           if (res.data.success) {
             this.products = res.data.products
               .filter((e) => e.id !== this.id)
-              .sort(() => Math.random() - 0.5)
-            this.isLoading = false
+              .sort(() => Math.random() - 0.5);
+            this.isLoading = false;
           }
         })
         .catch((err) => {
-          this.$httpMessageState(err, '連線錯誤，請再試一次')
-          this.isLoading = false
-        })
+          this.$httpMessageState(err, "連線錯誤，請再試一次");
+          this.isLoading = false;
+        });
     },
-    getFavoriteProduct () {
+    getFavoriteProduct() {
       this.$http
         .get(
           `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
@@ -308,49 +308,49 @@ export default {
         .then((response) => {
           this.favoriteProduct = response.data.products.filter((product) =>
             this.favorite.includes(product.id)
-          )
-          this.emitter.emit('update-favorite', this.favoriteProduct)
+          );
+          this.emitter.emit("update-favorite", this.favoriteProduct);
         })
         .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    toggleFavorite (product) {
+    toggleFavorite(product) {
       if (this.favorite.includes(product.id)) {
-        this.favorite.splice(this.favorite.indexOf(product.id), 1)
+        this.favorite.splice(this.favorite.indexOf(product.id), 1);
         this.$httpMessageState(
           {
             data: {
-              success: true
-            }
+              success: true,
+            },
           },
-          '移除收藏'
-        )
+          "移除收藏"
+        );
       } else {
-        this.favorite.push(product.id)
+        this.favorite.push(product.id);
         this.$httpMessageState(
           {
             data: {
-              success: true
-            }
+              success: true,
+            },
           },
-          '加入收藏'
-        )
+          "加入收藏"
+        );
       }
-      saveFavorite.saveFavorite(this.favorite)
-      this.getFavoriteProduct()
+      saveFavorite.saveFavorite(this.favorite);
+      this.getFavoriteProduct();
     },
-    changeImage (imageUrl) {
-      this.selectedImageUrl = imageUrl
-    }
+    changeImage(imageUrl) {
+      this.selectedImageUrl = imageUrl;
+    },
   },
-  created () {
-    this.id = this.$route.params.productId
-    this.getProduct()
-    this.getCart()
-    this.getProducts()
-  }
-}
+  created() {
+    this.id = this.$route.params.productId;
+    this.getProduct();
+    this.getCart();
+    this.getProducts();
+  },
+};
 </script>
 
 <!-- products[0].imageUrl" 默認顯示第一個產品的圖像 -->

@@ -7,7 +7,9 @@
       <h3 class="text-center">收藏清單</h3>
       <div class="row justify-content-center">
         <div class="col col-lg-9 mt-lg-5" style="margin-top: 45px">
-          <div class="row row-cols-2 row-cols-lg-4 row-cols-xxl-5 gx-2 gx-lg-4 p-1 p-lg-0">
+          <div
+            class="row row-cols-2 row-cols-lg-4 row-cols-xxl-5 gx-2 gx-lg-4 p-1 p-lg-0"
+          >
             <div
               class="col mb-4 mb-lg-5"
               v-for="item in favoriteProduct"
@@ -95,90 +97,90 @@
 </template>
 
 <script>
-import saveFavorite from '@/methods/saveFavorite'
+import saveFavorite from "@/methods/saveFavorite";
 
 export default {
-  data () {
+  data() {
     return {
       favorite: saveFavorite.getFavorite() || [],
       favoriteProduct: [],
       isLoading: false,
       carts: [],
       product: {},
-      productsQty: 1
-    }
+      productsQty: 1,
+    };
   },
-  inject: ['emitter'],
+  inject: ["emitter"],
   methods: {
-    getFavoriteProduct () {
-      this.isLoading = true
+    getFavoriteProduct() {
+      this.isLoading = true;
       this.$http
         .get(
           `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
         )
         .then((response) => {
-          this.isLoading = false
+          this.isLoading = false;
           this.favoriteProduct = response.data.products.filter((product) =>
             this.favorite.includes(product.id)
-          )
-          this.emitter.emit('update-favorite', this.favoriteProduct)
+          );
+          this.emitter.emit("update-favorite", this.favoriteProduct);
         })
         .catch((error) => {
-          this.isLoading = false
-          this.$httpMessageState(error, '連線錯誤')
-        })
+          this.isLoading = false;
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    getCart () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+    getCart() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       this.$http
         .get(url)
         .then((response) => {
-          this.carts = response.data.data.carts
-          this.emitter.emit('update-cart', this.carts)
+          this.carts = response.data.data.carts;
+          this.emitter.emit("update-cart", this.carts);
         })
         .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    removeFavorite (item) {
-      this.isLoading = true
-      this.favorite.splice(this.favorite.indexOf(item.id), 1)
+    removeFavorite(item) {
+      this.isLoading = true;
+      this.favorite.splice(this.favorite.indexOf(item.id), 1);
       this.$httpMessageState(
         {
           data: {
-            success: true
-          }
+            success: true,
+          },
         },
         `已將 ${item.title} 移除喜愛清單`
-      )
-      saveFavorite.saveFavorite(this.favorite)
-      this.isLoading = false
-      this.getFavoriteProduct()
+      );
+      saveFavorite.saveFavorite(this.favorite);
+      this.isLoading = false;
+      this.getFavoriteProduct();
     },
-    addToCart (id, qty = this.productsQty) {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+    addToCart(id, qty = this.productsQty) {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       const cart = {
         product_id: id,
-        qty
-      }
-      this.isLoading = true
+        qty,
+      };
+      this.isLoading = true;
       this.$http
         .post(url, { data: cart })
         .then((response) => {
-          this.isLoading = false
-          this.$httpMessageState(response, '加入購物車')
-          this.getCart()
+          this.isLoading = false;
+          this.$httpMessageState(response, "加入購物車");
+          this.getCart();
         })
         .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    getProductPage (id) {
-      this.$router.push(`/products/${id}`)
-    }
+    getProductPage(id) {
+      this.$router.push(`/products/${id}`);
+    },
   },
-  created () {
-    this.getFavoriteProduct()
-  }
-}
+  created() {
+    this.getFavoriteProduct();
+  },
+};
 </script>

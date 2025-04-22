@@ -60,21 +60,21 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Swiper, SwiperSlide } from "swiper/vue";
 
-import { Autoplay, Pagination } from 'swiper/modules'
+import { Autoplay, Pagination } from "swiper/modules";
 
-import 'swiper/css'
+import "swiper/css";
 
 export default {
-  setup () {
+  setup() {
     return {
-      modules: [Autoplay, Pagination]
-    }
+      modules: [Autoplay, Pagination],
+    };
   },
   components: {
     Swiper,
-    SwiperSlide
-  }
-}
+    SwiperSlide,
+  },
+};
 </script>

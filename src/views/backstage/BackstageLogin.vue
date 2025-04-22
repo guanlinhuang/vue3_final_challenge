@@ -43,7 +43,6 @@
             <button
               class="btnHover btnHover6 btn btn-outline-dark"
               type="submit"
-              @click="push"
             >
               <div>
                 <span>登入 </span>
@@ -59,44 +58,45 @@
 </template>
 
 <script>
-import emitter from '@/methods/emitter'
-import ToastMessages from '@/components/ToastMessages.vue'
+import emitter from "@/methods/emitter";
+import ToastMessages from "@/components/ToastMessages.vue";
 export default {
-  data () {
+  data() {
     return {
       user: {
-        username: '',
-        password: ''
-      }
-    }
+        username: "",
+        password: "",
+      },
+    };
   },
   components: {
-    ToastMessages
+    ToastMessages,
   },
-  provide () {
+  provide() {
     return {
-      emitter
-    }
+      emitter,
+    };
   },
   methods: {
-    signIn () {
-      const api = `${process.env.VUE_APP_API}admin/signin`
+    signIn() {
+      const api = `${process.env.VUE_APP_API}admin/signin`;
       this.$http
         .post(api, this.user)
         .then((res) => {
           if (res.data.success) {
-            const { token, expired } = res.data
-            document.cookie = `hexToken=${token};expires=${new Date(expired)}`
-            this.$httpMessageState(res, '登入')
-            this.$router.push('/dashboard/products')
+            const { token, expired } = res.data;
+            document.cookie = `hexToken=${token};expires=${new Date(expired)}`;
+            this.$http.defaults.headers.common.Authorization = token; // 加上這一行試試看
+            this.$httpMessageState(res, "登入");
+            this.$router.push("/dashboard/products");
           } else {
-            this.$httpMessageState(res, '登入')
+            this.$httpMessageState(res, "登入");
           }
         })
         .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
-    }
-  }
-}
+          this.$httpMessageState(error, "連線錯誤");
+        });
+    },
+  },
+};
 </script>

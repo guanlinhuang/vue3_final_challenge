@@ -1,4 +1,5 @@
-.userCart { // 考量到不同頁面可能不同排版，故未與 UserPay、UserOrder共用
+.userCart {
+  // 考量到不同頁面可能不同排版，故未與 UserPay、UserOrder共用
   padding-top: 30px;
   padding-bottom: 150px;
   font-size: 13px;
@@ -9,22 +10,21 @@
 
 // 與 UserPay、UserOrder共用
 .productName {
-  border-bottom: 1px solid
+  border-bottom: 1px solid;
 }
 
 .productName:hover {
   cursor: pointer;
-  color: $viridian!important;;
+  color: $viridian !important;
 }
 
 //「 套用優惠碼 」按鈕
-.btn-outline{
+.btn-outline {
   border: $viridian solid 1px;
   color: $viridian;
 }
 
-.btn-outline:hover{
+.btn-outline:hover {
   color: #fff;
   background-color: $viridian;
 }
-

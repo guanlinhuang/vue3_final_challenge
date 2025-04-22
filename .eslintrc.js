@@ -5,7 +5,8 @@ module.exports = {
   },
   extends: [
     'plugin:vue/vue3-essential',
-    '@vue/standard'
+    '@vue/standard',
+    'plugin:prettier/recommended' // 這一行加進去
   ],
   parserOptions: {
     parser: '@babel/eslint-parser'

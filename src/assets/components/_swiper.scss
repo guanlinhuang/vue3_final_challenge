@@ -1,15 +1,14 @@
 .container-fluid,
 .container {
-  --bs-gutter-x: 0
+  --bs-gutter-x: 0;
 }
 
 .swiper-slide {
   text-align: center;
   background: #fff;
   cursor: pointer;
-  height: 600px
+  height: 600px;
 }
-
 
 // Banner輪播
 .swiperBanner {
@@ -26,27 +25,26 @@
   }
 }
 
-.slideBanner_text{
+.slideBanner_text {
   bottom: 6%;
 
   @include media-breakpoint-up(sm) {
     left: 7%;
     bottom: 10%;
-}
-  
+  }
 }
 
-.slideBanner_text_link{
+.slideBanner_text_link {
   background-color: $viridian;
   color: #fff;
 }
 
-.slideBanner_text_link:hover{
+.slideBanner_text_link:hover {
   background-color: #fff;
-  color:$viridian;
+  color: $viridian;
 }
 
-.slideBanner_text_link2{
+.slideBanner_text_link2 {
   background-color: $viridian;
   color: #fff;
   bottom: 5%;
@@ -58,16 +56,16 @@
     width: 33%;
   }
   @include media-breakpoint-up(lg) {
-  width: 22%;
+    width: 22%;
   }
   @include media-breakpoint-up(xxl) {
     width: 16%;
-    }
+  }
 }
 
-.slideBanner_text_link2:hover{
+.slideBanner_text_link2:hover {
   background-color: #fff;
-  color:$viridian;
+  color: $viridian;
 }
 
 .slideBanner2 {
@@ -87,7 +85,6 @@
   background: $viridian !important;
 }
 
-
 // 產品輪播
 .swiper_img {
   overflow: hidden; // 超出的部分隱藏
@@ -102,7 +99,7 @@
 
 .swiper_img img {
   width: 100%;
-  height: 100% //320px
+  height: 100%; //320px
 }
 
 .product:hover {
@@ -110,11 +107,9 @@
 
   .swiper_img img {
     transform: scale(1.3, 1.3); // 變形縮放效果
-    transition: all .2s ease-out; // 動態轉換時間，時間越快越好
+    transition: all 0.2s ease-out; // 動態轉換時間，時間越快越好
   }
 }
-
-
 
 // 首頁 - 熱銷商品 輪播
 // .swiper 原生css帶有 position-relative 和 overflow-hidden
@@ -176,7 +171,6 @@
 .UserProduct .swiper-button-prev {
   top: 50% !important;
 }
-
 
 .product-swiper {
   margin: auto !important;

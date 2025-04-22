@@ -9,9 +9,7 @@
     >
       <h3 class="text-center">訂單查詢</h3>
       <div class="py-4 py-lg-5">
-        <Form
-          @submit="searchOrder"
-        >
+        <Form @submit="searchOrder">
           <div class="row row-cols-1 justify-content-center align-items-center">
             <div class="col-10 col-lg-3 px-0 mb-3 mb-lg-0">
               <Field
@@ -166,66 +164,66 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       OrderList: [],
       pagination: {},
-      search: '',
+      search: "",
       filterOrder: {},
       searchState: false,
       isLoading: false,
-      email: '',
-      carts: []
-    }
+      email: "",
+      carts: [],
+    };
   },
   methods: {
-    getOrder (page = 1) {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/orders?page=${page}`
+    getOrder(page = 1) {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/orders?page=${page}`;
       this.$http
         .get(api)
         .then((res) => {
           if (res.data.success) {
-            this.OrderList = res.data.orders
-            this.pagination = res.data.pagination
+            this.OrderList = res.data.orders;
+            this.pagination = res.data.pagination;
           }
         })
         .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    searchOrder () {
-      this.isLoading = true
-      this.searchState = true
+    searchOrder() {
+      this.isLoading = true;
+      this.searchState = true;
       this.filterOrder = this.OrderList.filter(
         (item) =>
           item.user.email === this.search || item.user.tel === this.search
-      )
-      this.isLoading = false
-      this.email = this.searchEmail
-      this.getOrder()
+      );
+      this.isLoading = false;
+      this.email = this.searchEmail;
+      this.getOrder();
     },
-    payOrder (id) {
+    payOrder(id) {
       window.open(
         this.$router.resolve({
-          path: `/pay/${id}`
+          path: `/pay/${id}`,
         }).href,
-        '_blank'
-      )
+        "_blank"
+      );
     },
-    getCart () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+    getCart() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       this.$http
         .get(url)
         .then((response) => {
-          this.carts = response.data.data.carts
+          this.carts = response.data.data.carts;
         })
         .catch((error) => {
-          this.$httpMessageState(error, '連線錯誤')
-        })
-    }
+          this.$httpMessageState(error, "連線錯誤");
+        });
+    },
   },
-  created () {
-    this.getOrder()
-  }
-}
+  created() {
+    this.getOrder();
+  },
+};
 </script>

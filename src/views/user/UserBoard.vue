@@ -9,26 +9,24 @@
 </template>
 
 <script>
-import emitter from '@/methods/emitter'
-import ToastMessages from '@/components/ToastMessages.vue'
-import NavbarFront from '@/components/NavbarFront.vue'
-import FooterFront from '@/components/FooterFront.vue'
-import SmallSidebar from '@/components/SmallSidebar'
+import emitter from "@/methods/emitter";
+import ToastMessages from "@/components/ToastMessages.vue";
+import NavbarFront from "@/components/NavbarFront.vue";
+import FooterFront from "@/components/FooterFront.vue";
+import SmallSidebar from "@/components/SmallSidebar";
 
 export default {
   components: {
     ToastMessages,
     NavbarFront,
     FooterFront,
-    SmallSidebar
+    SmallSidebar,
   },
-  provide () {
+  provide() {
     return {
-      emitter
-    }
+      emitter,
+    };
   },
-  created () {
-  }
-}
-
+  created() {},
+};
 </script>

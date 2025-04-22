@@ -26,16 +26,16 @@
 </template>
 
 <script>
-import Toast from 'bootstrap/js/dist/toast'
+import Toast from "bootstrap/js/dist/toast";
 export default {
-  name: 'MyToast',
-  props: ['msg'],
-  mounted () {
-    const toastEl = this.$refs.toast
+  name: "MyToast",
+  props: ["msg"],
+  mounted() {
+    const toastEl = this.$refs.toast;
     const toast = new Toast(toastEl, {
-      delay: 6000
-    })
-    toast.show()
-  }
-}
+      delay: 6000,
+    });
+    toast.show();
+  },
+};
 </script>

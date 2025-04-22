@@ -1,25 +1,37 @@
 <template>
   <div class="container mainContainer userOrder">
     <div class="pt-3 process d-flex justify-content-center align-items-center">
-      <div class="text-center mx-3"
-          ><i class="bi bi-cart-check fs-3"></i>
-          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">商品</p></div><div class="col px-0"><p class="mb-0">確認</p></div></div></div
-        >
+      <div class="text-center mx-3">
+        <i class="bi bi-cart-check fs-3"></i>
+        <div class="row row-cols-1 row-cols-lg-2">
+          <div class="col px-0"><p class="mb-0">商品</p></div>
+          <div class="col px-0"><p class="mb-0">確認</p></div>
+        </div>
+      </div>
       <span class="process_dark_line"></span>
-      <div class="process_dark text-center mx-3"
-          ><i class="bi bi-pen fs-3"></i>
-          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">資料</p></div><div class="col px-0"><p class="mb-0">填寫</p></div></div></div
-        >
-        <div class="process_gray_line"></div>
-        <div class="process_gray text-center mx-3"
-          ><i class="bi bi-cash-coin fs-3"></i>
-          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">資料</p></div><div class="col px-0"><p class="mb-0">確認</p></div></div></div
-        >
-        <div class="process_gray_line"></div>
-        <div class="process_gray text-center mx-3"
-          ><i class="bi bi-cart-check-fill fs-3"></i>
-          <div class="row row-cols-1 row-cols-lg-2"><div class="col px-0"><p class="mb-0">訂單</p></div><div class="col px-0"><p class="mb-0">完成</p></div></div></div
-        >
+      <div class="process_dark text-center mx-3">
+        <i class="bi bi-pen fs-3"></i>
+        <div class="row row-cols-1 row-cols-lg-2">
+          <div class="col px-0"><p class="mb-0">資料</p></div>
+          <div class="col px-0"><p class="mb-0">填寫</p></div>
+        </div>
+      </div>
+      <div class="process_gray_line"></div>
+      <div class="process_gray text-center mx-3">
+        <i class="bi bi-cash-coin fs-3"></i>
+        <div class="row row-cols-1 row-cols-lg-2">
+          <div class="col px-0"><p class="mb-0">資料</p></div>
+          <div class="col px-0"><p class="mb-0">確認</p></div>
+        </div>
+      </div>
+      <div class="process_gray_line"></div>
+      <div class="process_gray text-center mx-3">
+        <i class="bi bi-cart-check-fill fs-3"></i>
+        <div class="row row-cols-1 row-cols-lg-2">
+          <div class="col px-0"><p class="mb-0">訂單</p></div>
+          <div class="col px-0"><p class="mb-0">完成</p></div>
+        </div>
+      </div>
     </div>
     <div class="my-lg-5 row justify-content-center">
       <div class="col col-lg-6 me-4 d-none d-lg-block">
@@ -116,7 +128,9 @@
         <Form class="border p-3" v-slot="{ errors }" @submit="createOrder">
           <h2 class="text-center">顧客資訊</h2>
           <div class="mb-3">
-            <label for="name" class="form-label">姓名<span class="text-danger">*</span></label>
+            <label for="name" class="form-label"
+              >姓名<span class="text-danger">*</span></label
+            >
             <br />
             <Field
               id="name"
@@ -131,7 +145,9 @@
             <ErrorMessage name="姓名" class="invalid-feedback" />
           </div>
           <div class="mb-3">
-            <label for="tel" class="form-label">手機號碼<span class="text-danger">*</span></label>
+            <label for="tel" class="form-label"
+              >手機號碼<span class="text-danger">*</span></label
+            >
             <Field
               id="tel"
               name="手機號碼"
@@ -148,7 +164,9 @@
             ></ErrorMessage>
           </div>
           <div class="mb-3">
-            <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+            <label for="email" class="form-label"
+              >Email<span class="text-danger">*</span></label
+            >
             <Field
               id="email"
               name="email"
@@ -163,7 +181,9 @@
             <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
           </div>
           <div class="mb-3">
-            <label for="address" class="form-label">地址<span class="text-danger">*</span></label>
+            <label for="address" class="form-label"
+              >地址<span class="text-danger">*</span></label
+            >
             <Field
               id="address"
               name="地址"
@@ -200,7 +220,9 @@
       <Form class="p-2" v-slot="{ errors }" @submit="createOrder">
         <h2 class="text-center">顧客資訊</h2>
         <div class="mb-3">
-          <label for="name" class="form-label ms-1">姓名<span class="text-danger">*</span></label>
+          <label for="name" class="form-label ms-1"
+            >姓名<span class="text-danger">*</span></label
+          >
           <br />
           <Field
             id="name"
@@ -215,7 +237,9 @@
           <ErrorMessage name="姓名" class="invalid-feedback" />
         </div>
         <div class="mb-3">
-          <label for="tel" class="form-label ms-1">手機號碼<span class="text-danger">*</span></label>
+          <label for="tel" class="form-label ms-1"
+            >手機號碼<span class="text-danger">*</span></label
+          >
           <Field
             id="tel"
             name="手機號碼"
@@ -229,7 +253,9 @@
           <ErrorMessage name="手機號碼" class="invalid-feedback"></ErrorMessage>
         </div>
         <div class="mb-3">
-          <label for="email" class="form-label ms-1">Email<span class="text-danger">*</span></label>
+          <label for="email" class="form-label ms-1"
+            >Email<span class="text-danger">*</span></label
+          >
           <Field
             id="email"
             name="email"
@@ -243,7 +269,9 @@
           <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
         </div>
         <div class="mb-3">
-          <label for="address" class="form-label ms-1">地址<span class="text-danger">*</span></label>
+          <label for="address" class="form-label ms-1"
+            >地址<span class="text-danger">*</span></label
+          >
           <Field
             id="address"
             name="地址"
@@ -412,62 +440,68 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       cart: {},
-      coupon_code: '',
+      coupon_code: "",
       form: {
         user: {
-          name: '',
-          email: '',
-          tel: '',
-          address: ''
+          name: "",
+          email: "",
+          tel: "",
+          address: "",
         },
-        message: ''
+        message: "",
       },
-      carts: []
-    }
+      carts: [],
+    };
   },
-  inject: ['emitter'],
+  inject: ["emitter"],
   methods: {
-    getCart () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.$http.get(url).then((response) => {
-        this.cart = response.data.data
-        this.carts = response.data.data.carts
-        this.emitter.emit('update-cart', this.carts)
-      }).catch((error) => {
-        this.$httpMessageState(error, '連線錯誤')
-      })
+    getCart() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
+      this.$http
+        .get(url)
+        .then((response) => {
+          this.cart = response.data.data;
+          this.carts = response.data.data.carts;
+          this.emitter.emit("update-cart", this.carts);
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    createOrder () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`
-      const order = this.form
-      this.$http.post(url, { data: order }).then((res) => {
-        if (res.data.success) {
-          const id = res.data.orderId
-          this.$router.push(`/pay/${id}`)
-          this.$httpMessageState(res, '建立訂單')
-          this.getCart()
-        }
-      }).catch((error) => {
-        this.$httpMessageState(error, '連線錯誤')
-      })
+    createOrder() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`;
+      const order = this.form;
+      this.$http
+        .post(url, { data: order })
+        .then((res) => {
+          if (res.data.success) {
+            const id = res.data.orderId;
+            this.$router.push(`/pay/${id}`);
+            this.$httpMessageState(res, "建立訂單");
+            this.getCart();
+          }
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, "連線錯誤");
+        });
     },
-    isPhoneNumber (value) {
-      const phoneNumber = /^(09)[0-9]{8}$/
-      return phoneNumber.test(value) ? true : '手機號碼 為必填'
+    isPhoneNumber(value) {
+      const phoneNumber = /^(09)[0-9]{8}$/;
+      return phoneNumber.test(value) ? true : "手機號碼 為必填";
     },
-    backToPage () {
-      this.$router.go(-1)
+    backToPage() {
+      this.$router.go(-1);
     },
-    getProductPage (id) {
-      this.$router.push(`/products/${id}`)
-    }
+    getProductPage(id) {
+      this.$router.push(`/products/${id}`);
+    },
   },
 
-  created () {
-    this.getCart()
-  }
-}
+  created() {
+    this.getCart();
+  },
+};
 </script>

@@ -1,7 +1,9 @@
 <template>
   <footer class="footer">
     <div class="container py-4">
-      <div class="row row-cols-1 row-cols-md-2 mt-lg-5 d-lg-flex justify-content-around">
+      <div
+        class="row row-cols-1 row-cols-md-2 mt-lg-5 d-lg-flex justify-content-around"
+      >
         <div class="col col-lg-2 ms-3 ms-md-0">
           <router-link to="/"
             ><img
