@@ -57,7 +57,6 @@ const routes = [
         name: "最愛",
         component: () => import("../views/user/UserFavorite.vue"),
       },
-      { path: "", redirect: "/" },
     ],
   },
   {

@@ -47,7 +47,6 @@
                 placeholder="請輸入 Email"
                 rules="email|required"
                 aria-label="請輸入 Email"
-                v-model="search"
               /><ErrorMessage
                 name="email"
                 class="invalid-feedback"
@@ -71,7 +70,6 @@
       </div>
     </div>
   </div>
-  <SmallSidebar ref="smallSidebar" :cartss="carts"></SmallSidebar>
 </template>
 
 <script>
@@ -85,29 +83,13 @@ export default {
   },
   data() {
     return {
-      carts: [],
       formSuccess: false,
-      search: "",
     };
   },
   methods: {
-    getCart() {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-      this.$http
-        .get(url)
-        .then((response) => {
-          this.carts = response.data.data.carts;
-        })
-        .catch((error) => {
-          this.$httpMessageState(error, "連線錯誤");
-        });
-    },
     sendEmail() {
       this.formSuccess = true;
     },
-  },
-  created() {
-    this.getCart();
   },
 };
 </script>

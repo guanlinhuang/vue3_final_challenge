@@ -138,7 +138,7 @@
           prevEl: '.swiper-button-prev',
         }"
         :modules="modules"
-        :loop="true"
+        :loop="false"
         :spaceBetween="3"
         :slidesPerView="3"
         :breakpoints="{
