@@ -163,9 +163,7 @@
         </ul>
       </div>
       <div class="col col-lg-9 mt-lg-5" style="margin-top: 45px">
-        <div
-          class="row row-cols-2 row-cols-lg-4 row-cols-xxl-5 gx-2 gx-lg-4 p-1 p-lg-0"
-        >
+        <div class="row row-cols-2 row-cols-lg-4 gx-2 gx-lg-4 p-1 p-lg-0">
           <div class="col mb-4" v-for="item in productsFilter" :key="item.id">
             <div class="position-relative text-center product h-100">
               <a @click="getProductPage(item.id)">

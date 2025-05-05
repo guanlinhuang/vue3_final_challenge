@@ -7,9 +7,7 @@
       <h3 class="text-center">收藏清單</h3>
       <div class="row justify-content-center">
         <div class="col col-lg-9 mt-lg-5" style="margin-top: 45px">
-          <div
-            class="row row-cols-2 row-cols-lg-4 row-cols-xxl-5 gx-2 gx-lg-4 p-1 p-lg-0"
-          >
+          <div class="row row-cols-2 row-cols-lg-4 gx-2 gx-lg-4 p-1 p-lg-0">
             <div
               class="col mb-4 mb-lg-5"
               v-for="item in favoriteProduct"
