@@ -120,17 +120,15 @@ export default {
       const api = `${process.env.VUE_APP_API}logout`;
       this.$http.post(api, this.user).then((res) => {
         if (res.data.success) {
-          // ✅ 1. 清除 token cookie（使用 Max-Age 為最佳相容方式）
-          document.cookie = "hexToken=; Max-Age=0; path=/";
+          // ✅ 1. 清除 token cookie
+          document.cookie =
+            "hexToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
 
           // ✅ 2. 清除 axios headers
-          delete this.$http.defaults.headers.common.Authorization;
+          this.$http.defaults.headers.common.Authorization = null;
 
           // ✅ 3. 導回登入頁（建議加 reload 確保乾淨）
-          this.$router.push("/login").then(() => {
-            // ✅ 4. 為避免手機快取畫面殘留，強制重新載入頁面
-            location.reload();
-          });
+          this.$router.push("/login");
         }
       });
     },
