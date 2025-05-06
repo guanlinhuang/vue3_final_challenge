@@ -83,7 +83,7 @@
               </li>
               <li class="nav-item d-lg-none">
                 <router-link
-                  to="/storelist"
+                  to="/login"
                   class="nav-link text-white border-underline"
                   @click.prevent="logout"
                   >登出</router-link
