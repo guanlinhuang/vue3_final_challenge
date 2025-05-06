@@ -120,6 +120,14 @@ export default {
       const api = `${process.env.VUE_APP_API}logout`;
       this.$http.post(api, this.user).then((res) => {
         if (res.data.success) {
+          // ✅ 1. 清除 token cookie
+          document.cookie =
+            "hexToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+
+          // ✅ 2. 清除 axios headers
+          delete this.$http.defaults.headers.common.Authorization;
+
+          // ✅ 3. 導回登入頁（建議加 reload 確保乾淨）
           this.$router.push("/login");
         }
       });

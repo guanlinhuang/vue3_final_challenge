@@ -49,23 +49,17 @@
           <div class="col-lg-7 text-md-end text-white mb-5 mb-lg-0">
             <ul class="list-unstyled">
               <li class="py-2">
-                <a
-                  href="tel:04-12345678"
-                  class="text-white text-decoration-none"
-                  >04-1234-5678</a
-                >
+                <a href="tel:04-12345678" class="text-white">04-1234-5678</a>
               </li>
               <li class="py-2">
-                <a
-                  href="mailto:guantony.service@gmail.com"
-                  class="text-white text-decoration-none"
+                <a href="mailto:guantony.service@gmail.com" class="text-white"
                   >guantony.service@gmail.com</a
                 >
               </li>
               <li class="py-2">
                 <a
                   href="https://www.google.com/maps/@24.1960154,120.677505,13z?authuser=0&entry=ttu&g_ep=EgoyMDI0MTAyOS4wIKXMDSoASAFQAw%3D%3D"
-                  class="text-white text-decoration-none"
+                  class="text-white"
                   >台中市北屯區昌平路二段45之8號</a
                 >
               </li>
@@ -80,7 +74,7 @@
         </div>
       </div>
       <div class="text-center text-white pt-4">
-        <p class="mb-0">本網站由GuanTony工作室設計 © 2024版權所有</p>
+        <p class="mb-0">本網站由GuanTony工作室設計 © 2025版權所有</p>
         <p class="mb-0">【 本網站為個人練習作品用，非商業使用 】</p>
       </div>
     </div>
