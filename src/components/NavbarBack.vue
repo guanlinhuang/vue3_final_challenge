@@ -127,8 +127,10 @@ export default {
           // ✅ 2. 清除 axios headers
           this.$http.defaults.headers.common.Authorization = null;
 
-          // ✅ 3. 導回登入頁（建議加 reload 確保乾淨）
-          this.$router.push("/login");
+          // ✅ 3. 導回登入頁並強制 reload（避免手機快取或 token殘留）
+          this.$router.push("/login").then(() => {
+            location.reload();
+          });
         }
       });
     },
