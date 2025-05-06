@@ -88,7 +88,7 @@ export default {
             document.cookie = `hexToken=${token};expires=${new Date(
               expired
             )}; path=/`;
-            this.$http.defaults.headers.common.Authorization = token; // 加上這一行試試看
+            this.$http.defaults.headers.common.Authorization = token;
             this.$httpMessageState(res, "登入");
             this.$router.push("/dashboard/products");
           } else {

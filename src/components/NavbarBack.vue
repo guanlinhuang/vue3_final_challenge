@@ -121,11 +121,12 @@ export default {
       this.$http.post(api, this.user).then((res) => {
         if (res.data.success) {
           // ✅ 1. 清除 token cookie
+          document.cookie = "hexToken=; Max-Age=0; path=/";
           document.cookie =
             "hexToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
 
           // ✅ 2. 清除 axios headers
-          this.$http.defaults.headers.common.Authorization = null;
+          delete this.$http.defaults.headers.common.Authorization;
 
           // ✅ 3. 導回登入頁並強制 reload（避免手機快取或 token殘留）
           this.$router.push("/login").then(() => {
