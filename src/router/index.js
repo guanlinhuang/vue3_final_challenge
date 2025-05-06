@@ -100,22 +100,4 @@ const router = createRouter({
   },
 });
 
-// 加入路由守衛
-router.beforeEach((to, from, next) => {
-  const token = document.cookie.replace(
-    /(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/,
-    "$1"
-  );
-
-  const isBackendRoute = to.path.startsWith("/dashboard");
-
-  if (isBackendRoute && !token) {
-    next("/login");
-  } else if (to.path === "/login" && token) {
-    next("/dashboard/products");
-  } else {
-    next();
-  }
-});
-
 export default router;
