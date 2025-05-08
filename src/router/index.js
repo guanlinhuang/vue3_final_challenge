@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import UserBoard from "../views/user/UserBoard";
+import axios from "axios";
+import { check } from "@/api/auth";
 
 const routes = [
   {
@@ -68,6 +70,24 @@ const routes = [
     path: "/dashboard",
     name: "後台儀表板",
     component: () => import("../views/backstage/BackstageDashboard.vue"),
+    beforeEnter: async (to, from) => {
+      const token = document.cookie.replace(
+        /(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/,
+        "$1"
+      );
+      // 沒有 token => 導回 login
+      if (!token) {
+        return { path: "/login" };
+      }
+      axios.defaults.headers.common.Authorization = `${token}`;
+      const isLogin = await check(); // <=== 這裡一定要用 async await ，避免 token 過期或是格式錯誤的時候 miss 掉驗證
+      // 是登入狀態 => 允許進入路由 /dashboard
+      if (isLogin) {
+        return true;
+      }
+      // 未登入狀態 => 導回 login
+      return { path: "/login" };
+    },
     children: [
       {
         path: "products/:categoryName?",
