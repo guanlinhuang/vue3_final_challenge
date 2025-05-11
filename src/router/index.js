@@ -1,7 +1,17 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import UserBoard from "../views/user/UserBoard";
 import axios from "axios";
-import { check } from "@/api/auth";
+
+const check = async () => {
+  const api = `${process.env.VUE_APP_API}api/user/check`;
+  try {
+    const res = await axios.post(api);
+    return res.data.success; // 成功返回 true，失敗返回 false
+  } catch (error) {
+    console.error("登入檢查失敗", error);
+    return false;
+  }
+};
 
 const routes = [
   {
@@ -81,6 +91,7 @@ const routes = [
       }
       axios.defaults.headers.common.Authorization = `${token}`;
       const isLogin = await check(); // <=== 這裡一定要用 async await ，避免 token 過期或是格式錯誤的時候 miss 掉驗證
+
       // 是登入狀態 => 允許進入路由 /dashboard
       if (isLogin) {
         return true;
