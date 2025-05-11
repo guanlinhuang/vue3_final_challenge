@@ -81,16 +81,23 @@ const routes = [
     name: "後台儀表板",
     component: () => import("../views/backstage/BackstageDashboard.vue"),
     beforeEnter: async (to, from) => {
+      // 觸發全螢幕 loading
+      window.dispatchEvent(new CustomEvent("start-loading"));
+
       const token = document.cookie.replace(
         /(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/,
         "$1"
       );
       // 沒有 token => 導回 login
       if (!token) {
+        window.dispatchEvent(new CustomEvent("stop-loading"));
+
         return { path: "/login" };
       }
       axios.defaults.headers.common.Authorization = `${token}`;
       const isLogin = await check(); // <=== 這裡一定要用 async await ，避免 token 過期或是格式錯誤的時候 miss 掉驗證
+
+      window.dispatchEvent(new CustomEvent("stop-loading")); // 檢查完畢關閉 loading
 
       // 是登入狀態 => 允許進入路由 /dashboard
       if (isLogin) {
