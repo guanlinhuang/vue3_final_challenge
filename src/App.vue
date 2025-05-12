@@ -35,13 +35,4 @@ export default {
 
 <style lang="scss">
 @import "./assets/all.scss";
-.loading-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background-color: rgba(255, 255, 255, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 </style>
