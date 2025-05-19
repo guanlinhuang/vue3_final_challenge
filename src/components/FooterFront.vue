@@ -58,7 +58,8 @@
               </li>
               <li class="py-2">
                 <a
-                  href="https://www.google.com/maps/@24.1960154,120.677505,13z?authuser=0&entry=ttu&g_ep=EgoyMDI0MTAyOS4wIKXMDSoASAFQAw%3D%3D"
+                  href="https://maps.app.goo.gl/1fbwTvNMmPDQgeAp8"
+                  target="_blank"
                   class="text-white"
                   >台中市北屯區昌平路二段45之8號</a
                 >

@@ -40,7 +40,11 @@
                     @change="uploadFile"
                   />
                 </div>
-                <div class="mb-5" style="width: 100%; height: 500px">
+                <div
+                  v-if="tempProduct.imageUrl"
+                  class="mb-5"
+                  style="width: 100%; height: 500px"
+                >
                   <img
                     class="w-100 h-100 object-fit-cover"
                     :src="tempProduct.imageUrl"
